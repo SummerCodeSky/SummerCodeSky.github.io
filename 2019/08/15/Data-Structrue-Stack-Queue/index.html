@@ -22,7 +22,7 @@
     <meta name="description" content="Summer'sSky">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Hello World · Summer&#39;s Sky</title>
+    <title>Data Structrue-Stack&amp;&amp;Queue · Summer&#39;s Sky</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Summer&#39;s Sky.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Hello World</a>
+                <a href="#" class="post-name">Data Structrue-Stack&&Queue</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Hello World
+            Data Structrue-Stack&&Queue
             <!-- 404 -->
             
         </h1>
@@ -264,14 +264,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Stack,Queue">Stack,Queue</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">73</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.8k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/08/13</span>
+                    <span class="post-intro-time">2019/08/15</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,28 +401,227 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h1><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>栈作为一种<a href="https://baike.baidu.com/item/数据结构" target="_blank" rel="noopener">数据结构</a>，是一种只能在一端进行插入和删除操作的特殊<a href="https://baike.baidu.com/item/线性表" target="_blank" rel="noopener">线性表</a>。它按照先进后出的原则存储数据，先进入的数据被压入栈底，最后的数据在栈顶，需要读数据的时候从栈顶开始弹出数据（最后一个数据被第一个读出来）。栈具有记忆作用，对栈的插入与删除操作中，不需要改变栈底<a href="https://baike.baidu.com/item/指针" target="_blank" rel="noopener">指针</a>。</p>
+<h3 id="基本算法"><a href="#基本算法" class="headerlink" title="基本算法"></a>基本算法</h3><h5 id="进栈算法"><a href="#进栈算法" class="headerlink" title="进栈算法"></a>进栈算法</h5><p>（1）溢出判断，若溢出则进行出错处理；若栈未满，则进行（2）。</p>
+<p>（2）进栈，栈指针：index += 1；指向进栈地址。</p>
+<p>（3）进栈元素，strs[index]。</p>
+<p>（4）栈顶元素，栈顶指针：index。</p>
+<h5 id="退栈算法"><a href="#退栈算法" class="headerlink" title="退栈算法"></a>退栈算法</h5><p>（1）空值判断，如果栈元素为空，则出错处理，如果栈元素不为空，则进行（2）</p>
+<p>（2）出栈元素，strs[index];</p>
+<p>（2）出栈，栈指针：index -= 1，指向栈顶元素</p>
+<h3 id="Java之使用数组实现栈"><a href="#Java之使用数组实现栈" class="headerlink" title="Java之使用数组实现栈"></a>Java之使用数组实现栈</h3><p>`</p>
+<pre><code>//栈：先进后出
+public class Stack {
+    private String[] strs;
+    private static int index = -1;
+    public Stack() {  //默认无参数的数组大小为10；
+        this(10);
+    }
+public Stack(int size) {
+    strs = new String[size];//有参数的数组大小为size
+}
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+//判断是否为空
+public boolean isEmpty() {
+    return index == -1 ? true:false;
+}
+//判断是否为满
+public boolean isFull() {
+    return index == strs.length - 1 ? true:false;
+}
+//进栈
+public boolean add(String string) {
+    if (isFull()) {
+        System.out.println(&quot;栈已满，不能再添加新元素！！！&quot;+ string);
+        return false;
+    }
+    strs[++index] = string;
+    System.out.println(&quot;已经添加新元素&quot; + string);
+    return true;
+}
+//访问栈顶元素****************************************栈顶
+public String peek() {
+    if (isEmpty()) {
+        System.out.println(&quot;栈已空，没有栈顶元素！！！&quot;);
+        return &quot;&quot;;
+    }
+    System.out.println(&quot;栈顶元素&quot; +strs[index]);
+    return strs[index];
+}
+//出栈
+public String pop() {
+    if (isEmpty()) {
+        System.out.println(&quot;栈已空,不能出栈！！！&quot;);
+        return &quot;&quot;;
+    }
+    System.out.println(&quot;出栈元素&quot; + strs[index]);
+    return strs[index--];
+}
+public static void main(String[] args) {
+    Stack stack = new Stack(4);
+    stack.peek();        //栈已空，没有栈顶元素！！！
+    stack.add(&quot;小燕子&quot;);
+    stack.add(&quot;紫薇&quot;);
+    stack.add(&quot;晴儿&quot;);
+    stack.peek();    //栈顶元素晴儿
+    stack.add(&quot;金锁&quot;);
+    stack.add(&quot;柳红&quot;);//栈已满，不能再添加新元素！！！柳红
+    stack.pop();
+    stack.pop();
+    stack.pop();
+    stack.pop();
+    stack.pop();//栈已空,不能出栈！！！
+}
+}</code></pre><p>`</p>
+<hr>
+<h1 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h1><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>队列是一种特殊的<a href="https://baike.baidu.com/item/线性表/3228081" target="_blank" rel="noopener">线性表</a>，队列又称为先进先出（FIFO—first in first out）<a href="https://baike.baidu.com/item/线性表" target="_blank" rel="noopener">线性表</a>。特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头。</p>
+<h3 id="队列类型"><a href="#队列类型" class="headerlink" title="队列类型"></a>队列类型</h3><h5 id="顺序队列"><a href="#顺序队列" class="headerlink" title="顺序队列"></a>顺序队列</h5><p>建立顺序队列结构必须为其静态分配或动态申请一片连续的存储空间，并设置两个指针进行管理。一个是队头指针front，它指向队头元素；另一个是队尾指针rear，它指向下一个入队元素的存储位置</p>
+<p>存放元素：向量空间；</p>
+<p>队列指针：队头指针front、队尾指针rear；</p>
+<p>初始位置：front = rear = 0；</p>
+<h5 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h5><p>在实际使用队列时，为了使队列空间能重复使用，往往对队列的使用方法稍加改进：无论插入或删除，一旦rear指针增1或front指针增1 时超出了所分配的队列空间，就让它指向这片连续空间的起始位置。实际上是把队列空间想象成一个环形空间，环形空间中的存储单元循环使用，用这种方法管理的队列也就称为循环队列。</p>
+<h3 id="基本算法-1"><a href="#基本算法-1" class="headerlink" title="基本算法"></a>基本算法</h3><h5 id="顺序队列（假溢出现象）"><a href="#顺序队列（假溢出现象）" class="headerlink" title="顺序队列（假溢出现象）"></a>顺序队列（假溢出现象）</h5><p>（1）初始位置：front == rear =0。</p>
+<p>（2）进队列，如果队列满：条件为rear == strs.length，那么则进行出错处理；如果队列未满那么进行（3）。</p>
+<p>（3）将元素string存入队列：strs[rear] = string；指针位置：rear +=1。</p>
+<p>（4）出队列，如果队列空：条件为front == rear,那么进行出错处理；如果队列未空，那么进行（5）。</p>
+<p>（5）将元素string取出队列：string = strs[front] ;指针位置：front += 1。</p>
+<p>（6）队列顶元素：</p>
+<h5 id="循环队列-1"><a href="#循环队列-1" class="headerlink" title="循环队列"></a>循环队列</h5><p>和顺序队列实现差不多，只是在判断条件上有区别！！！！！</p>
+<p>空对：队首和队尾相同</p>
+<p>满队：（队尾+1）%长度 = 队首</p>
+<p>出队：队首 =（队首+1）%长度</p>
+<p>进队：队尾 = （队尾+1）%长度</p>
+<h3 id="Java数组实现队列"><a href="#Java数组实现队列" class="headerlink" title="Java数组实现队列"></a>Java数组实现队列</h3><h5 id="数组实现顺序队列"><a href="#数组实现顺序队列" class="headerlink" title="数组实现顺序队列"></a>数组实现顺序队列</h5><p><code>public class SequentialQueue {
+    private String[] strs;
+    private int front = 0;     //队列初始条件未放置任何元素
+    private int rear = 0;      //初始队列front = rear = 0，
+    //初始无参数对象构建默认数组大小为10；
+    public SequentialQueue() {
+        this(10);
+    }
+    //初始有参数对象构建默认数组大小为size；
+    public SequentialQueue(int size) {
+        strs = new String[size];
+    }
+    //入队列
+    //判断队列满情况   返回boolean值的isFull()
+    public boolean isFull() {
+        return rear == strs.length? true:false; //******************判断队列为满队尾指针与队列长度
+    }
+    public boolean add(String string) {
+        if (isFull()) {
+            System.out.println(&quot;队列已满！！！&quot;+ string +&quot;放不下&quot;);
+            return false;
+        }
+        strs[rear++] = string;
+        System.out.println(string + &quot;已经存入队列！&quot;);
+        return true;
+    }
+    //出队列
+    //判断是否为空
+    public boolean isEmpty() {
+        return front == rear ?true:false;
+    }
+    public boolean pop() {
+        if (isEmpty()) {
+            System.out.println(&quot;队列中已经没有元素要出队列！！！&quot;);
+            return false;
+        }
+        String string = strs[front++];
+        System.out.println(&quot;出队列元素：&quot; + string);
+        return true;
+    }
+    //队列顶元素**************************************************队列顶元素指针front
+    public String peek() {
+        System.out.println(&quot;队列顶元素&quot; +strs[front]);
+        return strs[front];
+    }
+    public static void main(String[] args) {
+        SequentialQueue sq = new SequentialQueue(3);
+        sq.add(&quot;房间&quot;);
+        sq.add(&quot;爱笑的眼睛&quot;);
+        sq.peek();
+        sq.add(&quot;情深深雨蒙蒙&quot;);
+        sq.add(&quot;尘埃&quot;);
+        sq.pop();
+        sq.pop();
+        sq.pop();
+        sq.pop();
+    }
+}</code></p>
+<h5 id="数组实现循环队列"><a href="#数组实现循环队列" class="headerlink" title="数组实现循环队列"></a>数组实现循环队列</h5><p><code>public class CircularQueue {
+    private String[] strs;
+    private int front = 0;     //队列初始条件未放置任何元素
+    private int rear = 0;      //初始队列front = rear = 0，
+    //初始无参数对象构建默认数组大小为10；
+    public CircularQueue() {
+        this(10);
+    }
+    //初始有参数对象构建默认数组大小为size；
+    public CircularQueue(int size) {
+        strs = new String[size];
+    }
+    //入队列
+    //判断队列满情况   返回boolean值的isFull()
+    public boolean isFull() {
+        rear = (rear + 1)%strs.length;
+        return rear == front? true:false; //******************判断队列为满队尾指针与队列长度
+    }
+    public boolean add(String string) {
+        if (isFull()) {
+            System.out.println(&quot;队列已满！！！&quot;+ string +&quot;放不下&quot;);
+            return false;
+        }
+        strs[rear] = string;
+        rear = (rear + 1)%strs.length;
+        System.out.println(string + &quot;已经存入队列！&quot;);
+        return true;
+    }
+    //出队列
+    //判断是否为空
+    public boolean isEmpty() {
+        return front == rear ?true:false;
+    }
+    public boolean pop() {
+        if (isEmpty()) {
+            System.out.println(&quot;队列中已经没有元素要出队列！！！&quot;);
+            return false;
+        }
+        String string = strs[front++];
+        front = (front + 1)%strs.length;
+        System.out.println(&quot;出队列元素：&quot; + string);
+        return true;
+    }
+    //队列顶元素**************************************************队列顶元素指针front
+    public String peek() {
+        System.out.println(&quot;队列顶元素&quot; +strs[front]);
+        return strs[front];
+    }
+    public static void main(String[] args) {
+        SequentialQueue sq = new SequentialQueue(3);
+        sq.add(&quot;房间&quot;);
+        sq.add(&quot;爱笑的眼睛&quot;);
+        sq.peek();
+        sq.add(&quot;情深深雨蒙蒙&quot;);
+        sq.add(&quot;尘埃&quot;);
+        sq.pop();
+        sq.pop();
+        sq.pop();
+        sq.pop();
+        sq.add(&quot;小幸运&quot;);
+        sq.add(&quot;青苹果乐园&quot;);
+    }
+}</code></p>
+<p><strong><em>队列和栈一样只允许在断点处插入和删除元素。</em></strong></p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">Summer</a>
-            <p>原文链接：<a href="http://yoursite.com/2019/08/13/hello-world/">http://yoursite.com/2019/08/13/hello-world/</a>
-            <p>发表日期：<a href="http://yoursite.com/2019/08/13/hello-world/">八月 13日 2019, 11:22:50 晚上</a>
-            <p>更新日期：<a href="http://yoursite.com/2019/08/13/hello-world/">August 13th 2019, 11:22:50 pm</a>
+            <p>原文链接：<a href="http://yoursite.com/2019/08/15/Data-Structrue-Stack-Queue/">http://yoursite.com/2019/08/15/Data-Structrue-Stack-Queue/</a>
+            <p>发表日期：<a href="http://yoursite.com/2019/08/15/Data-Structrue-Stack-Queue/">八月 15日 2019, 10:25:04 晚上</a>
+            <p>更新日期：<a href="http://yoursite.com/2019/08/15/Data-Structrue-Stack-Queue/">August 16th 2019, 12:59:43 am</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -424,13 +629,13 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/08/15/Data-Structrue-Stack-Queue/" title= "Data Structrue-Stack&&Queue">
-                    <div class="nextTitle">Data Structrue-Stack&&Queue</div>
-                </a>
-            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/08/13/hello-world/" title= "Hello World">
+                    <div class="prevTitle">Hello World</div>
+                </a>
             
         </li>
     </ul>
@@ -548,7 +753,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack"><span class="toc-number">1.</span> <span class="toc-text">Stack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-number">1.0.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本算法"><span class="toc-number">1.0.2.</span> <span class="toc-text">基本算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#进栈算法"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">进栈算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#退栈算法"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">退栈算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java之使用数组实现栈"><span class="toc-number">1.0.3.</span> <span class="toc-text">Java之使用数组实现栈</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Queue"><span class="toc-number">2.</span> <span class="toc-text">Queue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#队列类型"><span class="toc-number">2.0.2.</span> <span class="toc-text">队列类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#顺序队列"><span class="toc-number">2.0.2.0.1.</span> <span class="toc-text">顺序队列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#循环队列"><span class="toc-number">2.0.2.0.2.</span> <span class="toc-text">循环队列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本算法-1"><span class="toc-number">2.0.3.</span> <span class="toc-text">基本算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#顺序队列（假溢出现象）"><span class="toc-number">2.0.3.0.1.</span> <span class="toc-text">顺序队列（假溢出现象）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#循环队列-1"><span class="toc-number">2.0.3.0.2.</span> <span class="toc-text">循环队列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java数组实现队列"><span class="toc-number">2.0.4.</span> <span class="toc-text">Java数组实现队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#数组实现顺序队列"><span class="toc-number">2.0.4.0.1.</span> <span class="toc-text">数组实现顺序队列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数组实现循环队列"><span class="toc-number">2.0.4.0.2.</span> <span class="toc-text">数组实现循环队列</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

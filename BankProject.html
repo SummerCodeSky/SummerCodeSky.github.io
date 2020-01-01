@@ -341,23 +341,75 @@
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="BankProject-File存储信息"><a href="#BankProject-File存储信息" class="headerlink" title="BankProject-File存储信息"></a>BankProject-File存储信息</h1><h2 id="项目包分层"><a href="#项目包分层" class="headerlink" title="项目包分层"></a>项目包分层</h2><ol>
-<li><p>controller层：Test测试类的实现</p>
+<li><p>controller层：<font color="#ff0000">Test测试类</font>的实现</p>
 <p>通过main方法进行项目功能选择，接收后台参数并返回给处理页面。</p>
 </li>
-<li><p>service层：银行服务项目的具体实现</p>
+<li><p>service层：<font color="#ff0000">数据的二次加工</font>银行服务项目的具体实现</p>
 <p>调用dao层，将从dao层返回的数据进行二次加工（把从数据库查出来的数据进行包装）</p>
 </li>
-<li><p>dao层：对数据的增删改查相关工作。</p>
+<li><p>dao层：对<font color="#ff0000">数据的增删改查</font>相关工作。</p>
 <p>dao层调用DB层，DB层只读写文件。只需要操作数据库（写一些sql语句）</p>
 </li>
-<li><p>util层：工具类的实现</p>
-<p>写一些工具类：关闭流的类，加密的类，转化的类。</p>
+<li><p>util层：<font color="#ff0000">工具类</font>的实现</p>
+<p>写一些工具类：关闭流的类，加密的类，转化的类等等。</p>
 </li>
-<li><p>bean层：与项目有关的实体类如：User类</p>
+<li><p>bean层：与项目有关的<font color="#ff0000">实体类</font>如：User类</p>
+<p><strong>Controller层调用Service层；Service层调用Dao层；</strong></p>
 </li>
 </ol>
-<h2 id="项目执行步骤"><a href="#项目执行步骤" class="headerlink" title="项目执行步骤"></a>项目执行步骤</h2><h3 id="controller层"><a href="#controller层" class="headerlink" title="controller层"></a>controller层</h3><h3 id="util类："><a href="#util类：" class="headerlink" title="util类："></a>util类：</h3><p>模拟System.out.print功能</p>
-<p>模拟Scanner类功能</p>
+<h2 id="项目执行步骤"><a href="#项目执行步骤" class="headerlink" title="项目执行步骤"></a>项目执行步骤</h2><h3 id="controller层："><a href="#controller层：" class="headerlink" title="controller层："></a>controller层：</h3><h3 id="service层："><a href="#service层：" class="headerlink" title="service层："></a>service层：</h3><h3 id="dao层："><a href="#dao层：" class="headerlink" title="dao层："></a>dao层：</h3><h3 id="util层："><a href="#util层：" class="headerlink" title="util层："></a>util层：</h3><p><strong>1.</strong>模拟System.out.print功能；模拟Scanner类功能</p>
+<h3 id="bean层："><a href="#bean层：" class="headerlink" title="bean层："></a>bean层：</h3><h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><h2 id="PrintStream类"><a href="#PrintStream类" class="headerlink" title="PrintStream类"></a>PrintStream类</h2><p>​    PrintStream继承了FilterOutputStream.是”装饰类”的一种,所以属于字节流体系中(与PrintStream相似的流PrintWriter继承于Writer,属于字符流体系中)。</p>
+<p><font color="#ff0000">值得注意的是：</font></p>
+<ul>
+<li><p>与其他流不同的是，PrintStream永远不会抛异常，因为已经做了try{}catch{}的处理。,出现异常情况会在内部设置标识,通过checkError()获取此标识。</p>
+</li>
+<li><p>PrintStream流有自动刷新机制,例如当向PrintStream流中写入一个字节数组后自动调用flush()方法。</p>
+</li>
+</ul>
+<h3 id="PrintStream写文件："><a href="#PrintStream写文件：" class="headerlink" title="PrintStream写文件："></a><font color="#ff0000">PrintStream写文件：</font></h3><p><strong>1.PrintStream</strong>是<font color="#00ff00"><strong>字节</strong></font>类型的打印输出流（写入的是字节）。PrintStream流中，基本所有的print(Object obj)重载方法和Println(Object obj)重载方法都是通过将对应数据转化成字符串，然后调用write( )方法写到底层输出流中。<font color="#00ff00"><strong>PrintStream流：</strong></font>System.out和System.err就是被包装成PrintStream类；System.in不是PrintStream类。</p>
+<p>PrintStream流不是直接将数据写到文件的流,需要传入底层输出流out,而且<strong>(1)</strong>要实现指定编码方式,需要中间流<font color="#00ff00">OutputStreamWriter</font>,<font color="#00ff00">OutputStreamWriter</font>流实现了字符流以指定编码方式转换成字节流。<strong>(2)</strong>此外为了提高写入文件的效率,使用到了字符缓冲流BufferWriter。</p>
+<p><strong>PrintWriter</strong>是<font color="#00ff00"><strong>字符</strong></font>类型的打印输出流（写入的是字符）。</p>
+<p><strong>2.了解数据读取和写入的流程：</strong></p>
+<p>1.数据从流到文件的过程</p>
+<p>输出流—&gt;缓冲流—&gt;转化流—&gt;文件流—&gt;文件</p>
+<p>2.数据从文件到流的过程</p>
+<p>文件—&gt;文件流—&gt;转化流—&gt;缓冲流—&gt;输入流</p>
+<p><strong>3.PrintStream流写到文件的过程:</strong></p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570263304687.png" alt="1570263304687"></p>
+<p><font color="#ff0000">构造方法：</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PrintStream</span><span class="params">(OutputStream out)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PrintStream</span><span class="params">(OutputStream out, <span class="keyword">boolean</span> autoFlush)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PrintStream</span><span class="params">(OutputStream out, <span class="keyword">boolean</span> autoFlush, String encoding)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PrintStream</span><span class="params">(String fileName)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PrintStream</span><span class="params">(String fileName, String csn)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PrintStream</span><span class="params">(File file)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PrintStream</span><span class="params">(File file, String csn)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建了默认编码方式的PrintStream流,字节输出流out作为PrintStream流的输出流,不自动刷新.</li>
+<li>创建默认编码方式的PrintStream流,字节输出流out作为PrintStream流的输出流,传入是否自动刷新的参数autoFlush.</li>
+<li>创建了指定编码名称encoding的PrintStream,字节输出流out作为PrintStream流的输出流.传入是否自动刷新的参数autoFlush.</li>
+<li>创建了指定文件名称,默认字符编码方式的PrintStream流,FileOutputStream流作为PrintStream流的输出流.不自动刷新.</li>
+<li>创建指定了文件名称和字符编码名称csn的PrintStrea流,FileOutputStream作为PrintStream流的输出流.不自动刷新.</li>
+<li>创建指定文件对象File和默认编码方式的PrintStream流,FileOutputStream作为PrintStream流的输出流.不自动刷新.</li>
+<li>创建指定文件对象File和编码名称csn的PrintStream流,FileOutputStream作为PrintStream流的输出流.不自动刷新.</li>
+</ul>
+<p><font color="#ff0000">内部变量：</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> autoFlush;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> trouble = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">private</span> Formatter formatter;</span><br><span class="line"><span class="keyword">private</span> BufferedWriter textOut;</span><br><span class="line"><span class="keyword">private</span> OutputStreamWriter charOut;</span><br><span class="line"></span><br><span class="line">autoFlush----是否自动刷新缓冲区.</span><br><span class="line">trouble----是否抛出异常的内部标识.当PrintStream流内部抛出异常时会捕获异常,然后将trouble的值设置成<span class="keyword">true</span>.</span><br><span class="line">formatter----用于数据格式化的对象Formatter.</span><br><span class="line">textOut,charOut----PrintStream流本身不具备指定编码功能,BufferedWriter提供了缓冲数据的功能,而OutputStreamWriter提供了按照指定编码方法将字符转化成字节的功能.</span><br></pre></td></tr></table></figure>
+
+<p><font color="#ff0000">内部方法：</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checkError</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> b)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span> buf[], <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">printf</span><span class="params">(String format, Object ... args)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">printf</span><span class="params">(Locale l, String format, Object ... args)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">format</span><span class="params">(String format, Object ... args)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">format</span><span class="params">(Locale l, String format, Object ... args)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">append</span><span class="params">(CharSequence csq)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">append</span><span class="params">(CharSequence csq, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">append</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">boolean</span> b)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">long</span> l)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">float</span> f)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">double</span> d)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> s[])</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(String s)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(Object obj)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(<span class="keyword">boolean</span> x)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(<span class="keyword">char</span> x)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(<span class="keyword">long</span> x)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(<span class="keyword">float</span> x)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(<span class="keyword">double</span> x)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(<span class="keyword">char</span> x[])</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(String x)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(Object x)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">flush()----刷新流,将缓冲的数据写到底层输出流中.</span><br><span class="line">close()---关闭流,释放关联的资源.</span><br><span class="line">checkError()---检查流中异常状态,如果PrintStream流中有异常抛出,返回<span class="keyword">true</span>.</span><br><span class="line">write(<span class="keyword">int</span> b)----将单个字节b写到PrintStream流中.</span><br><span class="line">write(<span class="keyword">byte</span> buf[] ,<span class="keyword">int</span> off,<span class="keyword">int</span> len)----将字节数组buf中off位置开始,len个字节写到PrintStream流中.</span><br><span class="line">printf(String format, Object ... args)----将数据args按照默认的Locale值和format格式进行格式化后写到PrintStream流中,方法执行等同于out.format(format, args)</span><br><span class="line">printf(Locale l, String format, Object ... args)----将数据args根据Locale值和format格式进行格式化后写到PrintStream输出流中,方法执行等同于out.printf(l, format,args).</span><br><span class="line">format(String format, Object ... args)----根据默认的Locale值和format格式来格式化数据args.</span><br><span class="line">format(Locale l, String format, Object ... args)----将数据args根据Locale值和format格式进行格式化.</span><br><span class="line">append(CharSequence csq, <span class="keyword">int</span> start, <span class="keyword">int</span> end)----将字符序列csq中start(包含)位置到end(不包含)之间的子字符序列添加到PrintStream输出流中,此方法执行等同于out.print(csq.subSequence(start, end).toString()).</span><br><span class="line">append(<span class="keyword">char</span> c)----将单个字符添加到PrintStream输出流中.此方法执行等同于out.print(c).</span><br></pre></td></tr></table></figure>
+
+<p>其他的print(Object obj)的重载方法与println(Object obj)的重载方法总结如下,两个区别是println(Object obj)在写完数据后,会写入一个换行符.而这两类方法写入数据时都会先将数据转成字符串,然后调用底层输出流写到文件中(比如boolean类型的数据true,会先转成字符串”true”).此两类方法都将写入数据转化成了字符串,所以实际调用的方法是write(String s).</p>
+<h2 id="解析方法parseInt-、Number-的区别分析"><a href="#解析方法parseInt-、Number-的区别分析" class="headerlink" title="解析方法parseInt()、Number()的区别分析"></a>解析方法parseInt()、Number()的区别分析</h2><p>parseInt()、Number()这两个函数用到最多的地方就是把一个字符串转换成数据类型，那么他们都有哪些区别。</p>
+<p><strong>parseInt()：</strong></p>
+<ol>
+<li>无参数类型</li>
+</ol>
+<p>parseInt()：函数将给定的字符串以指定的基数解析为整数。</p>
+<ol start="2">
+<li>有参数类型</li>
+</ol>
+<p>parseInt（string，radix）：</p>
+<p>第二个参数表示使用的进制，我们一般使用10进制，也可能会有到8或者16进制。为了避免对“0”和“0x”开头的字符串解析错误，各种javascript编程规范都规定必须要明确给出第二个参数的值，如parseInt(“123”,10).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">parseInt(<span class="string">'16'</span>, <span class="number">8</span>)  = <span class="number">14</span></span><br><span class="line">parseInt(<span class="string">'10'</span>, <span class="number">8</span>)  = <span class="number">8</span></span><br><span class="line"></span><br><span class="line">parseInt(<span class="string">'16'</span>, <span class="number">10</span>)  = <span class="number">16</span></span><br><span class="line">parseInt(<span class="string">'10'</span>, <span class="number">10</span>)  = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">parseInt(<span class="string">'16'</span>, <span class="number">16</span>)  = <span class="number">22</span></span><br><span class="line">parseInt(<span class="string">'10'</span>, <span class="number">16</span>)  = <span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<p>parseInt从头解析string为整数，在遇到不能解析的字符时就返回已经解析的整数部分，如果第一个字符就不能解析，就直接返回NaN[是计算机科学中数值数据类型的一类值，表示未定义或不可表示的值。常在浮点数运算中使用。]。</p>
+<p><strong>Number():</strong></p>
 
     </article>
     <!-- license  -->
@@ -365,8 +417,8 @@
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">Summer</a>
             <p>原文链接：<a href="http://yoursite.com/BankProject.html">http://yoursite.com/BankProject.html</a>
-            <p>发表日期：<a href="http://yoursite.com/BankProject.html">August 20th 2019, 2:20:16 am</a>
-            <p>更新日期：<a href="http://yoursite.com/BankProject.html">August 19th 2019, 2:18:08 pm</a>
+            <p>发表日期：<a href="http://yoursite.com/BankProject.html">January 1st 2020, 12:48:00 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/BankProject.html">October 10th 2019, 9:50:06 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -524,9 +576,425 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 4
+        Total : 34
         </div>
         <!-- search  -->
         
@@ -539,6 +1007,156 @@
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2019/12/09/小程序的flex布局/" >小程序的flex布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2019/12/03/面试复习-MySql数据库/" >面试复习-MySql数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-2动态SQL实现/" >mybatis-2动态SQL实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-1对数据库事务操作/" >mybatis-1初学</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-6jdbc完成数据库事务操作/" >spring-6jdbc完成数据库事务操作</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-5AOP相关and模拟切面/" >spring-5AOP相关and模拟切面</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-4自动装配模式and与数据库连接/" >spring-4自动装配模式and与数据库连接</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-3其他引用类型的注入/" >spring-3其他引用类型的注入</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-2核心技术/" >spring-2核心技术</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span><a class="archive-post-title" href= "/2019/11/27/打印日志Logging/" >打印日志Logging</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/spring-1框架入门了解/" >spring框架1-入门了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/XML解析/" >XML解析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2019/11/22/java注解/" >java注解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2019/11/21/java反射机制/" >java反射机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2019/11/18/框架前提/" >框架前提</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2019/11/07/java-web中jsp和servlet编码配置（pageEncoding-charset、request-response）及中文乱码问题/" >java web中jsp和servlet编码配置（pageEncoding&charset、request&response）及中文乱码问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/29</span><a class="archive-post-title" href= "/2019/10/29/servlet/" >servlet</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2019/10/28/Jstl-jsp标准标签库/" >Jstl-jsp标准标签库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2019/10/21/配置tomcat服务器/" >配置tomcat服务器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML详解/" >XML-1前提</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2019/10/12/新建maven项目的配置及方式/" >新建maven项目的配置及方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/09</span><a class="archive-post-title" href= "/2019/10/09/数据库连接-JDBC-JDBC工具类库/" >数据库连接-JDBC*JDBC工具类库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2019/09/26/使用工具及下载等相关整理合集/" >使用工具及下载等相关整理合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2019/09/16/JavaScript-1/" >JavaScript&&1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2019/09/06/Database2-SQL语言/" >Database2-SQL语言</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/04</span><a class="archive-post-title" href= "/2019/09/04/DataBase1/" >DataBase1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/02</span><a class="archive-post-title" href= "/2019/09/02/CSS-lable/" >CSS-lable</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2019/08/29/HTML-label/" >HTML&&label</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/20</span><a class="archive-post-title" href= "/2019/08/20/Thread/" >Thread</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/20</span><a class="archive-post-title" href= "/2019/08/20/IO流/" >IO流</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -567,9 +1185,95 @@
     
         <span class="sidebar-tag-name" data-tags="DataStructrue、Search、Classical-Problem"><span class="iconfont-archer">&#xe606;</span>DataStructrue、Search、Classical-Problem</span>
     
-        <span class="sidebar-tag-name" data-tags="DataStructrue sort"><span class="iconfont-archer">&#xe606;</span>DataStructrue sort</span>
+        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="jstl 标准标签库"><span class="iconfont-archer">&#xe606;</span>jstl 标准标签库</span>
+    
+        <span class="sidebar-tag-name" data-tags="hashmap"><span class="iconfont-archer">&#xe606;</span>hashmap</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis动态sql"><span class="iconfont-archer">&#xe606;</span>mybatis动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="文件的上传和下载（Tomcat和jar包）"><span class="iconfont-archer">&#xe606;</span>文件的上传和下载（Tomcat和jar包）</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
+    
+        <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
+    
+        <span class="sidebar-tag-name" data-tags="短视频项目"><span class="iconfont-archer">&#xe606;</span>短视频项目</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
+    
+        <span class="sidebar-tag-name" data-tags="TCP UDP"><span class="iconfont-archer">&#xe606;</span>TCP UDP</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java基础"><span class="iconfont-archer">&#xe606;</span>Java基础</span>
+    
+        <span class="sidebar-tag-name" data-tags="DataStructrue LinkedList Tree"><span class="iconfont-archer">&#xe606;</span>DataStructrue LinkedList Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="css lable"><span class="iconfont-archer">&#xe606;</span>css lable</span>
     
         <span class="sidebar-tag-name" data-tags="Stack,Queue"><span class="iconfont-archer">&#xe606;</span>Stack,Queue</span>
+    
+        <span class="sidebar-tag-name" data-tags="IO InputStream OutputStream"><span class="iconfont-archer">&#xe606;</span>IO InputStream OutputStream</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML label"><span class="iconfont-archer">&#xe606;</span>HTML label</span>
+    
+        <span class="sidebar-tag-name" data-tags="DataStructrue sort"><span class="iconfont-archer">&#xe606;</span>DataStructrue sort</span>
+    
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
+    
+        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring的自动装配（注解） spring数据库连接"><span class="iconfont-archer">&#xe606;</span>spring的自动装配（注解） spring数据库连接</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring实现数据库事务操作"><span class="iconfont-archer">&#xe606;</span>spring实现数据库事务操作</span>
+    
+        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql数据库"><span class="iconfont-archer">&#xe606;</span>MySql数据库</span>
+    
+        <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
+    
+        <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
+    
+        <span class="sidebar-tag-name" data-tags="svn git"><span class="iconfont-archer">&#xe606;</span>svn git</span>
+    
+        <span class="sidebar-tag-name" data-tags="sql database"><span class="iconfont-archer">&#xe606;</span>sql database</span>
+    
+        <span class="sidebar-tag-name" data-tags="JDBC SQL C3P0 DBCP Druid DButils"><span class="iconfont-archer">&#xe606;</span>JDBC SQL C3P0 DBCP Druid DButils</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据库连接池"><span class="iconfont-archer">&#xe606;</span>数据库连接池</span>
+    
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+    
+        <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
+    
+        <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
+    
+        <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

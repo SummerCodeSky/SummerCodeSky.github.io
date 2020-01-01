@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Summer">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Summer">
+    
+    <meta name="keywords" content="summer,summer-theme,summer-blog">
+    
+    <meta name="description" content="Summer'sSky">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Database2-SQL语言 · Summer&#39;s Sky</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Summer&#39;s Sky.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Database2-SQL语言</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Summer's Sky.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Database2-SQL语言
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "sql database">sql database</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">7.5k</span>阅读时长: <span class="post-count reading-time">29 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/09/06</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="数据库数据操作"><a href="#数据库数据操作" class="headerlink" title="数据库数据操作"></a>数据库数据操作</h1><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>!!!!!!!!!一条数据库语句以”；”为结束标志。</p>
+<h2 id="数据操纵语言-DML"><a href="#数据操纵语言-DML" class="headerlink" title="数据操纵语言(DML)"></a>数据操纵语言(DML)</h2><p>增删改查语句</p>
+<p>数据操纵语言DML主要有三种形式：<br>1) 插入：INSERT<br>2) 更新：UPDATE<br>3) 删除：DELETE</p>
+<h2 id="数据查询语言（DQL）"><a href="#数据查询语言（DQL）" class="headerlink" title="数据查询语言（DQL）"></a>数据查询语言（DQL）</h2><p>数据查询语言DQL基本结构是由SELECT子句，FROM子句，WHERE<br>子句组成的查询块：<br>SELECT &lt;字段名表&gt;<br>FROM &lt;表或视图名&gt;<br>WHERE &lt;查询条件&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">查询所有数据</span><br><span class="line">select * from 表名；</span><br><span class="line"></span><br><span class="line">起别名 ： ----------------关键字as</span><br><span class="line">select 字段 as 别名 from 表名</span><br><span class="line"></span><br><span class="line">查询部分（可指定字段）*************最好用这个</span><br><span class="line">select 字段1，字段2，... from 表名</span><br><span class="line"></span><br><span class="line">查询出来的记录去重</span><br><span class="line">select (distinct)字段 from 表名</span><br><span class="line"></span><br><span class="line">查询语句加减乘除：</span><br><span class="line">select 字段*12 from 表名</span><br><span class="line"></span><br><span class="line">统计：--------------------关键字count</span><br><span class="line">select count(*) from 表名</span><br><span class="line">或者select count(某一字段) from 表名</span><br><span class="line"></span><br><span class="line">最大最小：------------------关键字max/min</span><br><span class="line">select max(某一字段) from 表名</span><br><span class="line">或者select min(某一字段) from 表名</span><br><span class="line"></span><br><span class="line">平均-----------------------关键字avg()</span><br><span class="line">select avg(某一字段) from 表名</span><br><span class="line"></span><br><span class="line">总和-----------------------关键字sum()</span><br><span class="line">select sum(某一字段) from 表名</span><br><span class="line"></span><br><span class="line">字符串拼接--------------------关键字concat()</span><br><span class="line">select concat(&apos;我是&apos;，字段1，&apos;我的ID是&apos;,字段2) from 表名</span><br></pre></td></tr></table></figure>
+
+<h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><p>&lt; &gt; &gt;= &lt;= != and(&amp;&amp;)   or(||)    =</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">select 字段 from 表名 where 字段&gt;1000;</span><br><span class="line"></span><br><span class="line">between</span><br><span class="line"></span><br><span class="line">null</span><br><span class="line"></span><br><span class="line">not null</span><br><span class="line"></span><br><span class="line">in</span><br><span class="line"></span><br><span class="line">like</span><br><span class="line">通配符：% _</span><br><span class="line"></span><br><span class="line">limit</span><br><span class="line"></span><br><span class="line">order by:</span><br><span class="line">asc desc</span><br><span class="line"></span><br><span class="line">group by</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据定义语言DDL"><a href="#数据定义语言DDL" class="headerlink" title="数据定义语言DDL"></a>数据定义语言DDL</h2><p>  数据定义语言DDL用来创建数据库中的各种对象—–表、视图、<br>索引、同义词、聚簇等如：<br>CREATE| TABLE / VIEW / INDEX / SYN / CLUSTER<br>表 视图 索引 同义词 簇</p>
+<p>DDL操作是隐性提交的！不能rollback  </p>
+<h2 id="数据控制语言DCL"><a href="#数据控制语言DCL" class="headerlink" title="数据控制语言DCL"></a>数据控制语言DCL</h2><p>  数据控制语言DCL用来授予或回收访问数据库的某种特权，并控制<br>数据库操纵事务发生的时间及效果，对数据库实行监视等。如：</p>
+<p>1) GRANT：授权。</p>
+<p>2) ROLLBACK [WORK] TO [SAVEPOINT]：回退到某一点。<br>回滚—ROLLBACK<br>回滚命令使数据库状态回到上次最后提交的状态。其格式为：<br>SQL&gt;ROLLBACK;</p>
+<p>3) COMMIT [WORK]：提交。  </p>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>​    主要提高从表中检索数据的速度。由于数据是存储在数据库表里面，所以索引是创建在数据表对象上的，有表中的一个字段或者多个字段生成的键组成。这些键存储在数据结构中（b-数或者哈希表）中，通过mysql可以快速有效的查找到与键值相关联的字段。  根据数据结构索引可以分为：b型<br>树索引，和哈希索引<br>​    在mysql中支持的6种索引：，唯一索普通索引引，全文索引，单列<br>索引，多列索引，空间索引。<br>​    创建索引可以提高查询的速度，但过多的创建索引就会占据许多磁盘空间，因此在创建的时候要权衡。<br>​    适合建立索引的:<br>（1）经常被查询的字段id，where语句中出现的字段。<br>（2）在分组的字段，在group by语句中出现的字段。<br>（3）存在依赖关系的子表和父表之间的联合查询，主键和外键。<br>（4）设置唯一完整性约束的字段。<br>​    不适合的<br>（1）查询子句中很少被使用的字段。<br>（2）拥有多重复的字段。</p>
+<h3 id="创建索引的方式有三种："><a href="#创建索引的方式有三种：" class="headerlink" title="创建索引的方式有三种："></a>创建索引的方式有三种：</h3><h4 id="创建表的时候创建索引"><a href="#创建表的时候创建索引" class="headerlink" title="创建表的时候创建索引"></a>创建表的时候创建索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(字段1，类型 字段2，类型) index/key 索引名字 (索引字段 asc/desc);</span><br><span class="line">关键字：index/key</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看索引</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show index from 表名;</span><br><span class="line">show keys from 表名;</span><br></pre></td></tr></table></figure>
+
+<h4 id="在存在的表上创建索引"><a href="#在存在的表上创建索引" class="headerlink" title="在存在的表上创建索引"></a>在存在的表上创建索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create index 索引名 on 表名(字段名 asc/desc/*升序降序可有可无*/);</span><br><span class="line">关键字：index on</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用alter创建普通索引"><a href="#使用alter创建普通索引" class="headerlink" title="使用alter创建普通索引"></a>使用alter创建普通索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add index/key 索引名(字段 asc/desc/*升序降序可有可无*/);</span><br><span class="line">关键字：alter add index/key</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建和查看唯一索引："><a href="#创建和查看唯一索引：" class="headerlink" title="创建和查看唯一索引："></a>创建和查看唯一索引：</h3><p>唯一索引：创建索引的时候，限制索引的值是唯一的，这样的索引<br>可以更快的查找记录。在mysql中根据创建索引的方式：手动和自<br>动。<br>自动索引：在数据库表中设置完整性约束时，这个表会被系统自动<br>创建索引。<br>手动索引：手动在数据库表上创建索引，设置那个字段为主键或者<br>唯一完整性约束时，系统就会自动创建关联字段的唯一索引。</p>
+<h4 id="创建表的时候创建唯一索引"><a href="#创建表的时候创建唯一索引" class="headerlink" title="创建表的时候创建唯一索引"></a>创建表的时候创建唯一索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(字段1 类型 unique，字段2 类型 unique) index/keys 索引名字 (索引字段);</span><br><span class="line">关键字：index/keys unique</span><br></pre></td></tr></table></figure>
+
+<h4 id="在存在的表上创建唯一索引"><a href="#在存在的表上创建唯一索引" class="headerlink" title="在存在的表上创建唯一索引"></a>在存在的表上创建唯一索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create unique index 索引名 on 表名(索引字段) ;</span><br><span class="line">关键字：unique</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用alter创建唯一索引"><a href="#使用alter创建唯一索引" class="headerlink" title="使用alter创建唯一索引"></a>使用alter创建唯一索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add unique index 索引名(索引字段);</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建全文索引："><a href="#创建全文索引：" class="headerlink" title="创建全文索引："></a>创建全文索引：</h3><p>​    全文索引主要用在关联数据类型为 char ，varchar，和text的字段上，方便更快的查询数量较大的字符串类型的字段。<br>​    默认情况下的全文索引是不区分大小写的，但是要是二进制文件的<br>话就要区分大小写。</p>
+<h4 id="创建表的时候创建全文索引"><a href="#创建表的时候创建全文索引" class="headerlink" title="创建表的时候创建全文索引"></a>创建表的时候创建全文索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(字段1 类型，字段2 类型) fulltext index/keys 索引名字 (索引字段);</span><br><span class="line">关键字：index/keys fulltext</span><br></pre></td></tr></table></figure>
+
+<h4 id="在存在的表上创建全文索引"><a href="#在存在的表上创建全文索引" class="headerlink" title="在存在的表上创建全文索引"></a>在存在的表上创建全文索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create fulltext index 索引名 on 表名(索引字段) ;</span><br><span class="line">关键字：fulltext</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用alter创建全文索引"><a href="#使用alter创建全文索引" class="headerlink" title="使用alter创建全文索引"></a>使用alter创建全文索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add fulltext index 索引名(索引字段);</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建和查看多列索引："><a href="#创建和查看多列索引：" class="headerlink" title="创建和查看多列索引："></a>创建和查看多列索引：</h3><h4 id="创建表的时候创建多列索引"><a href="#创建表的时候创建多列索引" class="headerlink" title="创建表的时候创建多列索引"></a>创建表的时候创建多列索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(字段1 类型，字段2 类型) index 索引名(索引字段1，索引字段2)</span><br></pre></td></tr></table></figure>
+
+<h4 id="在存在的表上创建多列索引"><a href="#在存在的表上创建多列索引" class="headerlink" title="在存在的表上创建多列索引"></a>在存在的表上创建多列索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table index/key 索引名 on 表名(索引字段1,索引字段2) ;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用alter创建多列索引"><a href="#使用alter创建多列索引" class="headerlink" title="使用alter创建多列索引"></a>使用alter创建多列索引</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add index/key 索引名(索引字段1，索引字段2);</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop index 索引名 on 表名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.show index from 表名;</span><br></pre></td></tr></table></figure>
+
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p>触发器：包含建立触发器，查看触发器，和删除触发器。都是数据<br>库操作最基本的。<br>触发器（trigger）是数据库对象之一，类似的和函数类似。需要<br>声明，执行等。触发器的执行不是由程序调用。不是手工调用。而<br>是由事件触发，激活来实现执行。</p>
+<table>
+<thead>
+<tr>
+<th>触发器类型</th>
+<th>激活触发器的语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>INSERT型触发器</td>
+<td>INSERT,LOAD DATA,REPLACE</td>
+</tr>
+<tr>
+<td>UPDATE型触发器</td>
+<td>UPDATE</td>
+</tr>
+<tr>
+<td>DELETE型触发器</td>
+<td>DELETE REPLACE</td>
+</tr>
+</tbody></table>
+<h3 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h3><h4 id="创建执行一条语句的触发器"><a href="#创建执行一条语句的触发器" class="headerlink" title="创建执行一条语句的触发器"></a>创建执行一条语句的触发器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create trigger trigger_test before insert on</span><br><span class="line">student for each row insert into info</span><br><span class="line">valuses(null,’aa’,now());</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建包含多条执行语句的触发器"><a href="#创建包含多条执行语句的触发器" class="headerlink" title="创建包含多条执行语句的触发器"></a>创建包含多条执行语句的触发器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">create trigger 触发器名字 before|after （触发器事</span><br><span class="line">件）on 表名字 for each row</span><br><span class="line">begin</span><br><span class="line">要执行的语句内容；</span><br><span class="line">end；（这里可以使用$$表示结束，delimiter间隔符来指</span><br><span class="line">定；）</span><br><span class="line">delimiter $$</span><br><span class="line">create trigger trigger_test123 before insert on</span><br><span class="line">student for each row</span><br><span class="line">begin</span><br><span class="line">insert into test1 values(123,now());</span><br><span class="line">insert into test2 values(123,now());</span><br><span class="line">insert into test3 values(123,now());</span><br><span class="line">insert into test4 values(123,now());</span><br><span class="line">end</span><br><span class="line">$$</span><br><span class="line">结束后需要转换过来。</span><br><span class="line">//Delimiter；</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看触发器"><a href="#查看触发器" class="headerlink" title="查看触发器"></a>查看触发器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Show triggers；如果已经存在触发器了，那就不能再创建触发</span><br><span class="line">器。</span><br><span class="line">Event：触发器激活事件；</span><br><span class="line">Table：触发对象执行在哪个表上；</span><br><span class="line">Statement：触发激活后执行的语句；</span><br><span class="line">Timing 触发器执行的时间；</span><br><span class="line">系统的触发器在：information_schema中他的tiggers表结构</span><br><span class="line">为：</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop trigger 触发器的名字；</span><br></pre></td></tr></table></figure>
+
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>数据库中的查询有的时候非常复杂，表的链接，子查询。这些查询操作比较的复杂和编写的语句比较的多。有的时候这样的操作还是经常需要的。这样也保证不了正确率。就降低了数据库的实用性。在查询的过程中也不是全都需要查询的字段，那么就要限制程序员的操作字段。</p>
+<ol>
+<li>解决查询的全部查询：select *from 表；把表种所有数据都拿出来，耗时。</li>
+<li>解决sql语句的复用。为了提高数据库的复用性和安全性。就提供了视图。</li>
+</ol>
+<h3 id="相关定义"><a href="#相关定义" class="headerlink" title="相关定义"></a>相关定义</h3><p>​    本质就是一个虚拟表，内容和原表内容相似，包括一系列带有名称和行数的数据。但是视图并不在数据库中以存储数据值的形式存在。行和列数据来自定义视图的查询所引用基本表，并且当具体引用视图的时候动态生成。不占用资源.</p>
+<p>特点：</p>
+<p>1.来自不同表</p>
+<p>2.由实际表产生的虚表</p>
+<p>3.建立删除视图不影响基表</p>
+<p>4.对视图的内容更新（增加、删除、修改）影响基本表</p>
+<p>5.视图来自多个表的时候不想允许内容更新（增加、删除、修改）</p>
+<h3 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use employee;</span><br><span class="line">select *from emp;</span><br></pre></td></tr></table></figure>
+
+<h4 id="普通视图"><a href="#普通视图" class="headerlink" title="普通视图"></a>普通视图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#创建普通视图</span><br><span class="line">create view test1_view as select *from emp;</span><br><span class="line">select * from test1_view;</span><br></pre></td></tr></table></figure>
+
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><h4 id="封装查询常量的视图"><a href="#封装查询常量的视图" class="headerlink" title="封装查询常量的视图"></a>封装查询常量的视图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#封装查询常量的视图</span><br><span class="line">select 3.1415926;</span><br><span class="line">create view test2_view as select 3.1415926;</span><br><span class="line">select * from test2_view;</span><br></pre></td></tr></table></figure>
+
+<h4 id="封装聚合函数视图"><a href="#封装聚合函数视图" class="headerlink" title="封装聚合函数视图"></a>封装聚合函数视图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#封装聚合函数视图</span><br><span class="line">desc emp;</span><br><span class="line">select max(sal) from emp;</span><br><span class="line">create view test3_view as select max(sal) from emp;</span><br></pre></td></tr></table></figure>
+
+<h4 id="封装排序功能的（order-by）视图"><a href="#封装排序功能的（order-by）视图" class="headerlink" title="封装排序功能的（order by）视图"></a>封装排序功能的（order by）视图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#封装排序功能的（order by）视图</span><br><span class="line">select * from emp order by sal asc;</span><br><span class="line">create view test4_view as select * from emp order by sal asc;</span><br><span class="line">select * from test4_view;</span><br></pre></td></tr></table></figure>
+
+<h4 id="封装实现内连接的查询视图。"><a href="#封装实现内连接的查询视图。" class="headerlink" title="封装实现内连接的查询视图。"></a>封装实现内连接的查询视图。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#封装实现内连接的查询视图。</span><br><span class="line">select * from emp inner join dept on emp.deptno = dept.deptno;</span><br><span class="line">create view test5_view as select empno,ename,dept.deptno,dept</span><br><span class="line">.dname from emp inner join dept on emp.deptno = dept.deptno;</span><br><span class="line">select * from test5_view;</span><br></pre></td></tr></table></figure>
+
+<h4 id="封装实现表外链接（左右链接）的查询视图-left-join-right-join-视图"><a href="#封装实现表外链接（左右链接）的查询视图-left-join-right-join-视图" class="headerlink" title="封装实现表外链接（左右链接）的查询视图[left join ; right join]视图"></a>封装实现表外链接（左右链接）的查询视图[left join ; right join]视图</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#封装实现表外链接（左右链接）的查询视图[left join ; right join]视图</span><br><span class="line">select * from emp right join dept on emp.deptno = dept.deptno; </span><br><span class="line">select empno,ename,dept.deptno,dept</span><br><span class="line">.dname from emp right join dept on emp.deptno = dept.deptno; </span><br><span class="line">create view test6_view as select empno,ename,dept.deptno,dept</span><br><span class="line">.dname from emp right join dept on emp.deptno = dept.deptno; </span><br><span class="line">select * from test6_view;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现子查询的相关查询语句视图"><a href="#实现子查询的相关查询语句视图" class="headerlink" title="实现子查询的相关查询语句视图"></a>实现子查询的相关查询语句视图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#实现子查询的相关查询语句视图</span><br><span class="line">select emp.ename from emp where emp.deptno in (select deptno from dept);</span><br><span class="line">create view test7_view as select emp.ename from emp where emp.deptno in (select deptno from dept);</span><br><span class="line">select * from test7_view;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现记录联合（union和union-all）查询语句视图"><a href="#实现记录联合（union和union-all）查询语句视图" class="headerlink" title="实现记录联合（union和union all）查询语句视图"></a>实现记录联合（union和union all）查询语句视图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#实现记录联合（union和union all）查询语句视图</span><br><span class="line">select deptno from emp union all select deptno from dept;</span><br><span class="line">create view test8_view as select deptno from emp union all select deptno from dept;</span><br><span class="line">select * from test8_view;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询视图的两种方法"><a href="#查询视图的两种方法" class="headerlink" title="查询视图的两种方法"></a>查询视图的两种方法</h3><h4 id="使用表查询"><a href="#使用表查询" class="headerlink" title="使用表查询"></a>使用表查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show tables;#查看表</span><br><span class="line">show create view test8_view;#查看视图详细信息</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用数据库查询"><a href="#使用数据库查询" class="headerlink" title="使用数据库查询"></a>使用数据库查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show databases;#查看数据库</span><br><span class="line">show table status from employee;#显示表和视图的详细信息</span><br><span class="line">show create view test8_view;#查看视图详细信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#删除视图</span><br><span class="line">create view test as select * from emp;</span><br><span class="line">select * from test;</span><br><span class="line"></span><br><span class="line">drop view test;#最重要的一句</span><br><span class="line"></span><br><span class="line">show create view test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他相关语句创建修改视图"><a href="#其他相关语句创建修改视图" class="headerlink" title="其他相关语句创建修改视图"></a>其他相关语句创建修改视图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">drop view test1;</span><br><span class="line">drop view test2;</span><br><span class="line"></span><br><span class="line">关键字：：：create or replace</span><br><span class="line">#可以使用create or replace view 视图名字 as 查询语句</span><br><span class="line">create or replace view test2 as select ename from emp;</span><br><span class="line">select * from test2;</span><br><span class="line"></span><br><span class="line">关键字：：：alter</span><br><span class="line">#可以使用alter view 视图名字 as 查询语句</span><br><span class="line">alter view test1 as select empno from emp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="相关定义-1"><a href="#相关定义-1" class="headerlink" title="相关定义"></a>相关定义</h3><p>函数存储着一系列sql语句，调用函数就是一次性执行这些语句，所以函数可以降低语句重复。</p>
+<p><font color="#ff0000">注意：</font></p>
+<p><font color="#228B22">函数注重返回值，不注重执行过程，所以一些语句无法执行。所以函数并不是单纯sql语句集合</font></p>
+<p><font color="#228B22">通俗一点话来说：即函数只要可以输出，那么不论中间是否有一些sql语句未执行，只要有结果输出就行。</font></p>
+<h3 id="函数创建—的格式"><a href="#函数创建—的格式" class="headerlink" title="函数创建—的格式"></a>函数创建—的格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#函数创建</span><br><span class="line">use employee;</span><br><span class="line">#create 函数 returns 类型;</span><br><span class="line">#begin</span><br><span class="line">#sql语句</span><br><span class="line">#return 值;</span><br><span class="line">#end;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数创建—返回值不同"><a href="#函数创建—返回值不同" class="headerlink" title="函数创建—返回值不同"></a>函数创建—返回值不同</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">1.返回值类型为int</span><br><span class="line">#返回值类型为int</span><br><span class="line">delimiter $$</span><br><span class="line">create function myselect() returns int</span><br><span class="line">#多条语句需要加begin end</span><br><span class="line">begin</span><br><span class="line">return 666;</span><br><span class="line">end</span><br><span class="line">$$</span><br><span class="line">delimiter ;</span><br><span class="line">select myselect();</span><br><span class="line"></span><br><span class="line">2.返回值类型为varchar  </span><br><span class="line">#返回值类型为varchar    且注意varchar必须给长度。。。。。。。。。。。。。</span><br><span class="line">#方法一</span><br><span class="line">delimiter $$</span><br><span class="line">create function myselect1() returns varchar(25)</span><br><span class="line">#多条语句需要加begin end   定义变量declare 赋值用into</span><br><span class="line">begin</span><br><span class="line">declare d varchar(25);</span><br><span class="line">select ename from emp where empno = 7499 into d;</span><br><span class="line">return d;</span><br><span class="line">end</span><br><span class="line">$$</span><br><span class="line">delimiter ;</span><br><span class="line">select myselect1();</span><br><span class="line"></span><br><span class="line">#方法二</span><br><span class="line">#另一种写法select ename into d from emp where empno = 7499;</span><br><span class="line">delimiter $$</span><br><span class="line">create function myselect2() returns varchar(25)</span><br><span class="line">#多条语句需要加begin end   定义变量declare 赋值用into</span><br><span class="line">begin</span><br><span class="line">declare d varchar(25);</span><br><span class="line">select ename into d from emp where empno = 7499;</span><br><span class="line">return d;</span><br><span class="line">end</span><br><span class="line">$$</span><br><span class="line">delimiter ;</span><br><span class="line">select myselect2();</span><br><span class="line"></span><br><span class="line">3.带参数的函数</span><br><span class="line">#带参数的函数</span><br><span class="line">delimiter $$</span><br><span class="line">create function myselect3(name varchar(20)) returns int</span><br><span class="line">begin</span><br><span class="line">declare d int;</span><br><span class="line">select sal into d from emp where ename = name;</span><br><span class="line">return d;</span><br><span class="line">end</span><br><span class="line">$$</span><br><span class="line">delimiter ;</span><br><span class="line">select myselect3(&apos;allen&apos;);</span><br><span class="line">select * from emp where sal = myselect3(&apos;allen&apos;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数创建—变量"><a href="#函数创建—变量" class="headerlink" title="函数创建—变量"></a>函数创建—变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">1.</span><br><span class="line">#如何给变量赋值</span><br><span class="line">#set 变量名 = 值；</span><br><span class="line">eg: set a = &apos;java&apos;;</span><br><span class="line"></span><br><span class="line">2.</span><br><span class="line">#如何给变量定义初始值</span><br><span class="line">#dclare 变量名 变量名类型 default 值；</span><br><span class="line">eg: declare d varchar(25) default ‘yyy’;</span><br><span class="line"></span><br><span class="line">3.</span><br><span class="line">#定义全局变量 set @name =</span><br><span class="line">#定义局部变量 declare</span><br><span class="line">delimiter $$</span><br><span class="line">set @name = &quot;summer&quot;;</span><br><span class="line">create function myselect4() returns varchar(25)</span><br><span class="line">begin</span><br><span class="line">declare d varchar(25) default @name;</span><br><span class="line">return d;</span><br><span class="line">end</span><br><span class="line">$$</span><br><span class="line">delimiter ;</span><br><span class="line">select myselect4();</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看函数的三种方式"><a href="#查看函数的三种方式" class="headerlink" title="查看函数的三种方式"></a>查看函数的三种方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#1.查看函数</span><br><span class="line">show create function myselect4;</span><br><span class="line">#2.</span><br><span class="line">show function status;</span><br><span class="line">#3.</span><br><span class="line">show function status -g;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除修改数据库的操作"><a href="#删除修改数据库的操作" class="headerlink" title="删除修改数据库的操作"></a>删除修改数据库的操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#修改函数...........................最好不要用</span><br><span class="line">#alter function 函数名 选项</span><br><span class="line"></span><br><span class="line">#删除函数</span><br><span class="line">drop function myselect4;</span><br><span class="line"></span><br><span class="line">#删除函数如果存在</span><br><span class="line">drop function if exists my1;</span><br><span class="line"></span><br><span class="line">#删除表如果存在</span><br><span class="line">drop table if exists table1;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><h3 id="相关定义-2"><a href="#相关定义-2" class="headerlink" title="相关定义"></a>相关定义</h3><p>​    SQL语句需要先编译然后执行，而存储过程（Stored<br>Procedure）是一组为了<strong>完成特定功能的SQL语句集</strong>，经编译后存<br>储在数据库中，用户通过指定存储过程的名字并给定参数（如果该<br>存储过程带有参数）来调用执行它。</p>
+<p>​    存储过程是可编程的函数，在数据库中创建并保存，可以由SQL语句和控制结构组成。当想要在不同的应用程序或平台上执行相同的函<br>数，或者封装特定功能时，存储过程是非常有用的。数据库中的存<br>储过程可以看做是对编程中面向对象方法的模拟，它允许控制数据<br>的访问方式。</p>
+<h3 id="存储过程的创建"><a href="#存储过程的创建" class="headerlink" title="存储过程的创建"></a>存储过程的创建</h3><h4 id="1-格式"><a href="#1-格式" class="headerlink" title="1.格式"></a><strong>1.格式</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">create procedure dateTest2(id1 int,date1 varchar(20),id2 int,id3 int)</span><br><span class="line">begin</span><br><span class="line">#增加insert into</span><br><span class="line">insert into mydate values(id1 ,date1);</span><br><span class="line">select * from mydate;</span><br><span class="line">#删除delete from</span><br><span class="line">delete from mydate where id = id2;</span><br><span class="line">select * from mydate;</span><br><span class="line">#更新update set</span><br><span class="line">update mydate set date = &quot;2088-04-05&quot; where id = id3;</span><br><span class="line">select * from mydate;</span><br><span class="line">#查询1select * from</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#调用存储过程</span><br><span class="line">call dateTest2(7,&quot;2055-09-23&quot;,2,5);</span><br></pre></td></tr></table></figure>
+
+<p><font color="#ff0000">注意：</font></p>
+<p>(1)delimiter $$默认会以$$符号作为结束，所以输入“；”并不能使sql语句结束，使用delimiter ; 才能使用以“；”结束的语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">delimiter $$</span><br><span class="line">中间语句</span><br><span class="line">delimiter ;</span><br><span class="line">后面才能写以“；”结束的语句。</span><br></pre></td></tr></table></figure>
+
+<p>(2)存储过程的输入、输出、输入输出参数如果有多个，那么以“，”隔开。</p>
+<p>(3)存储过程以begin开始，以end结束。</p>
+<h4 id="2-参数"><a href="#2-参数" class="headerlink" title="2.参数"></a><strong>2.参数</strong></h4><p>MySQL存储过程的参数用在存储过程的定义，共有三种参数类<br>型,IN,OUT,INOUT,形式如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE PROCEDURE([[IN |OUT |INOUT ] 参数名 数据类</span><br><span class="line">形...])</span><br></pre></td></tr></table></figure>
+
+<p><strong>IN 输入参数</strong></p>
+<p>表示该参数的值必须在调用存储过程时指定，在存储过程中修改该<br>参数的值不能被返回，为默认值。仅需要将数据传入存储过程，并不需要返回计算后的该值。只能当做传入参数</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#IN</span><br><span class="line">create procedure mySave1(in ex_in int)</span><br><span class="line">begin</span><br><span class="line">select ex_in;</span><br><span class="line">set ex_in = 88;</span><br><span class="line">select ex_in;</span><br><span class="line">end</span><br><span class="line">set @ex_in = 11;</span><br><span class="line">call mySave1(@ex_in);</span><br><span class="line">select @ex_in;</span><br><span class="line">#总结：@ex_in虽然在存储过程中被修改，但并不影响@ex_in</span><br><span class="line">的值</span><br></pre></td></tr></table></figure>
+
+<p><strong>OUT 输出参数</strong></p>
+<p>该值可在存储过程内部被改变，并可返回。不接受外部传入的数据，仅返回计算之后的值。只能当做转出参数</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#OUT</span><br><span class="line">create procedure mySave2(OUT ex_out int)</span><br><span class="line">begin</span><br><span class="line">select ex_out;</span><br><span class="line">set ex_out = 66;</span><br><span class="line">select ex_out;</span><br><span class="line">end</span><br><span class="line">set @ex_out = 22;</span><br><span class="line">call mySave2(@ex_out);</span><br><span class="line">select @ex_out;</span><br></pre></td></tr></table></figure>
+
+<p><strong>INOUT 输入输出参数</strong></p>
+<p>调用时指定，并且可被改变和返回。需要数据传入存储过程经过调用计算后，再传出返回值。可当做传入转出参数 </p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#inout</span><br><span class="line">create procedure mySave3(inout ex_inout int)</span><br><span class="line">begin</span><br><span class="line">select ex_inout;</span><br><span class="line">set ex_inout = 123;</span><br><span class="line">select ex_inout;</span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line">set @ex_inout = 999;</span><br><span class="line">call mySave3(@ex_inout);</span><br><span class="line">select @ex_inout;</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储过程中的注释"><a href="#存储过程中的注释" class="headerlink" title="存储过程中的注释"></a>存储过程中的注释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MySQL存储过程可使用两种风格的注释</span><br><span class="line">单行注释：双平杠（两个减号加空格）： -- select</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储过程的调用"><a href="#存储过程的调用" class="headerlink" title="存储过程的调用"></a>存储过程的调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call 存储过程名(需要传递的参数值)</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储过程的查询"><a href="#存储过程的查询" class="headerlink" title="存储过程的查询"></a>存储过程的查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">方式一：</span><br><span class="line">select name from mysql.proc where db=’数据库名’;//查看当前数据库中的存储过程</span><br><span class="line"></span><br><span class="line">方式二：</span><br><span class="line">select routine_name from information_schema.routines where routine_schema=&apos;数据库名&apos;;</span><br><span class="line"></span><br><span class="line">方式三：</span><br><span class="line">show procedure status where db=&apos;数据库名&apos;;</span><br><span class="line"></span><br><span class="line">方式四：</span><br><span class="line">show create procedure 数据库.存储过程名;//查看某个存储过程的详细</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储过程的删除"><a href="#存储过程的删除" class="headerlink" title="存储过程的删除"></a>存储过程的删除</h3><p>删除一个存储过程比较简单，和删除表一样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP PROCEDURE 存储过程名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL存储过程的控制语句"><a href="#MySQL存储过程的控制语句" class="headerlink" title="MySQL存储过程的控制语句"></a>MySQL存储过程的控制语句</h3><h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><p><strong>if-then  -else语句</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mysql &gt; CREATE PROCEDURE proc2(IN parameter</span><br><span class="line">int)  </span><br><span class="line">    -&gt; begin</span><br><span class="line">    -&gt; declare var int;  </span><br><span class="line">    -&gt; set var=parameter+1;  </span><br><span class="line">    -&gt; if var=0 then</span><br><span class="line">    -&gt; insert into t values(17);  </span><br><span class="line">    -&gt; end if;  </span><br><span class="line">    -&gt; if parameter=0 then</span><br><span class="line">    -&gt; update t set s1=s1+1;  </span><br><span class="line">    -&gt; else</span><br><span class="line">    -&gt; update t set s1=s1+2;  </span><br><span class="line">    -&gt; end if;  </span><br><span class="line">    -&gt; end;  </span><br><span class="line">    -&gt; //  </span><br><span class="line">mysql &gt; DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<p><strong>case语句：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //  </span><br><span class="line">mysql &gt; CREATE PROCEDURE proc3 (in parameter</span><br><span class="line">int)  </span><br><span class="line">     -&gt; begin</span><br><span class="line">     -&gt; declare var int;  </span><br><span class="line">     -&gt; set var=parameter+1;  </span><br><span class="line">     -&gt; case var  </span><br><span class="line">     -&gt; when 0 then   </span><br><span class="line">     -&gt; insert into t values(17);  </span><br><span class="line">     -&gt; when 1 then   </span><br><span class="line">     -&gt; insert into t values(18);  </span><br><span class="line">     -&gt; else   </span><br><span class="line">     -&gt; insert into t values(19);  </span><br><span class="line">     -&gt; end case;  </span><br><span class="line">     -&gt; end;  </span><br><span class="line">     -&gt; //  </span><br><span class="line">mysql &gt; DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><p><strong>while ···· end while：（先判断后执行） while()</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //  </span><br><span class="line">mysql &gt; CREATE PROCEDURE proc4()  </span><br><span class="line">     -&gt; begin</span><br><span class="line">     -&gt; declare var int;  </span><br><span class="line">     -&gt; set var=0;  </span><br><span class="line">     -&gt; while var&lt;6 do  </span><br><span class="line">     -&gt; insert into t values(var);  </span><br><span class="line">     -&gt; set var=var+1;  </span><br><span class="line">     -&gt; end while;  </span><br><span class="line">     -&gt; end;  </span><br><span class="line">     -&gt; //  </span><br><span class="line">mysql &gt; DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<p><strong>repeat···· end repeat：（先执行后判断）do…while</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //  </span><br><span class="line">mysql &gt; CREATE PROCEDURE proc5 ()  </span><br><span class="line">     -&gt; begin   </span><br><span class="line">     -&gt; declare v int;  </span><br><span class="line">     -&gt; set v=0;  </span><br><span class="line">     -&gt; repeat  </span><br><span class="line">     -&gt; insert into t values(v);  </span><br><span class="line">     -&gt; set v=v+1;  </span><br><span class="line">     -&gt; until v&gt;=5  </span><br><span class="line">     -&gt; end repeat;  </span><br><span class="line">     -&gt; end;  </span><br><span class="line">     -&gt; //  </span><br><span class="line">mysql &gt; DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<p><strong>[ loop ·····end loop: （for）]</strong></p>
+<p>loop循环不需要初始条件，这点和while 循环相似，同时和<br>repeat循环一样不需要结束条件, leave语句的意义是离开循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql &gt; DELIMITER //  </span><br><span class="line">mysql &gt; CREATE PROCEDURE proc6 ()  </span><br><span class="line">     -&gt; begin</span><br><span class="line">     -&gt; declare v int;  </span><br><span class="line">     -&gt; set v=0;  </span><br><span class="line">     -&gt; LOOP_LABLE:loop  </span><br><span class="line">     -&gt; insert into t values(v);  </span><br><span class="line">     -&gt; set v=v+1;  </span><br><span class="line">     -&gt; if v &gt;=5 then</span><br><span class="line">     -&gt; leave LOOP_LABLE;  </span><br><span class="line">     -&gt; end if;  </span><br><span class="line">     -&gt; end loop;  </span><br><span class="line">     -&gt; end;  </span><br><span class="line">     -&gt; //  </span><br><span class="line">mysql &gt; DELIMITER ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="存储过程和函数的区别："><a href="#存储过程和函数的区别：" class="headerlink" title="存储过程和函数的区别："></a>存储过程和函数的区别：</h3><p>1）函数理解成一个变量；而存储过程可以返回多个。存储过程的参数可以有IN,OUT,INOUT三种类型，而函数只能有IN类，存储过程声明时不需要返回类型，而函数声明时需要描述返回类型，且函数体中必须包含一个有效的RETURN语句。<br>2）存储过程一般是作为一个独立的部分来执行（ EXECUTE 语句执行），而函数可以作为查询语句的一个部分来调用（SELECT调用），由于函数可以返回一个表对象，因此它可以在查询语句中位于FROM关键字的后面。 SQL语句中不可用存储过程，而可以使用函数。</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="相关定义-3"><a href="#相关定义-3" class="headerlink" title="相关定义"></a>相关定义</h3><p><font color="#ff0000">    事务是指逻辑上的一组操作，组成这组操作的各个单元，要不全部成功。</font></p>
+<p>即要么都执行，要么都不执行。双方必须放到一个事务中。</p>
+<p>保证了数据操作的安全性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建表</span><br><span class="line">mysql&gt; create table acount(id int primary key auto_increment,name varchar(40),money float);</span><br><span class="line">插入数据的两种方式</span><br><span class="line">mysql&gt; insert into account values(1,&apos;A&apos;,1000);</span><br><span class="line">mysql&gt; insert into account(name,money) values(&apos;C&apos;,1000);#因为primary key可以自增所以可以不用设置。</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启事务（start-transaction）"><a href="#开启事务（start-transaction）" class="headerlink" title="开启事务（start transaction）"></a>开启事务（start transaction）</h3><p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569467955029.png" alt="1569467955029"></p>
+<h3 id="回滚事务（rollback）"><a href="#回滚事务（rollback）" class="headerlink" title="回滚事务（rollback）"></a>回滚事务（rollback）</h3><p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569468010568.png" alt="1569468010568"></p>
+<h3 id="提交事务（commit）"><a href="#提交事务（commit）" class="headerlink" title="提交事务（commit）"></a>提交事务（commit）</h3><p>最终提交的事务不能再进行回滚操作。</p>
+<h3 id="JDBC使用事务"><a href="#JDBC使用事务" class="headerlink" title="JDBC使用事务"></a>JDBC使用事务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	当JDBC程序向数据库获得一个Connection对象时，默认情况下这Connection对象会自动向数据库提交在它上面发送的SQL语句。</span><br><span class="line">若想关闭这种默认提交方式，让多条SQL在一个事务中执行，可使用</span><br><span class="line">下列的JDBC控制事务语句</span><br><span class="line">#JDBC使用事务</span><br><span class="line">#设置自动提交为false 开启事务</span><br><span class="line">Connection.setAutoCommit(false);</span><br><span class="line">#回滚事务</span><br><span class="line">Connection.rollback;</span><br><span class="line">#提交事务</span><br><span class="line">Connection.commit;</span><br></pre></td></tr></table></figure>
+
+<h3 id="事务的四大特性"><a href="#事务的四大特性" class="headerlink" title="事务的四大特性"></a>事务的四大特性</h3><h4 id="原子性-Atomicity"><a href="#原子性-Atomicity" class="headerlink" title="原子性(Atomicity)"></a>原子性(Atomicity)</h4><p>不可分割的单元，要不全成功，要不全失败。</p>
+<h4 id="一致性-consistency"><a href="#一致性-consistency" class="headerlink" title="一致性(consistency)"></a>一致性(consistency)</h4><p>事务一致性的概念是：事务必须使数据库从一个一致性状态<br>变换到另外一个一致性状态。</p>
+<h4 id="隔离性-Isolation"><a href="#隔离性-Isolation" class="headerlink" title="隔离性(Isolation)"></a>隔离性(Isolation)</h4><p>多个用户开启事务，相互不干扰，并发执行。</p>
+<p>即多个并发事物相互隔离。</p>
+<h5 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h5><p>​    多个线程开启各自事务操作数据库中数据时，数据库系统要负责隔离操作，以保证各个线程在获取数据时的准确性。</p>
+<p><font color="#ff0000">事务不考虑隔离性可能会引发的问题,如果事务不考虑隔离性，可能<br>会引发如下问题：</font></p>
+<p><strong>脏读</strong>(前一事务未提交的脏数据。)</p>
+<p>脏读指一个事务读取了另外一个事务未提交的数据。</p>
+<p><strong>不可重复读</strong>(重新读取了前一事务已提交的数据)</p>
+<p>不可重复读指在一个事务内读取表中的某一行数据，多次读取结果<br>不同。</p>
+<p><font color="#ff0000">不可重复读和脏读的区别是:脏读是读取前一事务未提交的脏数据<br>，不可重复读是重新读取了前一事务已提交的数据。</font></p>
+<p><strong>虚读（幻读）</strong></p>
+<p>虚读(幻读)是指在一个事务内读取到了别的事务插入的数据，导致<br>前后读取不一致。</p>
+<table>
+<thead>
+<tr>
+<th>事务隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交（read uncommitted）</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>不可重复读</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>可重复读（repeatable read）</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>串行化</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<p><strong>隔离级别相关语句：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#查询MySQL当前隔离级别：</span><br><span class="line">select @@tx_isolation;</span><br><span class="line">#MySQL默认repeatable read</span><br><span class="line">#设置当前隔离级别                session为全局</span><br><span class="line">set session transaction isolation level read uncommitted;</span><br></pre></td></tr></table></figure>
+
+<h4 id="持久性-Durablity"><a href="#持久性-Durablity" class="headerlink" title="持久性(Durablity)"></a>持久性(Durablity)</h4><p>事务一旦提交，对事务改变是永久性的，即使数据库故障也不会有任何影响。</p>
+<h4 id="隔离级别相关测试语句："><a href="#隔离级别相关测试语句：" class="headerlink" title="隔离级别相关测试语句："></a><font color="#ff0000">隔离级别相关测试语句：</font></h4><h5 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h5><p>打开一个客户端A，并设置当前事务模式为read uncommitted（未提交读），查询表account的初始值：</p>
+<p><img src="file:///E:%5Csoft%5CQQ%5Cmessage%5C1135374534%5CImage%5CC2C%5CG@YYNZ6R%5B~@F2HSZXY%5BIVC4.png" alt="img"></p>
+<p>在客户端A的事务提交之前，打开另一个客户端B，更新表account</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569525979998.png" alt="1569525979998"></p>
+<p>这时，虽然客户端B的事务还没提交，但是客户端A就可以查询到B已经更新的数据</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569526162226.png" alt="1569526162226"></p>
+<p>一旦客户端B的事务因为某种原因回滚，所有的操作都将会被撤销，那客户端A查询到的数据其实就是脏数据</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569526298708.png" alt="1569526298708"></p>
+<p>在客户端A执行更新语句update account set balance = balance - 50 where id =1，lilei的balance没有变成350，居然是400，是不是很奇怪，数据不一致啊，如果你这么想就太天真 了，在应用程序中，我们会用400-50=350，并不知道其他会话回滚了，要想解决这个问题可以采用读已提交的隔离级别</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569526526638.png" alt="1569526526638"></p>
+<h5 id="读已提交"><a href="#读已提交" class="headerlink" title="读已提交"></a>读已提交</h5><p>​    打开一个客户端A，并设置当前事务模式为read committed（未提交读），查询表account的初始值：</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569526811496.png" alt="1569526811496"></p>
+<p>在客户端A的事务提交之前，打开另一个客户端B，更新表account：</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569527096067.png" alt="1569527096067"></p>
+<p>这时，客户端B的事务还没提交，客户端A不能查询到B已经更新的数据，解决了脏读问题：</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569527153581.png" alt="1569527153581"></p>
+<p>客户端B的事务提交</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569527212609.png" alt="1569527212609"></p>
+<p>客户端A执行与上一步相同的查询，结果 与上一步不一致，即产生了不可重复读的问题</p>
+<p><font color="#ff0000">需要注意的是要设置全局隔离级别即：session</font></p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569527957209.png" alt="1569527957209"></p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569527852892.png" alt="1569527852892"></p>
+<h5 id="可重复读"><a href="#可重复读" class="headerlink" title="可重复读"></a>可重复读</h5><p>​    1、 打开一个客户端A，并设置当前事务模式为repeatable read，查询表account</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569528127327.png" alt="1569528127327"></p>
+<p>2、在客户端A的事务提交之前，打开另一个客户端B，更新表account并提交</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569528299231.png" alt="1569528299231"></p>
+<p>3、在客户端A执行步骤（1）的查询：</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569528359760.png" alt="1569528359760"></p>
+<p>​    4、 执行步骤（1），lilei的balance仍然是400与步骤（1）查询结果一致，没有出现不可重复读的 问题；接着执行update balance = balance - 50 where id = 1，balance没有变成400-50=350，lilei的balance值用的是步骤（2）中的350来<br>算的，所以是300，数据的一致性倒是没有被破坏，这个有点神奇，也许是mysql的特色吧</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569528565170.png" alt="1569528565170"></p>
+<p>5、在客户端A提交事务，查询表account的初始值</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569528625748.png" alt="1569528625748"></p>
+<p>6、在客户端B开启事务，新增一条数据，其中balance字段值为600</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569528768775.png" alt="1569528768775"></p>
+<p>7、  在客户端A计算balance之和，值为300+16000+2400=18700，没有把客户端B的值算进去。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569528999029.png" alt="1569528999029"></p>
+<p>客户端A等客户端B提交后再计算balance之和，居然变成了19300，这是因为把客户端B的600算进去了</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569529065723.png" alt="1569529065723"></p>
+<p>站在客户的角度，客户是看不到客户端B的，它会觉得是天下掉馅饼了，多了600块，这就是幻读，站在开发者的角度，数据的 一致性并没有破坏。但是在应用程序中，我们得代码可能会把18700提交给用户了，如果你一定要避免这情况小概率状况的发生，那么就要采取下面要介绍的事务隔离级别“串行化”。</p>
+<h5 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h5><p>打开一个客户端A，并设置当前事务模式为serializable，查询表 account的初始值</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569529232761.png" alt="1569529232761"></p>
+<p>打开一个客户端B，并设置当前事务模式为serializable，插入一条记录报错，表被锁了插入失败，mysql中事务隔离级别为serializable时会锁表，因此不会出现幻读的情况，这种隔离级别并发性极低，开发中很少会用到。</p>
+<p><font color="#ff0000">总结补充：</font></p>
+<p><font color="#ff0000">1、SQL规范所规定的标准，不同的数据库具体的实现可能会有<br>些差异</font></p>
+<p><font color="#ff0000"> 2、mysql中默认事务隔离级别是可重复读时并不会锁住读取到<br>的行</font></p>
+<p><font color="#ff0000">3、事务隔离级别为读提交时，写数据只会锁住相应的行</font></p>
+<p><font color="#ff0000">4、事务隔离级别为可重复读时，如果有索引（包括主键索引）<br>的时候，以索引列为条件更新数据，会存在间隙锁间隙锁、行锁、<br>下一键锁的问题，从而锁住一些行；如果没有索引，更新数据时会<br>锁住整张表。</font></p>
+<p><font color="#ff0000">5、事务隔离级别为串行化时，写、修改、删除数据都会锁住整<br>张表</font></p>
+<p><font color="#ff0000">6、隔离级别越高，越能保证数据的完整性和一致性，但是对并<br>发性能的影响也越大，鱼和熊掌不可兼得啊。对于多数应用程序，<br>可以优先考虑把数据库系统的隔离级别设为Read Committed，它<br>能够避免脏读取，而且具有较好的并发性能。尽管它会导致不可重<br>复读、幻读这些并发问题，在可能出现这类问题的个别场合，可以<br>由应用程序采用悲观锁或乐观锁来控制。</font></p>
+<h1 id="mysql题目基础语法应用"><a href="#mysql题目基础语法应用" class="headerlink" title="mysql题目基础语法应用"></a>mysql题目基础语法应用</h1><h3 id="单表查询答案"><a href="#单表查询答案" class="headerlink" title="单表查询答案"></a>单表查询答案</h3><ol>
+<li>查找部门30中员工的详细信息。</li>
+</ol>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567749939585.png" alt="1567749939585"></p>
+<p>2.找出从事clerk工作的员工的编号、姓名、部门号。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567750092163.png" alt="1567750092163"></p>
+<ol start="3">
+<li>检索出奖金多于基本工资的员工信息。</li>
+</ol>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567751695437.png" alt="1567751695437"></p>
+<p>4.检索出奖金多于基本工资60%的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567751741905.png" alt="1567751741905"></p>
+<p>5.找出10部门的经理、20部门的职员的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567752026950.png" alt="1567752026950"></p>
+<p>6.找出10部门的经理、20部门的职员或者既不是经理也不是职员但是工资高于2000元的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567752983001.png" alt="1567752983001"></p>
+<p>7.找出获得奖金的员工的工作。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567753035972.png" alt="1567753035972"></p>
+<p>8.找出奖金少于100或者没有获得奖金的员工的信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567753139658.png" alt="1567753139658"></p>
+<p>9.找出姓名以A、B、S开始的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567753261405.png" alt="1567753261405"></p>
+<p>10.找到名字长度为6个字符的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567753376865.png" alt="1567753376865"></p>
+<p>11.名字中不包含R字符的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567753554403.png" alt="1567753554403"></p>
+<p>12.返回员工的详细信息并按姓名排序。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567753902922.png" alt="1567753902922"> </p>
+<p>13.返回员工的信息并按工作降序工资升序排列。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567753973416.png" alt="1567753973416"></p>
+<p>14.计算员工的日薪(按30天)。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567754247152.png" alt="1567754247152"></p>
+<p>\15. 找出姓名中包含A的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1567754359649.png" alt="1567754359649"> </p>
+<h3 id="多表查询答案"><a href="#多表查询答案" class="headerlink" title="多表查询答案"></a>多表查询答案</h3><p>\1. 返回拥有员工的部门名、部门号。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569310147487.png" alt="img"></p>
+<p>2.工资水平多于smith的员工信息。</p>
+<p><img src="C:%5CUsers%5Clixueni%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569310487573.png" alt="1569310487573"></p>
+<p> 3.返回员工和所属经理的姓名。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC1F5.tmp.jpg" alt="img"> ]</p>
+<p>or</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC1F6.tmp.jpg" alt="img"> </p>
+<p>（没有经理是否显示）</p>
+<p> 4.返回雇员的雇佣日期早于其经理雇佣日期的员工及其经理姓名     </p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC1F7.tmp.jpg" alt="img">   </p>
+<p>\5.       返回员工姓名及其所在的部门名称。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC208.tmp.jpg" alt="img"> </p>
+<p>\6. 返回从事clerk工作的员工姓名和所在部门名称。 </p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC209.tmp.jpg" alt="img">  </p>
+<p>\7. 返回部门号及其本部门的最低工资。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC20A.tmp.jpg" alt="img"> </p>
+<p>\8. 返回销售部(sales)所有员工的姓名。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC20B.tmp.jpg" alt="img"> </p>
+<p>9.返回工资水平多于平均工资的员工。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC20C.tmp.jpg" alt="img"> </p>
+<p>\10. 返回与SCOTT从事相同工作的员工。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC20D.tmp.jpg" alt="img"> </p>
+<p> 如果不包含自己</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC20E.tmp.jpg" alt="img"> </p>
+<p>11.返回与30部门员工工资水平相同的员工姓名与工资。   </p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC20F.tmp.jpg" alt="img"> </p>
+<p>12.返回工资高于30部门所有员工工资水平的员工信息。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC210.tmp.jpg" alt="img"> </p>
+<p>13.返回部门号、部门名、部门所在位置及其每个部门的员工总数。   </p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC211.tmp.jpg" alt="img"> </p>
+<p>\14. 返回员工的姓名、所在部门名及其工资。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC212.tmp.jpg" alt="img"> </p>
+<p>15.返回员工的详细信息。(包括部门名)</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC213.tmp.jpg" alt="img"> </p>
+<p>16.返回员工工作及其从事此工作的最低工资。 </p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC214.tmp.jpg" alt="img"> </p>
+<p>17.计算出员工的年薪，并且以年薪排序。  </p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC224.tmp.jpg" alt="img"> </p>
+<p>18.返回工资处于第四级别的员工的姓名。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC225.tmp.jpg" alt="img"> </p>
+<p>19.返回工资为二等级的职员名字、部门所在地、和二等级的最低工资和最高工资  </p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC226.tmp.jpg" alt="img"> </p>
+<p>20.工资等级多于smith的员工信息。</p>
+<p><img src="file:///C:%5CUsers%5Clixueni%5CAppData%5CLocal%5CTemp%5Cksohtml%5CwpsC227.tmp.jpg" alt="img"> </p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">Summer</a>
+            <p>原文链接：<a href="http://yoursite.com/2019/09/06/Database2-SQL语言/">http://yoursite.com/2019/09/06/Database2-SQL语言/</a>
+            <p>发表日期：<a href="http://yoursite.com/2019/09/06/Database2-SQL语言/">September 6th 2019, 9:24:23 am</a>
+            <p>更新日期：<a href="http://yoursite.com/2019/09/06/Database2-SQL语言/">October 10th 2019, 4:50:08 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/09/16/JavaScript-1/" title= "JavaScript&&1">
+                    <div class="nextTitle">JavaScript&&1</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/09/04/DataBase1/" title= "DataBase1">
+                    <div class="prevTitle">DataBase1</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:Summerwithcode@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/SummerCodeSky" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库数据操作"><span class="toc-number">1.</span> <span class="toc-text">数据库数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前提"><span class="toc-number">1.1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操纵语言-DML"><span class="toc-number">1.2.</span> <span class="toc-text">数据操纵语言(DML)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据查询语言（DQL）"><span class="toc-number">1.3.</span> <span class="toc-text">数据查询语言（DQL）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#条件查询"><span class="toc-number">1.3.1.</span> <span class="toc-text">条件查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据定义语言DDL"><span class="toc-number">1.4.</span> <span class="toc-text">数据定义语言DDL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据控制语言DCL"><span class="toc-number">1.5.</span> <span class="toc-text">数据控制语言DCL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引"><span class="toc-number">2.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建索引的方式有三种："><span class="toc-number">2.0.1.</span> <span class="toc-text">创建索引的方式有三种：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建索引"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">创建表的时候创建索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建索引"><span class="toc-number">2.0.1.2.</span> <span class="toc-text">在存在的表上创建索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建普通索引"><span class="toc-number">2.0.1.3.</span> <span class="toc-text">使用alter创建普通索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建和查看唯一索引："><span class="toc-number">2.0.2.</span> <span class="toc-text">创建和查看唯一索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建唯一索引"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">创建表的时候创建唯一索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建唯一索引"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">在存在的表上创建唯一索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建唯一索引"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">使用alter创建唯一索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建全文索引："><span class="toc-number">2.0.3.</span> <span class="toc-text">创建全文索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建全文索引"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">创建表的时候创建全文索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建全文索引"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">在存在的表上创建全文索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建全文索引"><span class="toc-number">2.0.3.3.</span> <span class="toc-text">使用alter创建全文索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建和查看多列索引："><span class="toc-number">2.0.4.</span> <span class="toc-text">创建和查看多列索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建多列索引"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">创建表的时候创建多列索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建多列索引"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">在存在的表上创建多列索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建多列索引"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">使用alter创建多列索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除索引"><span class="toc-number">2.0.5.</span> <span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看索引"><span class="toc-number">2.0.6.</span> <span class="toc-text">查看索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#触发器"><span class="toc-number">3.</span> <span class="toc-text">触发器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建触发器"><span class="toc-number">3.0.1.</span> <span class="toc-text">创建触发器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建执行一条语句的触发器"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">创建执行一条语句的触发器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建包含多条执行语句的触发器"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">创建包含多条执行语句的触发器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看触发器"><span class="toc-number">3.0.2.</span> <span class="toc-text">查看触发器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除触发器"><span class="toc-number">3.0.3.</span> <span class="toc-text">删除触发器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#视图"><span class="toc-number">4.</span> <span class="toc-text">视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义"><span class="toc-number">4.0.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建视图"><span class="toc-number">4.0.2.</span> <span class="toc-text">创建视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通视图"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">普通视图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">4.0.3.</span> <span class="toc-text">封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#封装查询常量的视图"><span class="toc-number">4.0.3.1.</span> <span class="toc-text">封装查询常量的视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装聚合函数视图"><span class="toc-number">4.0.3.2.</span> <span class="toc-text">封装聚合函数视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装排序功能的（order-by）视图"><span class="toc-number">4.0.3.3.</span> <span class="toc-text">封装排序功能的（order by）视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装实现内连接的查询视图。"><span class="toc-number">4.0.3.4.</span> <span class="toc-text">封装实现内连接的查询视图。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装实现表外链接（左右链接）的查询视图-left-join-right-join-视图"><span class="toc-number">4.0.3.5.</span> <span class="toc-text">封装实现表外链接（左右链接）的查询视图[left join ; right join]视图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现子查询的相关查询语句视图"><span class="toc-number">4.0.4.</span> <span class="toc-text">实现子查询的相关查询语句视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现记录联合（union和union-all）查询语句视图"><span class="toc-number">4.0.5.</span> <span class="toc-text">实现记录联合（union和union all）查询语句视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询视图的两种方法"><span class="toc-number">4.0.6.</span> <span class="toc-text">查询视图的两种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用表查询"><span class="toc-number">4.0.6.1.</span> <span class="toc-text">使用表查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用数据库查询"><span class="toc-number">4.0.6.2.</span> <span class="toc-text">使用数据库查询</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除视图"><span class="toc-number">4.0.7.</span> <span class="toc-text">删除视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他相关语句创建修改视图"><span class="toc-number">4.0.8.</span> <span class="toc-text">其他相关语句创建修改视图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">4.1.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-1"><span class="toc-number">4.1.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—的格式"><span class="toc-number">4.1.2.</span> <span class="toc-text">函数创建—的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—返回值不同"><span class="toc-number">4.1.3.</span> <span class="toc-text">函数创建—返回值不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—变量"><span class="toc-number">4.1.4.</span> <span class="toc-text">函数创建—变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看函数的三种方式"><span class="toc-number">4.1.5.</span> <span class="toc-text">查看函数的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除修改数据库的操作"><span class="toc-number">4.1.6.</span> <span class="toc-text">删除修改数据库的操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储过程"><span class="toc-number">4.2.</span> <span class="toc-text">存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-2"><span class="toc-number">4.2.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的创建"><span class="toc-number">4.2.2.</span> <span class="toc-text">存储过程的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-格式"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">1.格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-参数"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">2.参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程中的注释"><span class="toc-number">4.2.3.</span> <span class="toc-text">存储过程中的注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的调用"><span class="toc-number">4.2.4.</span> <span class="toc-text">存储过程的调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的查询"><span class="toc-number">4.2.5.</span> <span class="toc-text">存储过程的查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的删除"><span class="toc-number">4.2.6.</span> <span class="toc-text">存储过程的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL存储过程的控制语句"><span class="toc-number">4.2.7.</span> <span class="toc-text">MySQL存储过程的控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#条件语句"><span class="toc-number">4.2.7.1.</span> <span class="toc-text">条件语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环语句"><span class="toc-number">4.2.7.2.</span> <span class="toc-text">循环语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程和函数的区别："><span class="toc-number">4.2.8.</span> <span class="toc-text">存储过程和函数的区别：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">4.3.</span> <span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-3"><span class="toc-number">4.3.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启事务（start-transaction）"><span class="toc-number">4.3.2.</span> <span class="toc-text">开启事务（start transaction）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回滚事务（rollback）"><span class="toc-number">4.3.3.</span> <span class="toc-text">回滚事务（rollback）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交事务（commit）"><span class="toc-number">4.3.4.</span> <span class="toc-text">提交事务（commit）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC使用事务"><span class="toc-number">4.3.5.</span> <span class="toc-text">JDBC使用事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事务的四大特性"><span class="toc-number">4.3.6.</span> <span class="toc-text">事务的四大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原子性-Atomicity"><span class="toc-number">4.3.6.1.</span> <span class="toc-text">原子性(Atomicity)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一致性-consistency"><span class="toc-number">4.3.6.2.</span> <span class="toc-text">一致性(consistency)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离性-Isolation"><span class="toc-number">4.3.6.3.</span> <span class="toc-text">隔离性(Isolation)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#事务的隔离级别"><span class="toc-number">4.3.6.3.1.</span> <span class="toc-text">事务的隔离级别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#持久性-Durablity"><span class="toc-number">4.3.6.4.</span> <span class="toc-text">持久性(Durablity)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离级别相关测试语句："><span class="toc-number">4.3.6.5.</span> <span class="toc-text">隔离级别相关测试语句：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#读未提交"><span class="toc-number">4.3.6.5.1.</span> <span class="toc-text">读未提交</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#读已提交"><span class="toc-number">4.3.6.5.2.</span> <span class="toc-text">读已提交</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#可重复读"><span class="toc-number">4.3.6.5.3.</span> <span class="toc-text">可重复读</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#串行化"><span class="toc-number">4.3.6.5.4.</span> <span class="toc-text">串行化</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql题目基础语法应用"><span class="toc-number">5.</span> <span class="toc-text">mysql题目基础语法应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单表查询答案"><span class="toc-number">5.0.1.</span> <span class="toc-text">单表查询答案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多表查询答案"><span class="toc-number">5.0.2.</span> <span class="toc-text">多表查询答案</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 48
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/2019/12/16/短视频项目总结/" >短视频项目总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2019/12/09/小程序的flex布局/" >小程序的flex布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/05</span><a class="archive-post-title" href= "/2019/12/05/hashmap源码解析/" >hashmap源码解析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2019/12/03/面试复习-Java基础/" >面试复习-Java基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2019/12/03/面试复习-MySql数据库/" >面试复习-MySql数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-2动态SQL实现/" >mybatis-2动态SQL实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-1对数据库事务操作/" >mybatis-1初学</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-6jdbc完成数据库事务操作/" >spring-6jdbc完成数据库事务操作</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-5AOP相关and模拟切面/" >spring-5AOP相关and模拟切面</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-4自动装配模式and与数据库连接/" >spring-4自动装配模式and与数据库连接</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-3其他引用类型的注入/" >spring-3其他引用类型的注入</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-2核心技术/" >spring-2核心技术</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span><a class="archive-post-title" href= "/2019/11/27/打印日志Logging/" >打印日志Logging</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/spring-1框架入门了解/" >spring框架1-入门了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/XML解析/" >XML解析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2019/11/22/java注解/" >java注解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2019/11/21/java反射机制/" >java反射机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2019/11/18/框架前提/" >框架前提</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2019/11/10/企业级Java电商网站开发-服务端-1/" >企业级Java电商网站开发(服务端)1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2019/11/08/酒店管理项目总结/" >酒店管理项目总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2019/11/08/java8以上新特性/" >java8以上新特性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2019/11/07/java-web中jsp和servlet编码配置（pageEncoding-charset、request-response）及中文乱码问题/" >java web中jsp和servlet编码配置（pageEncoding&charset、request&response）及中文乱码问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2019/11/06/servlet的实际应用/" >servlet的实际应用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2019/11/06/Arrays方法/" >Arrays方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/29</span><a class="archive-post-title" href= "/2019/10/29/servlet/" >servlet</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2019/10/28/Jstl-jsp标准标签库/" >Jstl-jsp标准标签库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2019/10/22/JSP-前后端分离/" >JSP-前后端分离</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2019/10/21/配置tomcat服务器/" >配置tomcat服务器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML详解/" >XML-1前提</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2019/10/14/svn及git的使用/" >svn及git的使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2019/10/12/新建maven项目的配置及方式/" >新建maven项目的配置及方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/09</span><a class="archive-post-title" href= "/2019/10/09/数据库连接-JDBC-JDBC工具类库/" >数据库连接-JDBC*JDBC工具类库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/08</span><a class="archive-post-title" href= "/2019/10/08/review/" >review</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2019/09/26/使用工具及下载等相关整理合集/" >使用工具及下载等相关整理合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2019/09/16/JavaScript-1/" >JavaScript&&1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2019/09/06/Database2-SQL语言/" >Database2-SQL语言</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/04</span><a class="archive-post-title" href= "/2019/09/04/DataBase1/" >DataBase1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/02</span><a class="archive-post-title" href= "/2019/09/02/CSS-lable/" >CSS-lable</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2019/08/29/HTML-label/" >HTML&&label</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/22</span><a class="archive-post-title" href= "/2019/08/22/网络编程/" >网络编程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/20</span><a class="archive-post-title" href= "/2019/08/20/Thread/" >Thread</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/20</span><a class="archive-post-title" href= "/2019/08/20/IO流/" >IO流</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span><a class="archive-post-title" href= "/2019/08/19/DataStructrue-Search-ClassicalProblem/" >DataStructrue-Search&&ClassicalProblem</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span><a class="archive-post-title" href= "/2019/08/19/DataStructrue-sort/" >DataStructrue-sort</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href= "/2019/08/17/DataStructrue-LinkedList-Tree/" >DataStructrue-LinkedList&&Tree</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2019/08/16/BankProject/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/15</span><a class="archive-post-title" href= "/2019/08/15/Data-Structrue-Stack-Queue/" >Data Structrue-Stack&&Queue</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2019/08/13/hello-world/" >Hello World</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="DataStructrue LinkedList Tree"><span class="iconfont-archer">&#xe606;</span>DataStructrue LinkedList Tree</span>
+    
+        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="DataStructrue、Search、Classical-Problem"><span class="iconfont-archer">&#xe606;</span>DataStructrue、Search、Classical-Problem</span>
+    
+        <span class="sidebar-tag-name" data-tags="hashmap"><span class="iconfont-archer">&#xe606;</span>hashmap</span>
+    
+        <span class="sidebar-tag-name" data-tags="jstl 标准标签库"><span class="iconfont-archer">&#xe606;</span>jstl 标准标签库</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis动态sql"><span class="iconfont-archer">&#xe606;</span>mybatis动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="文件的上传和下载（Tomcat和jar包）"><span class="iconfont-archer">&#xe606;</span>文件的上传和下载（Tomcat和jar包）</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+    
+        <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
+    
+        <span class="sidebar-tag-name" data-tags="短视频项目"><span class="iconfont-archer">&#xe606;</span>短视频项目</span>
+    
+        <span class="sidebar-tag-name" data-tags="TCP UDP"><span class="iconfont-archer">&#xe606;</span>TCP UDP</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java基础"><span class="iconfont-archer">&#xe606;</span>Java基础</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
+    
+        <span class="sidebar-tag-name" data-tags="Stack,Queue"><span class="iconfont-archer">&#xe606;</span>Stack,Queue</span>
+    
+        <span class="sidebar-tag-name" data-tags="DataStructrue sort"><span class="iconfont-archer">&#xe606;</span>DataStructrue sort</span>
+    
+        <span class="sidebar-tag-name" data-tags="css lable"><span class="iconfont-archer">&#xe606;</span>css lable</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML label"><span class="iconfont-archer">&#xe606;</span>HTML label</span>
+    
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="IO InputStream OutputStream"><span class="iconfont-archer">&#xe606;</span>IO InputStream OutputStream</span>
+    
+        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring实现数据库事务操作"><span class="iconfont-archer">&#xe606;</span>spring实现数据库事务操作</span>
+    
+        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
+    
+        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring的自动装配（注解） spring数据库连接"><span class="iconfont-archer">&#xe606;</span>spring的自动装配（注解） spring数据库连接</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql数据库"><span class="iconfont-archer">&#xe606;</span>MySql数据库</span>
+    
+        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
+    
+        <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
+    
+        <span class="sidebar-tag-name" data-tags="svn git"><span class="iconfont-archer">&#xe606;</span>svn git</span>
+    
+        <span class="sidebar-tag-name" data-tags="sql database"><span class="iconfont-archer">&#xe606;</span>sql database</span>
+    
+        <span class="sidebar-tag-name" data-tags="JDBC SQL C3P0 DBCP Druid DButils"><span class="iconfont-archer">&#xe606;</span>JDBC SQL C3P0 DBCP Druid DButils</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Summer"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

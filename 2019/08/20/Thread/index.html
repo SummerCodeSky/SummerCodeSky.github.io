@@ -431,11 +431,11 @@ height:50vh;
 <h2 id="线程睡眠"><a href="#线程睡眠" class="headerlink" title="线程睡眠"></a>线程睡眠</h2><p>Thread类中有两个重载的sleep()方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sleep(<span class="keyword">long</span> millis) ; <span class="comment">//指定睡眠毫秒数</span></span><br><span class="line">sleep(<span class="keyword">long</span> millis, <span class="keyword">int</span> nanos);  <span class="comment">//两个参数，一个为毫秒，一个为纳秒。</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="设置进程优先级"><a href="#设置进程优先级" class="headerlink" title="设置进程优先级"></a>设置进程优先级</h2><p><img src="D:%5Chexo%5Cimgs%5Cthread1.png" alt></p>
+<h2 id="设置进程优先级"><a href="#设置进程优先级" class="headerlink" title="设置进程优先级"></a>设置进程优先级</h2><p><img src="https://i.loli.net/2020/01/16/2HaI8LTngEuAmNR.png" alt="error"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Thread.MAX_PRIORITY;</span><br><span class="line">Thread.MIN_PRIORITY;</span><br><span class="line">Thread.NORM_PRIORITY;</span><br><span class="line"><span class="keyword">new</span> Thread().setPriority(Thread.MAX_PRIORITY)</span><br></pre></td></tr></table></figure>
 
 <h2 id="唤醒正在睡眠的线程"><a href="#唤醒正在睡眠的线程" class="headerlink" title="唤醒正在睡眠的线程"></a>唤醒正在睡眠的线程</h2><p>调用Thread类的interrupt方法唤醒正在睡眠的线程，会抛出一个InterruptedException的异常</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cthread2.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/SoZR9NP1c5tVJqB.png" alt="error"></p>
 <h2 id="Join线程"><a href="#Join线程" class="headerlink" title="Join线程"></a>Join线程</h2><p>Thread类中的join方法的主要作用就是同步，它可以使得线程之间的并行执行变为串行执行。</p>
 <p><strong><em>注意：将某个线程设置join需要在start（）方法之后</em></strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">join的意思是使得放弃当前线程的执行，并返回对应的线程</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">ThreadJoinTest t1 = <span class="keyword">new</span> ThreadJoinTest(<span class="string">"小明"</span>);</span><br><span class="line">ThreadJoinTest t2 = <span class="keyword">new</span> ThreadJoinTest(<span class="string">"小东"</span>);</span><br><span class="line">t1.start();</span><br><span class="line">t1.join();   <span class="comment">//join()必须在线程启动之后方可执行，</span></span><br><span class="line">t2.start();   <span class="comment">//结果是t1线程执行完后，才到t2程执行</span></span><br></pre></td></tr></table></figure>
@@ -447,13 +447,13 @@ height:50vh;
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> lixueni</span></span><br><span class="line"><span class="comment"> *线程的礼让（Thread.yield()）方法</span></span><br><span class="line"><span class="comment"> 在同级线程中，会礼让</span></span><br><span class="line"><span class="comment"> but在高级线程中，如果没有比这个线程再高一级的线程，那么就不会礼让</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="synchronized同步方法"><a href="#synchronized同步方法" class="headerlink" title="synchronized同步方法"></a>synchronized同步方法</h2><p><strong><em>主要针对线程安全问题如下：</em></strong></p>
-<p><img src="D:%5Chexo%5Cimgs%5Cthread3.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/mDhxHFa6fIN5iXd.png" alt="error"></p>
 <h3 id="synchronized将方法设置为同步"><a href="#synchronized将方法设置为同步" class="headerlink" title="synchronized将方法设置为同步"></a>synchronized将方法设置为同步</h3><p>保证了在某个时间段内只有一个线程执行changeNum方法，解决了线程安全问题。</p>
 <p><font color="#00ffff"><strong>注意：</strong></font></p>
 <p>synchronized锁住的是当前对象，如果线程里面的对象是不同的对象，则不需要同步，因为不会发生线程安全问题。<strong><em>如下不会发生线程安全问题：</em></strong></p>
-<p><img src="D:%5Chexo%5Cimgs%5Cthread4.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/MPNabFTCI5Bte3q.png" alt="error"></p>
 <h3 id="synchronized同步代码块"><a href="#synchronized同步代码块" class="headerlink" title="synchronized同步代码块"></a>synchronized同步代码块</h3><p><font color="#00ffff"><strong>在方法上面加synchronized同步会有性能问题，而在代码块上同步会优化：</strong></font></p>
-<p><img src="D:%5Chexo%5Cimgs%5Cthread5.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/tsl9E2JRISurNGh.png" alt="error"></p>
 <p><strong>代码块注意要传入任意对象（但一定要保证多个线程访问的是同一个对象），this可能会出现指代不清楚的情况。</strong></p>
 <h2 id="实现多个公司售卖电影票功能"><a href="#实现多个公司售卖电影票功能" class="headerlink" title="实现多个公司售卖电影票功能"></a>实现多个公司售卖电影票功能</h2><p>例：使用多线程程序模拟电影票售卖的过程，一共有100张票，3个公司对外售卖</p>
 <p><strong>程序设计思路</strong></p>
@@ -465,14 +465,14 @@ height:50vh;
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Zhangsan</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"张三对李四说:/你先给我画，我再给你书"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"张三对李四说:/我拿到书了"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lisi</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"张三对李四说:/你先给我书，我再给你画"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"张三对李四说:/我拿到画了"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//线程类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread001</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">	<span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">	<span class="keyword">static</span> Zhangsan zs = <span class="keyword">new</span> Zhangsan();</span><br><span class="line">	<span class="keyword">static</span> Lisi ls = <span class="keyword">new</span> Lisi();</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (flag) &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (zs) &#123;</span><br><span class="line">				zs.say();</span><br><span class="line">				<span class="keyword">synchronized</span> (ls) &#123;</span><br><span class="line">					zs.get();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (ls) &#123;</span><br><span class="line">				ls.say();</span><br><span class="line">				<span class="keyword">synchronized</span> (zs) &#123;</span><br><span class="line">					ls.get();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDeadLock</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		MyThread001 mt = <span class="keyword">new</span> MyThread001();</span><br><span class="line">		mt.flag = <span class="keyword">true</span>;</span><br><span class="line">		mt.start();</span><br><span class="line">		</span><br><span class="line">		MyThread001 mt1 = <span class="keyword">new</span> MyThread001();</span><br><span class="line">		mt1.flag = <span class="keyword">false</span>;</span><br><span class="line">		mt1.start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h2><h3 id="volatile作用"><a href="#volatile作用" class="headerlink" title="volatile作用"></a>volatile作用</h3><h3 id="volatile关键字-1"><a href="#volatile关键字-1" class="headerlink" title="volatile关键字"></a>volatile关键字</h3><h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><p>新建，就绪，运行，阻塞，死亡</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cthread6.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/QZL9CPSXHprj8Oa.png" alt="error"></p>
 <p>1.新建线程，创建一个线程对象。</p>
 <p>2.线程对象创建好之后进入就绪状态，此时会等待获取CPU的执行权。</p>
 <p>3.获取到CPU执行权之后，线程对象开始运行。</p>
 <p>4.在线程对象运行的过程中，可能会有CPU会切换到其他线程上面，此时会失去执行权，回到第二步就绪状态。</p>
 <p>5.如果线程对象在执行过程中遇到了wait()方法或者sleep()方法，线程将会进入阻塞状态。</p>
 <p>6.线程对象执行结束后会变成死亡状态。</p>
-<h2 id="生产者消费者设计模式"><a href="#生产者消费者设计模式" class="headerlink" title="生产者消费者设计模式"></a>生产者消费者设计模式</h2><p><img src="D:%5Chexo%5Cimgs%5Cthread7.png" alt></p>
+<h2 id="生产者消费者设计模式"><a href="#生产者消费者设计模式" class="headerlink" title="生产者消费者设计模式"></a>生产者消费者设计模式</h2><p><img src="https://i.loli.net/2020/01/16/4mWSgXQ3vOjrY9J.png" alt="error"></p>
 <p>在一个KFC内。服务员负责生产食，消费者负责消费食物。</p>
 <p><strong>涉及到的内容：</strong></p>
 <p>1.Java模式思想：生产着消费者模式</p>
@@ -515,7 +515,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">Summer</a>
             <p>原文链接：<a href="http://yoursite.com/2019/08/20/Thread/">http://yoursite.com/2019/08/20/Thread/</a>
             <p>发表日期：<a href="http://yoursite.com/2019/08/20/Thread/">八月 20日 2019, 3:12:59 下午</a>
-            <p>更新日期：<a href="http://yoursite.com/2019/08/20/Thread/">January 1st 2020, 1:57:15 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/2019/08/20/Thread/">January 16th 2020, 5:23:06 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1123,9 +1123,55 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 34
+        Total : 36
         </div>
         <!-- search  -->
         
@@ -1135,6 +1181,25 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/Collection接口的list具体实现类之ArrayList/" >Collection接口的list具体实现类之ArrayList</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/线程安全与线程不安全/" >线程安全与线程不安全</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
@@ -1236,7 +1301,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML详解/" >XML-1前提</a>
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML前提/" >XML-1前提</a>
         </li>
     
     
@@ -1314,59 +1379,65 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="ArrayList"><span class="iconfont-archer">&#xe606;</span>ArrayList</span>
+    
         <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
     
         <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
     
         <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
     
         <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
     
-        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
     
         <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
     
-        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
-    
-        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
-    
-        <span class="sidebar-tag-name" data-tags="mybatis动态sql"><span class="iconfont-archer">&#xe606;</span>mybatis动态sql</span>
-    
         <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
     
-        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
     
         <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
     
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
-        <span class="sidebar-tag-name" data-tags="DataStructrue sort"><span class="iconfont-archer">&#xe606;</span>DataStructrue sort</span>
-    
-        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
-    
-        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
-    
-        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
-    
-        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
-    
-        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
-    
-        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
-    
-        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
     
-        <span class="sidebar-tag-name" data-tags="spring的自动装配（注解） spring数据库连接"><span class="iconfont-archer">&#xe606;</span>spring的自动装配（注解） spring数据库连接</span>
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
+    
+        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
+    
+        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
     
         <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
     
         <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
     
         <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
     

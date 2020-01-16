@@ -266,7 +266,7 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "DataStructrue sort">DataStructrue sort</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "排序算法">排序算法</a>
     
 </div>
                 
@@ -402,7 +402,7 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><p><strong>各种排序算法的时间复杂度及空间复杂度</strong></p>
-<p><img src="D:%5Chexo%5Cimgs%5C%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/bRFnoxmrOG2s4JE.png" alt="error"></p>
 <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>冒泡排序（Bubble Sort），是一种<a href="https://baike.baidu.com/item/计算机科学" target="_blank" rel="noopener">计算机科学</a>领域的较简单的<a href="https://baike.baidu.com/item/排序算法/5399605" target="_blank" rel="noopener">排序算法</a>。</p>
 <p>它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素列已经排序完成。</p>
 <h3 id="思想："><a href="#思想：" class="headerlink" title="思想："></a>思想：</h3><h4 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4><p>一个简单的例子理解冒泡排序</p>
@@ -411,23 +411,23 @@ height:50vh;
 <p>第二趟排序：1,3,4,5（开始）→ 1,3,4,5 →  1,3,<strong>4</strong>,<strong>5</strong>                    （发生两次比较：1与3比，不交换；3与4比，不交换。此时确认4为次大数）</p>
 <p>第三趟排序：1,3,4,5（开始）→ 1,<strong>3</strong>,<strong>4</strong>,<strong>5</strong>                                       （发生一次比较：1与3比，不交换。 此时确认3为第三大的数）</p>
 <p>至此，已经确认5、4、3分别为最大、次大和第三大的数，由于整个数组只有四个元素，故排序已经完成。</p>
-<h4 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h4><p><img src="D:%5Chexo%5Cimgs%5CbubbleSort.gif" alt></p>
+<h4 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h4><p><img src="https://i.loli.net/2020/01/16/dZGQ6FMSVI1UX8l.gif" alt="error"></p>
 <h4 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h4><p>冒泡排序是一种用时间换空间的排序方法，最坏情况是把顺序的排列变成逆序，或者把逆序的数列变成顺序。在这种情况下，每一次比较都需要进行交换运算。</p>
 <p>O(N^2)</p>
 <h3 id="程序实现："><a href="#程序实现：" class="headerlink" title="程序实现："></a>程序实现：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//冒泡排序</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length - <span class="number">1</span>; i++) &#123;<span class="comment">// 第一层循环</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numbers.length - <span class="number">1</span> - i; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (numbers[j] &lt; numbers[j + <span class="number">1</span>]) &#123;</span><br><span class="line">					<span class="keyword">int</span> temp = numbers[j];</span><br><span class="line">					numbers[j] = numbers[j + <span class="number">1</span>];</span><br><span class="line">					numbers[j + <span class="number">1</span>] = temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 输出数组</span></span><br><span class="line">		System.out.println(<span class="string">"冒牌排序："</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</span><br><span class="line">			System.out.print(numbers[i] + <span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
 <p>程序运行结果</p>
-<p><img src="D:%5Chexo%5Cimgs%5C%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E7%BB%93%E6%9E%9C.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/DATXCc9ZQIyluqw.png" alt="error"></p>
 <h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><h3 id="概念：-1"><a href="#概念：-1" class="headerlink" title="概念："></a>概念：</h3><p>选择排序（Selection sort）是一种简单直观的<a href="https://baike.baidu.com/item/排序算法/5399605" target="_blank" rel="noopener">排序算法</a>。它的工作原理是：第一次从待排序的<a href="https://baike.baidu.com/item/数据元素/715313" target="_blank" rel="noopener">数据元素</a>中选出最小（或最大）的一个元素，存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，然后放到已排序的序列的末尾。以此类推，直到全部待排序的数据元素的个数为零。选择排序是不稳定的排序方法。</p>
 <h3 id="思想：-1"><a href="#思想：-1" class="headerlink" title="思想："></a>思想：</h3><h4 id="算法步骤-1"><a href="#算法步骤-1" class="headerlink" title="算法步骤"></a>算法步骤</h4><p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。</p>
 <p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
 <p>重复第二步，直到所有元素均排序完毕。</p>
-<h4 id="图示-1"><a href="#图示-1" class="headerlink" title="图示"></a>图示</h4><p><img src="D:%5Chexo%5Cimgs%5CselectionSort.gif" alt></p>
+<h4 id="图示-1"><a href="#图示-1" class="headerlink" title="图示"></a>图示</h4><p><img src="https://i.loli.net/2020/01/16/IbEDs5UJOkPfnWT.gif" alt="error"></p>
 <h4 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h4><p>O(N^2)</p>
 <h3 id="程序实现：-1"><a href="#程序实现：-1" class="headerlink" title="程序实现："></a>程序实现：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选择排序</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</span><br><span class="line">			<span class="keyword">int</span> k = i; <span class="comment">// 从前遍历位置记录</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = numbers.length - <span class="number">1</span>; j &gt; i; j--) &#123;</span><br><span class="line">				<span class="comment">//从后遍历，记录最小的位置并记录</span></span><br><span class="line">				<span class="keyword">if</span> (numbers[j] &lt; numbers[k]) &#123;</span><br><span class="line">					k = j; <span class="comment">// 记录位置</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//记录的最小的位置并与从前遍历的交换位置</span></span><br><span class="line">			<span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">			numbers[i] = numbers[k];</span><br><span class="line">			numbers[k] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 输出数组</span></span><br><span class="line">		System.out.println(<span class="string">"选择排序："</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</span><br><span class="line">			System.out.print(numbers[i] + <span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
 <p>程序运行结果</p>
-<p><img src="D:%5Chexo%5Cimgs%5C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E7%BB%93%E6%9E%9C.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/8MIeBq1HfaLyTCn.png" alt="error"></p>
 <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><h3 id="概念：-2"><a href="#概念：-2" class="headerlink" title="概念："></a>概念：</h3><p>快速排序（Quicksort）是对<a href="https://baike.baidu.com/item/冒泡排序/4602306" target="_blank" rel="noopener">冒泡排序</a>的一种改进。</p>
 <p>快速排序由C. A. R. Hoare在1960年提出。它的基本思想是：通过一趟排序将要排序的数据<strong>分割</strong>成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以<a href="https://baike.baidu.com/item/递归/1740695" target="_blank" rel="noopener">递归</a>进行，以此达到整个数据变成有序<a href="https://baike.baidu.com/item/序列/1302588" target="_blank" rel="noopener">序列</a>。</p>
 <p>快速排序又是一种<strong>分而治之思想</strong>在排序算法上的典型应用。本质上来看，快速排序应该算是在<strong>冒泡排序基础上的递归分治法</strong>。</p>
@@ -438,20 +438,20 @@ height:50vh;
 <li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</li>
 <li>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</li>
 </ol>
-<h4 id="图示-2"><a href="#图示-2" class="headerlink" title="图示"></a>图示</h4><p><img src="D:%5Chexo%5Cimgs%5CquickSort.gif" alt></p>
+<h4 id="图示-2"><a href="#图示-2" class="headerlink" title="图示"></a>图示</h4><p><img src="https://i.loli.net/2020/01/16/wb1HEMVWDrlU6Qm.gif" alt="error"></p>
 <h4 id="复杂度-2"><a href="#复杂度-2" class="headerlink" title="复杂度"></a>复杂度</h4><p>在平均状况下，排序 n 个项目要 Ο(nlogn) 次比较。在最坏状况下则需要 Ο(n2)<br>次比较，但这种状况并不常见。事实上，快速排序通常明显比其他 Ο(nlogn) 算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来。</p>
 <p>Ο(nlogn)</p>
 <h3 id="程序实现：-2"><a href="#程序实现：-2" class="headerlink" title="程序实现："></a>程序实现：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//快速排序</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//先初始定义基准值位置</span></span><br><span class="line">		<span class="keyword">int</span> i = low;</span><br><span class="line">		<span class="keyword">int</span> j = high;</span><br><span class="line">		<span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">		<span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">			<span class="comment">//先从后向前找,*********************************与基准值相比较，拆分成两个空间</span></span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; numbers[j] &gt; temp) &#123;</span><br><span class="line">				j--;<span class="comment">//向前移动一位</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (i &lt; j &amp;&amp; numbers[j] &lt; temp) &#123;</span><br><span class="line">				numbers[i++] = numbers[j];<span class="comment">//将比基准值小的赋值给下标low</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//从前向后找</span></span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; numbers[i] &lt; temp) &#123;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (i &lt; j &amp;&amp; numbers[i] &gt; temp) &#123;</span><br><span class="line">				numbers[j] = numbers[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//直到low == high的情况发生时,将基准值赋值给low。</span></span><br><span class="line">			numbers[i] = temp;</span><br><span class="line">			<span class="comment">//将数组分成以基准值为左右两部分进行排序</span></span><br><span class="line">			QuickSort(numbers, low, i - <span class="number">1</span>);</span><br><span class="line">			QuickSort(numbers, i + <span class="number">1</span>, high);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="D:%5Chexo%5Cimgs%5C%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%BB%93%E6%9E%9C.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/IWDAbOG9pQkfKqa.png" alt="error"></p>
 <h2 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h2><h3 id="概念：-3"><a href="#概念：-3" class="headerlink" title="概念："></a>概念：</h3><p>插入排序是一种最简单直观的排序算法，它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
 <h3 id="思想：-3"><a href="#思想：-3" class="headerlink" title="思想："></a>思想：</h3><p>插入排序和冒泡排序一样，也有一种优化算法，叫做拆半插入。</p>
 <h4 id="算法步骤-3"><a href="#算法步骤-3" class="headerlink" title="算法步骤"></a>算法步骤</h4><p>将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。</p>
 <p>从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
-<h4 id="图示-3"><a href="#图示-3" class="headerlink" title="图示"></a>图示</h4><p><img src="D:%5Chexo%5Cimgs%5CinsertionSort.gif" alt></p>
+<h4 id="图示-3"><a href="#图示-3" class="headerlink" title="图示"></a>图示</h4><p><img src="https://i.loli.net/2020/01/16/7MvCayb8B2ReHLf.gif" alt="error"></p>
 <h3 id="程序实现：-3"><a href="#程序实现：-3" class="headerlink" title="程序实现："></a>程序实现：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//直接插入排序</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; numbers.length ; i++) &#123;</span><br><span class="line">			<span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">			<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (j = i; j &gt; <span class="number">0</span> &amp;&amp; numbers[j] &lt; temp; j--) &#123;</span><br><span class="line">				numbers[j] = numbers[j - <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			numbers[j] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//输出数组</span></span><br><span class="line">		System.out.println(<span class="string">"插入排序："</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</span><br><span class="line">			System.out.print(numbers[i] + <span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="D:%5Chexo%5Cimgs%5C%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E7%BB%93%E6%9E%9C.png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/LZyD1xOW37NnzkG.png" alt="error"></p>
 <h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><h3 id="概念：-4"><a href="#概念：-4" class="headerlink" title="概念："></a>概念：</h3><p><strong>希尔排序</strong>(Shell’s Sort)是<a href="https://baike.baidu.com/item/插入排序" target="_blank" rel="noopener">插入排序</a>的一种又称“缩小增量排序”（Diminishing Increment Sort），是直接插入排序算法的一种更高效的改进版本</p>
 <p>但希尔排序是非稳定排序算法。</p>
 <p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
@@ -463,7 +463,7 @@ height:50vh;
 <h4 id="算法步骤-4"><a href="#算法步骤-4" class="headerlink" title="算法步骤"></a>算法步骤</h4><p>选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p>
 <p>按增量序列个数 k，对序列进行 k 趟排序；</p>
 <p>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p>
-<h4 id="图示-4"><a href="#图示-4" class="headerlink" title="图示"></a>图示</h4><p><img src="D:%5Chexo%5Cimgs%5CSorting_shellsort_anim.gif" alt></p>
+<h4 id="图示-4"><a href="#图示-4" class="headerlink" title="图示"></a>图示</h4><p><img src="https://i.loli.net/2020/01/16/kDEvUxqwaZQXVKc.gif" alt="error"></p>
 <h3 id="程序实现：-4"><a href="#程序实现：-4" class="headerlink" title="程序实现："></a>程序实现：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShellSort</span> <span class="keyword">implements</span> <span class="title">IArraySort</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] sort(<span class="keyword">int</span>[] sourceArray) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 对 arr 进行拷贝，不改变参数内容</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = Arrays.copyOf(sourceArray, sourceArray.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> gap = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (gap &lt; arr.length) &#123;</span><br><span class="line">            gap = gap * <span class="number">3</span> + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (gap &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = gap; i &lt; arr.length; i++) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = arr[i];</span><br><span class="line">                <span class="keyword">int</span> j = i - gap;</span><br><span class="line">                <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; tmp) &#123;</span><br><span class="line">                    arr[j + gap] = arr[j];</span><br><span class="line">                    j -= gap;</span><br><span class="line">                &#125;</span><br><span class="line">                arr[j + gap] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            gap = (<span class="keyword">int</span>) Math.floor(gap / <span class="number">3</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> arr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><h3 id="概念：-5"><a href="#概念：-5" class="headerlink" title="概念："></a>概念：</h3><p>堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。</p>
@@ -479,8 +479,8 @@ height:50vh;
 <li>把堆的尺寸缩小 1，并调用 shift_down(0)，目的是把新的数组顶端数据调整到相应位置；</li>
 <li>重复步骤 2，直到堆的尺寸为 1。</li>
 </ol>
-<h4 id="图示-5"><a href="#图示-5" class="headerlink" title="图示"></a>图示</h4><p><img src="D:%5Chexo%5Cimgs%5CheapSort.gif" alt></p>
-<p><img src="D:%5Chexo%5Cimgs%5CSorting_heapsort_anim.gif" alt></p>
+<h4 id="图示-5"><a href="#图示-5" class="headerlink" title="图示"></a>图示</h4><p><img src="https://i.loli.net/2020/01/16/txSgsprmNnwIqXY.gif" alt="error"></p>
+<p><img src="https://i.loli.net/2020/01/16/SPokzJTaV1QXOuW.gif" alt="error"></p>
 <h3 id="程序实现：-5"><a href="#程序实现：-5" class="headerlink" title="程序实现："></a>程序实现：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapSort</span> <span class="keyword">implements</span> <span class="title">IArraySort</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] sort(<span class="keyword">int</span>[] sourceArray) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 对 arr 进行拷贝，不改变参数内容</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = Arrays.copyOf(sourceArray, sourceArray.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> len = arr.length;</span><br><span class="line"></span><br><span class="line">        buildMaxHeap(arr, len);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            swap(arr, <span class="number">0</span>, i);</span><br><span class="line">            len--;</span><br><span class="line">            heapify(arr, <span class="number">0</span>, len);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (<span class="keyword">int</span>) Math.floor(len / <span class="number">2</span>); i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            heapify(arr, i, len);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">2</span> * i + <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> largest = i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (left &lt; len &amp;&amp; arr[left] &gt; arr[largest]) &#123;</span><br><span class="line">            largest = left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (right &lt; len &amp;&amp; arr[right] &gt; arr[largest]) &#123;</span><br><span class="line">            largest = right;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (largest != i) &#123;</span><br><span class="line">            swap(arr, i, largest);</span><br><span class="line">            heapify(arr, largest, len);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><h3 id="概念：-6"><a href="#概念：-6" class="headerlink" title="概念："></a>概念：</h3><p>归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</p>
@@ -496,7 +496,7 @@ height:50vh;
 <li>重复步骤 3 直到某一指针达到序列尾；</li>
 <li>将另一序列剩下的所有元素直接复制到合并序列尾。</li>
 </ol>
-<h4 id="图示-6"><a href="#图示-6" class="headerlink" title="图示"></a>图示</h4><p><img src="D:%5Chexo%5Cimgs%5CmergeSort.gif" alt></p>
+<h4 id="图示-6"><a href="#图示-6" class="headerlink" title="图示"></a>图示</h4><p><img src="https://i.loli.net/2020/01/16/yZYF6m4IvpCAjiK.gif" alt="error"></p>
 <h3 id="程序实现：-6"><a href="#程序实现：-6" class="headerlink" title="程序实现："></a>程序实现：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MergeSort</span> <span class="keyword">implements</span> <span class="title">IArraySort</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] sort(<span class="keyword">int</span>[] sourceArray) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 对 arr 进行拷贝，不改变参数内容</span></span><br><span class="line">        <span class="keyword">int</span>[] arr = Arrays.copyOf(sourceArray, sourceArray.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> arr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> middle = (<span class="keyword">int</span>) Math.floor(arr.length / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] left = Arrays.copyOfRange(arr, <span class="number">0</span>, middle);</span><br><span class="line">        <span class="keyword">int</span>[] right = Arrays.copyOfRange(arr, middle, arr.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> merge(sort(left), sort(right));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span>[] merge(<span class="keyword">int</span>[] left, <span class="keyword">int</span>[] right) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[left.length + right.length];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (left.length &gt; <span class="number">0</span> &amp;&amp; right.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (left[<span class="number">0</span>] &lt;= right[<span class="number">0</span>]) &#123;</span><br><span class="line">                result[i++] = left[<span class="number">0</span>];</span><br><span class="line">                left = Arrays.copyOfRange(left, <span class="number">1</span>, left.length);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                result[i++] = right[<span class="number">0</span>];</span><br><span class="line">                right = Arrays.copyOfRange(right, <span class="number">1</span>, right.length);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (left.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            result[i++] = left[<span class="number">0</span>];</span><br><span class="line">            left = Arrays.copyOfRange(left, <span class="number">1</span>, left.length);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (right.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            result[i++] = right[<span class="number">0</span>];</span><br><span class="line">            right = Arrays.copyOfRange(right, <span class="number">1</span>, right.length);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -507,7 +507,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">Summer</a>
             <p>原文链接：<a href="http://yoursite.com/2019/08/19/DataStructrue-sort/">http://yoursite.com/2019/08/19/DataStructrue-sort/</a>
             <p>发表日期：<a href="http://yoursite.com/2019/08/19/DataStructrue-sort/">八月 19日 2019, 9:17:50 上午</a>
-            <p>更新日期：<a href="http://yoursite.com/2019/08/19/DataStructrue-sort/">January 1st 2020, 11:38:05 am</a>
+            <p>更新日期：<a href="http://yoursite.com/2019/08/19/DataStructrue-sort/">January 16th 2020, 5:03:37 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1115,9 +1115,55 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 34
+        Total : 36
         </div>
         <!-- search  -->
         
@@ -1127,6 +1173,25 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/Collection接口的list具体实现类之ArrayList/" >Collection接口的list具体实现类之ArrayList</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/线程安全与线程不安全/" >线程安全与线程不安全</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
@@ -1228,7 +1293,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML详解/" >XML-1前提</a>
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML前提/" >XML-1前提</a>
         </li>
     
     
@@ -1306,59 +1371,65 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="ArrayList"><span class="iconfont-archer">&#xe606;</span>ArrayList</span>
+    
         <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
     
         <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
     
         <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
     
         <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
     
-        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
     
         <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
     
-        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
-    
-        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
-    
-        <span class="sidebar-tag-name" data-tags="mybatis动态sql"><span class="iconfont-archer">&#xe606;</span>mybatis动态sql</span>
-    
         <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
     
-        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
     
         <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
     
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
-        <span class="sidebar-tag-name" data-tags="DataStructrue sort"><span class="iconfont-archer">&#xe606;</span>DataStructrue sort</span>
-    
-        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
-    
-        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
-    
-        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
-    
-        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
-    
-        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
-    
-        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
-    
-        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
     
-        <span class="sidebar-tag-name" data-tags="spring的自动装配（注解） spring数据库连接"><span class="iconfont-archer">&#xe606;</span>spring的自动装配（注解） spring数据库连接</span>
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
+    
+        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
+    
+        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
     
         <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
     
         <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
     
         <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
     

@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">7.5k</span>阅读时长: <span class="post-count reading-time">29 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">7.1k</span>阅读时长: <span class="post-count reading-time">28 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -590,8 +590,8 @@ height:50vh;
 <p>保证了数据操作的安全性。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建表</span><br><span class="line">mysql&gt; create table acount(id int primary key auto_increment,name varchar(40),money float);</span><br><span class="line">插入数据的两种方式</span><br><span class="line">mysql&gt; insert into account values(1,&apos;A&apos;,1000);</span><br><span class="line">mysql&gt; insert into account(name,money) values(&apos;C&apos;,1000);#因为primary key可以自增所以可以不用设置。</span><br></pre></td></tr></table></figure>
 
-<h3 id="开启事务（start-transaction）"><a href="#开启事务（start-transaction）" class="headerlink" title="开启事务（start transaction）"></a>开启事务（start transaction）</h3><p><img src="D:%5Chexo%5Cimgs%5Cdatabase(1).png" alt></p>
-<h3 id="回滚事务（rollback）"><a href="#回滚事务（rollback）" class="headerlink" title="回滚事务（rollback）"></a>回滚事务（rollback）</h3><p><img src="D:%5Chexo%5Cimgs%5Cdatabase(2).png" alt></p>
+<h3 id="开启事务（start-transaction）"><a href="#开启事务（start-transaction）" class="headerlink" title="开启事务（start transaction）"></a>开启事务（start transaction）</h3><p><img src="https://i.loli.net/2020/01/16/pBoYXIxzuqHTkf8.png" alt="error"></p>
+<h3 id="回滚事务（rollback）"><a href="#回滚事务（rollback）" class="headerlink" title="回滚事务（rollback）"></a>回滚事务（rollback）</h3><p><img src="https://i.loli.net/2020/01/16/rpmkzg3E91qcWVF.png" alt="error"></p>
 <h3 id="提交事务（commit）"><a href="#提交事务（commit）" class="headerlink" title="提交事务（commit）"></a>提交事务（commit）</h3><p>最终提交的事务不能再进行回滚操作。</p>
 <h3 id="JDBC使用事务"><a href="#JDBC使用事务" class="headerlink" title="JDBC使用事务"></a>JDBC使用事务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	当JDBC程序向数据库获得一个Connection对象时，默认情况下这Connection对象会自动向数据库提交在它上面发送的SQL语句。</span><br><span class="line">若想关闭这种默认提交方式，让多条SQL在一个事务中执行，可使用</span><br><span class="line">下列的JDBC控制事务语句</span><br><span class="line">#JDBC使用事务</span><br><span class="line">#设置自动提交为false 开启事务</span><br><span class="line">Connection.setAutoCommit(false);</span><br><span class="line">#回滚事务</span><br><span class="line">Connection.rollback;</span><br><span class="line">#提交事务</span><br><span class="line">Connection.commit;</span><br></pre></td></tr></table></figure>
 
@@ -648,44 +648,44 @@ height:50vh;
 <h4 id="持久性-Durablity"><a href="#持久性-Durablity" class="headerlink" title="持久性(Durablity)"></a>持久性(Durablity)</h4><p>事务一旦提交，对事务改变是永久性的，即使数据库故障也不会有任何影响。</p>
 <h4 id="隔离级别相关测试语句："><a href="#隔离级别相关测试语句：" class="headerlink" title="隔离级别相关测试语句："></a><font color="#ff0000">隔离级别相关测试语句：</font></h4><h5 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h5><p>打开一个客户端A，并设置当前事务模式为read uncommitted（未提交读），查询表account的初始值：</p>
 <p>在客户端A的事务提交之前，打开另一个客户端B，更新表account</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(3).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/zydVn5wK9LJ4XcA.png" alt="error"></p>
 <p>这时，虽然客户端B的事务还没提交，但是客户端A就可以查询到B已经更新的数据</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(4).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/RdJikSbL6HP3jO2.png" alt="error"></p>
 <p>一旦客户端B的事务因为某种原因回滚，所有的操作都将会被撤销，那客户端A查询到的数据其实就是脏数据</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(5).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/Jk2uS3p6T4srVOC.png" alt="error"></p>
 <p>在客户端A执行更新语句update account set balance = balance - 50 where id =1，lilei的balance没有变成350，居然是400，是不是很奇怪，数据不一致啊，如果你这么想就太天真 了，在应用程序中，我们会用400-50=350，并不知道其他会话回滚了，要想解决这个问题可以采用读已提交的隔离级别</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(6).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/ZFRv9VEmiAyaJbu.png" alt="error"></p>
 <h5 id="读已提交"><a href="#读已提交" class="headerlink" title="读已提交"></a>读已提交</h5><p>​    打开一个客户端A，并设置当前事务模式为read committed（未提交读），查询表account的初始值：</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(7).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/RdW81JstYu7xSOw.png" alt="error"></p>
 <p>在客户端A的事务提交之前，打开另一个客户端B，更新表account：</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(8).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/njwo8WbahPQOtUX.png" alt="error"></p>
 <p>这时，客户端B的事务还没提交，客户端A不能查询到B已经更新的数据，解决了脏读问题：</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(9).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/9RY4jefA2uNoZwp.png" alt="error"></p>
 <p>客户端B的事务提交</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(10).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/PGwrdRkhsQA9naI.png" alt="error"></p>
 <p>客户端A执行与上一步相同的查询，结果 与上一步不一致，即产生了不可重复读的问题</p>
 <p><font color="#ff0000">需要注意的是要设置全局隔离级别即：session</font></p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(11).png" alt></p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(12).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/N6nQLSkGeWgtxmB.png" alt="error"></p>
+<p><img src="https://i.loli.net/2020/01/16/u1QoAF4ONrCgGhm.png" alt="error"></p>
 <h5 id="可重复读"><a href="#可重复读" class="headerlink" title="可重复读"></a>可重复读</h5><p>​    1、 打开一个客户端A，并设置当前事务模式为repeatable read，查询表account</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(13).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/tXYu19KA6rwQ3Sn.png" alt="error"></p>
 <p>2、在客户端A的事务提交之前，打开另一个客户端B，更新表account并提交</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(14).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/WwqmGSa1ncRD8Nr.png" alt="error"></p>
 <p>3、在客户端A执行步骤（1）的查询：</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(15).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/MrCciTAH4pGO5du.png" alt="error"></p>
 <p>​    4、 执行步骤（1），lilei的balance仍然是400与步骤（1）查询结果一致，没有出现不可重复读的 问题；接着执行update balance = balance - 50 where id = 1，balance没有变成400-50=350，lilei的balance值用的是步骤（2）中的350来<br>算的，所以是300，数据的一致性倒是没有被破坏，这个有点神奇，也许是mysql的特色吧</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(16).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/lH37BYLuiDjCZvq.png" alt="error"></p>
 <p>5、在客户端A提交事务，查询表account的初始值</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(17).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/7s4UIf2q9Gj8CdY.png" alt="error"></p>
 <p>6、在客户端B开启事务，新增一条数据，其中balance字段值为600</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(18).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/ZdN2WarYEmCRA4j.png" alt="error"></p>
 <p>7、  在客户端A计算balance之和，值为300+16000+2400=18700，没有把客户端B的值算进去。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(19).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/AXsWxgtfaeTDOoS.png" alt="error"></p>
 <p>客户端A等客户端B提交后再计算balance之和，居然变成了19300，这是因为把客户端B的600算进去了</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(20).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/AFyw7xt6EYoRn1W.png" alt="error"></p>
 <p>站在客户的角度，客户是看不到客户端B的，它会觉得是天下掉馅饼了，多了600块，这就是幻读，站在开发者的角度，数据的 一致性并没有破坏。但是在应用程序中，我们得代码可能会把18700提交给用户了，如果你一定要避免这情况小概率状况的发生，那么就要采取下面要介绍的事务隔离级别“串行化”。</p>
 <h5 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h5><p>打开一个客户端A，并设置当前事务模式为serializable，查询表 account的初始值</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cdatabase(21).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/9jw1zEl3LPpGNgo.png" alt="error"></p>
 <p>打开一个客户端B，并设置当前事务模式为serializable，插入一条记录报错，表被锁了插入失败，mysql中事务隔离级别为serializable时会锁表，因此不会出现幻读的情况，这种隔离级别并发性极低，开发中很少会用到。</p>
 <p><font color="#ff0000">总结补充：</font></p>
 <p><font color="#ff0000">1、SQL规范所规定的标准，不同的数据库具体的实现可能会有<br>些差异</font></p>
@@ -697,61 +697,37 @@ height:50vh;
 <h1 id="mysql题目基础语法应用"><a href="#mysql题目基础语法应用" class="headerlink" title="mysql题目基础语法应用"></a>mysql题目基础语法应用</h1><h3 id="单表查询答案"><a href="#单表查询答案" class="headerlink" title="单表查询答案"></a>单表查询答案</h3><ol>
 <li>查找部门30中员工的详细信息。</li>
 </ol>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(1).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/ncwFsKkqTbOJovU.png" alt="error"></p>
 <p>2.找出从事clerk工作的员工的编号、姓名、部门号。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(2).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/huSIb7PypUYLnkJ.png" alt="error"></p>
 <ol start="3">
 <li>检索出奖金多于基本工资的员工信息。</li>
 </ol>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(3).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/aWXJsQw5kbfoHu3.png" alt="error"></p>
 <p>4.检索出奖金多于基本工资60%的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(4).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/n8HoQDxJiBSrpEc.png" alt="error"></p>
 <p>5.找出10部门的经理、20部门的职员的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(5).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/GFYaAc2TEKj96t1.png" alt="error"></p>
 <p>6.找出10部门的经理、20部门的职员或者既不是经理也不是职员但是工资高于2000元的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(6).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/R28a37YJSHoDg1G.png" alt="error"></p>
 <p>7.找出获得奖金的员工的工作。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(7).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/ZKxkPasJ9lOofEM.png" alt="error"></p>
 <p>8.找出奖金少于100或者没有获得奖金的员工的信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(8).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/o7KujIQYy1LqOf5.png" alt="error"></p>
 <p>9.找出姓名以A、B、S开始的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(9).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/O3UFKGo15whvNDj.png" alt="error"></p>
 <p>10.找到名字长度为6个字符的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(10).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/6ueECBSFWZH87TU.png" alt="error"></p>
 <p>11.名字中不包含R字符的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(11).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/D9yMkqTY8nsW7m2.png" alt="error"></p>
 <p>12.返回员工的详细信息并按姓名排序。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(12).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/6xLMsUCajlWkKiz.png" alt="error"></p>
 <p>13.返回员工的信息并按工作降序工资升序排列。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(13).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/XPmNuZlfeFaS45I.png" alt="error"></p>
 <p>14.计算员工的日薪(按30天)。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(14).png" alt></p>
+<p><img src="https://i.loli.net/2020/01/16/cg3IdVRJxC6iWlQ.png" alt="error"></p>
 <p>\15. 找出姓名中包含A的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(15).png" alt></p>
-<h3 id="多表查询答案"><a href="#多表查询答案" class="headerlink" title="多表查询答案"></a>多表查询答案</h3><p>\1. 返回拥有员工的部门名、部门号。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(16).png" alt></p>
-<p>2.工资水平多于smith的员工信息。</p>
-<p><img src="D:%5Chexo%5Cimgs%5Cmysql(17).png" alt></p>
-<p> 3.返回员工和所属经理的姓名。</p>
-<p>（没有经理是否显示）</p>
-<p> 4.返回雇员的雇佣日期早于其经理雇佣日期的员工及其经理姓名     </p>
-<p>\5.       返回员工姓名及其所在的部门名称。</p>
-<p>\6. 返回从事clerk工作的员工姓名和所在部门名称。 </p>
-<p>\7. 返回部门号及其本部门的最低工资。</p>
-<p>\8. 返回销售部(sales)所有员工的姓名。</p>
-<p>9.返回工资水平多于平均工资的员工。</p>
-<p>\10. 返回与SCOTT从事相同工作的员工。</p>
-<p> 如果不包含自己</p>
-<p>11.返回与30部门员工工资水平相同的员工姓名与工资。   </p>
-<p>12.返回工资高于30部门所有员工工资水平的员工信息。</p>
-<p>13.返回部门号、部门名、部门所在位置及其每个部门的员工总数。   </p>
-<p>\14. 返回员工的姓名、所在部门名及其工资。</p>
-<p>15.返回员工的详细信息。(包括部门名)</p>
-<p>16.返回员工工作及其从事此工作的最低工资。 </p>
-<p>17.计算出员工的年薪，并且以年薪排序。  </p>
-<p>18.返回工资处于第四级别的员工的姓名。</p>
-<p>19.返回工资为二等级的职员名字、部门所在地、和二等级的最低工资和最高工资  </p>
-<p>20.工资等级多于smith的员工信息。</p>
+<p><img src="https://i.loli.net/2020/01/16/nSkmFrlUtjQL9bd.png" alt="error"></p>
 
     </article>
     <!-- license  -->
@@ -760,7 +736,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">Summer</a>
             <p>原文链接：<a href="http://yoursite.com/2019/09/06/Database2-SQL语言/">http://yoursite.com/2019/09/06/Database2-SQL语言/</a>
             <p>发表日期：<a href="http://yoursite.com/2019/09/06/Database2-SQL语言/">九月 6日 2019, 9:24:23 上午</a>
-            <p>更新日期：<a href="http://yoursite.com/2019/09/06/Database2-SQL语言/">January 1st 2020, 1:21:00 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/2019/09/06/Database2-SQL语言/">January 16th 2020, 4:47:50 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -897,7 +873,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库数据操作"><span class="toc-number">1.</span> <span class="toc-text">数据库数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前提"><span class="toc-number">1.1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操纵语言-DML"><span class="toc-number">1.2.</span> <span class="toc-text">数据操纵语言(DML)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据查询语言（DQL）"><span class="toc-number">1.3.</span> <span class="toc-text">数据查询语言（DQL）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#条件查询"><span class="toc-number">1.3.1.</span> <span class="toc-text">条件查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据定义语言DDL"><span class="toc-number">1.4.</span> <span class="toc-text">数据定义语言DDL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据控制语言DCL"><span class="toc-number">1.5.</span> <span class="toc-text">数据控制语言DCL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引"><span class="toc-number">2.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建索引的方式有三种："><span class="toc-number">2.0.1.</span> <span class="toc-text">创建索引的方式有三种：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建索引"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">创建表的时候创建索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建索引"><span class="toc-number">2.0.1.2.</span> <span class="toc-text">在存在的表上创建索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建普通索引"><span class="toc-number">2.0.1.3.</span> <span class="toc-text">使用alter创建普通索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建和查看唯一索引："><span class="toc-number">2.0.2.</span> <span class="toc-text">创建和查看唯一索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建唯一索引"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">创建表的时候创建唯一索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建唯一索引"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">在存在的表上创建唯一索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建唯一索引"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">使用alter创建唯一索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建全文索引："><span class="toc-number">2.0.3.</span> <span class="toc-text">创建全文索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建全文索引"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">创建表的时候创建全文索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建全文索引"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">在存在的表上创建全文索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建全文索引"><span class="toc-number">2.0.3.3.</span> <span class="toc-text">使用alter创建全文索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建和查看多列索引："><span class="toc-number">2.0.4.</span> <span class="toc-text">创建和查看多列索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建多列索引"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">创建表的时候创建多列索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建多列索引"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">在存在的表上创建多列索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建多列索引"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">使用alter创建多列索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除索引"><span class="toc-number">2.0.5.</span> <span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看索引"><span class="toc-number">2.0.6.</span> <span class="toc-text">查看索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#触发器"><span class="toc-number">3.</span> <span class="toc-text">触发器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建触发器"><span class="toc-number">3.0.1.</span> <span class="toc-text">创建触发器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建执行一条语句的触发器"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">创建执行一条语句的触发器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建包含多条执行语句的触发器"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">创建包含多条执行语句的触发器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看触发器"><span class="toc-number">3.0.2.</span> <span class="toc-text">查看触发器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除触发器"><span class="toc-number">3.0.3.</span> <span class="toc-text">删除触发器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#视图"><span class="toc-number">4.</span> <span class="toc-text">视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义"><span class="toc-number">4.0.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建视图"><span class="toc-number">4.0.2.</span> <span class="toc-text">创建视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通视图"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">普通视图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">4.0.3.</span> <span class="toc-text">封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#封装查询常量的视图"><span class="toc-number">4.0.3.1.</span> <span class="toc-text">封装查询常量的视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装聚合函数视图"><span class="toc-number">4.0.3.2.</span> <span class="toc-text">封装聚合函数视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装排序功能的（order-by）视图"><span class="toc-number">4.0.3.3.</span> <span class="toc-text">封装排序功能的（order by）视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装实现内连接的查询视图。"><span class="toc-number">4.0.3.4.</span> <span class="toc-text">封装实现内连接的查询视图。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装实现表外链接（左右链接）的查询视图-left-join-right-join-视图"><span class="toc-number">4.0.3.5.</span> <span class="toc-text">封装实现表外链接（左右链接）的查询视图[left join ; right join]视图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现子查询的相关查询语句视图"><span class="toc-number">4.0.4.</span> <span class="toc-text">实现子查询的相关查询语句视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现记录联合（union和union-all）查询语句视图"><span class="toc-number">4.0.5.</span> <span class="toc-text">实现记录联合（union和union all）查询语句视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询视图的两种方法"><span class="toc-number">4.0.6.</span> <span class="toc-text">查询视图的两种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用表查询"><span class="toc-number">4.0.6.1.</span> <span class="toc-text">使用表查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用数据库查询"><span class="toc-number">4.0.6.2.</span> <span class="toc-text">使用数据库查询</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除视图"><span class="toc-number">4.0.7.</span> <span class="toc-text">删除视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他相关语句创建修改视图"><span class="toc-number">4.0.8.</span> <span class="toc-text">其他相关语句创建修改视图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">4.1.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-1"><span class="toc-number">4.1.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—的格式"><span class="toc-number">4.1.2.</span> <span class="toc-text">函数创建—的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—返回值不同"><span class="toc-number">4.1.3.</span> <span class="toc-text">函数创建—返回值不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—变量"><span class="toc-number">4.1.4.</span> <span class="toc-text">函数创建—变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看函数的三种方式"><span class="toc-number">4.1.5.</span> <span class="toc-text">查看函数的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除修改数据库的操作"><span class="toc-number">4.1.6.</span> <span class="toc-text">删除修改数据库的操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储过程"><span class="toc-number">4.2.</span> <span class="toc-text">存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-2"><span class="toc-number">4.2.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的创建"><span class="toc-number">4.2.2.</span> <span class="toc-text">存储过程的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-格式"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">1.格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-参数"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">2.参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程中的注释"><span class="toc-number">4.2.3.</span> <span class="toc-text">存储过程中的注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的调用"><span class="toc-number">4.2.4.</span> <span class="toc-text">存储过程的调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的查询"><span class="toc-number">4.2.5.</span> <span class="toc-text">存储过程的查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的删除"><span class="toc-number">4.2.6.</span> <span class="toc-text">存储过程的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL存储过程的控制语句"><span class="toc-number">4.2.7.</span> <span class="toc-text">MySQL存储过程的控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#条件语句"><span class="toc-number">4.2.7.1.</span> <span class="toc-text">条件语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环语句"><span class="toc-number">4.2.7.2.</span> <span class="toc-text">循环语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程和函数的区别："><span class="toc-number">4.2.8.</span> <span class="toc-text">存储过程和函数的区别：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">4.3.</span> <span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-3"><span class="toc-number">4.3.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启事务（start-transaction）"><span class="toc-number">4.3.2.</span> <span class="toc-text">开启事务（start transaction）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回滚事务（rollback）"><span class="toc-number">4.3.3.</span> <span class="toc-text">回滚事务（rollback）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交事务（commit）"><span class="toc-number">4.3.4.</span> <span class="toc-text">提交事务（commit）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC使用事务"><span class="toc-number">4.3.5.</span> <span class="toc-text">JDBC使用事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事务的四大特性"><span class="toc-number">4.3.6.</span> <span class="toc-text">事务的四大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原子性-Atomicity"><span class="toc-number">4.3.6.1.</span> <span class="toc-text">原子性(Atomicity)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一致性-consistency"><span class="toc-number">4.3.6.2.</span> <span class="toc-text">一致性(consistency)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离性-Isolation"><span class="toc-number">4.3.6.3.</span> <span class="toc-text">隔离性(Isolation)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#事务的隔离级别"><span class="toc-number">4.3.6.3.1.</span> <span class="toc-text">事务的隔离级别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#持久性-Durablity"><span class="toc-number">4.3.6.4.</span> <span class="toc-text">持久性(Durablity)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离级别相关测试语句："><span class="toc-number">4.3.6.5.</span> <span class="toc-text">隔离级别相关测试语句：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#读未提交"><span class="toc-number">4.3.6.5.1.</span> <span class="toc-text">读未提交</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#读已提交"><span class="toc-number">4.3.6.5.2.</span> <span class="toc-text">读已提交</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#可重复读"><span class="toc-number">4.3.6.5.3.</span> <span class="toc-text">可重复读</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#串行化"><span class="toc-number">4.3.6.5.4.</span> <span class="toc-text">串行化</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql题目基础语法应用"><span class="toc-number">5.</span> <span class="toc-text">mysql题目基础语法应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单表查询答案"><span class="toc-number">5.0.1.</span> <span class="toc-text">单表查询答案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多表查询答案"><span class="toc-number">5.0.2.</span> <span class="toc-text">多表查询答案</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库数据操作"><span class="toc-number">1.</span> <span class="toc-text">数据库数据操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前提"><span class="toc-number">1.1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据操纵语言-DML"><span class="toc-number">1.2.</span> <span class="toc-text">数据操纵语言(DML)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据查询语言（DQL）"><span class="toc-number">1.3.</span> <span class="toc-text">数据查询语言（DQL）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#条件查询"><span class="toc-number">1.3.1.</span> <span class="toc-text">条件查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据定义语言DDL"><span class="toc-number">1.4.</span> <span class="toc-text">数据定义语言DDL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据控制语言DCL"><span class="toc-number">1.5.</span> <span class="toc-text">数据控制语言DCL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引"><span class="toc-number">2.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建索引的方式有三种："><span class="toc-number">2.0.1.</span> <span class="toc-text">创建索引的方式有三种：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建索引"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">创建表的时候创建索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建索引"><span class="toc-number">2.0.1.2.</span> <span class="toc-text">在存在的表上创建索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建普通索引"><span class="toc-number">2.0.1.3.</span> <span class="toc-text">使用alter创建普通索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建和查看唯一索引："><span class="toc-number">2.0.2.</span> <span class="toc-text">创建和查看唯一索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建唯一索引"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">创建表的时候创建唯一索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建唯一索引"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">在存在的表上创建唯一索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建唯一索引"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">使用alter创建唯一索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建全文索引："><span class="toc-number">2.0.3.</span> <span class="toc-text">创建全文索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建全文索引"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">创建表的时候创建全文索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建全文索引"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">在存在的表上创建全文索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建全文索引"><span class="toc-number">2.0.3.3.</span> <span class="toc-text">使用alter创建全文索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建和查看多列索引："><span class="toc-number">2.0.4.</span> <span class="toc-text">创建和查看多列索引：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表的时候创建多列索引"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">创建表的时候创建多列索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在存在的表上创建多列索引"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">在存在的表上创建多列索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用alter创建多列索引"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">使用alter创建多列索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除索引"><span class="toc-number">2.0.5.</span> <span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看索引"><span class="toc-number">2.0.6.</span> <span class="toc-text">查看索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#触发器"><span class="toc-number">3.</span> <span class="toc-text">触发器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建触发器"><span class="toc-number">3.0.1.</span> <span class="toc-text">创建触发器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建执行一条语句的触发器"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">创建执行一条语句的触发器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建包含多条执行语句的触发器"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">创建包含多条执行语句的触发器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看触发器"><span class="toc-number">3.0.2.</span> <span class="toc-text">查看触发器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除触发器"><span class="toc-number">3.0.3.</span> <span class="toc-text">删除触发器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#视图"><span class="toc-number">4.</span> <span class="toc-text">视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义"><span class="toc-number">4.0.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建视图"><span class="toc-number">4.0.2.</span> <span class="toc-text">创建视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通视图"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">普通视图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">4.0.3.</span> <span class="toc-text">封装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#封装查询常量的视图"><span class="toc-number">4.0.3.1.</span> <span class="toc-text">封装查询常量的视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装聚合函数视图"><span class="toc-number">4.0.3.2.</span> <span class="toc-text">封装聚合函数视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装排序功能的（order-by）视图"><span class="toc-number">4.0.3.3.</span> <span class="toc-text">封装排序功能的（order by）视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装实现内连接的查询视图。"><span class="toc-number">4.0.3.4.</span> <span class="toc-text">封装实现内连接的查询视图。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装实现表外链接（左右链接）的查询视图-left-join-right-join-视图"><span class="toc-number">4.0.3.5.</span> <span class="toc-text">封装实现表外链接（左右链接）的查询视图[left join ; right join]视图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现子查询的相关查询语句视图"><span class="toc-number">4.0.4.</span> <span class="toc-text">实现子查询的相关查询语句视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现记录联合（union和union-all）查询语句视图"><span class="toc-number">4.0.5.</span> <span class="toc-text">实现记录联合（union和union all）查询语句视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询视图的两种方法"><span class="toc-number">4.0.6.</span> <span class="toc-text">查询视图的两种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用表查询"><span class="toc-number">4.0.6.1.</span> <span class="toc-text">使用表查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用数据库查询"><span class="toc-number">4.0.6.2.</span> <span class="toc-text">使用数据库查询</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除视图"><span class="toc-number">4.0.7.</span> <span class="toc-text">删除视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他相关语句创建修改视图"><span class="toc-number">4.0.8.</span> <span class="toc-text">其他相关语句创建修改视图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">4.1.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-1"><span class="toc-number">4.1.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—的格式"><span class="toc-number">4.1.2.</span> <span class="toc-text">函数创建—的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—返回值不同"><span class="toc-number">4.1.3.</span> <span class="toc-text">函数创建—返回值不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数创建—变量"><span class="toc-number">4.1.4.</span> <span class="toc-text">函数创建—变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看函数的三种方式"><span class="toc-number">4.1.5.</span> <span class="toc-text">查看函数的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除修改数据库的操作"><span class="toc-number">4.1.6.</span> <span class="toc-text">删除修改数据库的操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储过程"><span class="toc-number">4.2.</span> <span class="toc-text">存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-2"><span class="toc-number">4.2.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的创建"><span class="toc-number">4.2.2.</span> <span class="toc-text">存储过程的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-格式"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">1.格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-参数"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">2.参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程中的注释"><span class="toc-number">4.2.3.</span> <span class="toc-text">存储过程中的注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的调用"><span class="toc-number">4.2.4.</span> <span class="toc-text">存储过程的调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的查询"><span class="toc-number">4.2.5.</span> <span class="toc-text">存储过程的查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程的删除"><span class="toc-number">4.2.6.</span> <span class="toc-text">存储过程的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL存储过程的控制语句"><span class="toc-number">4.2.7.</span> <span class="toc-text">MySQL存储过程的控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#条件语句"><span class="toc-number">4.2.7.1.</span> <span class="toc-text">条件语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环语句"><span class="toc-number">4.2.7.2.</span> <span class="toc-text">循环语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储过程和函数的区别："><span class="toc-number">4.2.8.</span> <span class="toc-text">存储过程和函数的区别：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">4.3.</span> <span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关定义-3"><span class="toc-number">4.3.1.</span> <span class="toc-text">相关定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启事务（start-transaction）"><span class="toc-number">4.3.2.</span> <span class="toc-text">开启事务（start transaction）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回滚事务（rollback）"><span class="toc-number">4.3.3.</span> <span class="toc-text">回滚事务（rollback）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交事务（commit）"><span class="toc-number">4.3.4.</span> <span class="toc-text">提交事务（commit）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC使用事务"><span class="toc-number">4.3.5.</span> <span class="toc-text">JDBC使用事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事务的四大特性"><span class="toc-number">4.3.6.</span> <span class="toc-text">事务的四大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原子性-Atomicity"><span class="toc-number">4.3.6.1.</span> <span class="toc-text">原子性(Atomicity)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一致性-consistency"><span class="toc-number">4.3.6.2.</span> <span class="toc-text">一致性(consistency)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离性-Isolation"><span class="toc-number">4.3.6.3.</span> <span class="toc-text">隔离性(Isolation)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#事务的隔离级别"><span class="toc-number">4.3.6.3.1.</span> <span class="toc-text">事务的隔离级别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#持久性-Durablity"><span class="toc-number">4.3.6.4.</span> <span class="toc-text">持久性(Durablity)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隔离级别相关测试语句："><span class="toc-number">4.3.6.5.</span> <span class="toc-text">隔离级别相关测试语句：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#读未提交"><span class="toc-number">4.3.6.5.1.</span> <span class="toc-text">读未提交</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#读已提交"><span class="toc-number">4.3.6.5.2.</span> <span class="toc-text">读已提交</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#可重复读"><span class="toc-number">4.3.6.5.3.</span> <span class="toc-text">可重复读</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#串行化"><span class="toc-number">4.3.6.5.4.</span> <span class="toc-text">串行化</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql题目基础语法应用"><span class="toc-number">5.</span> <span class="toc-text">mysql题目基础语法应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单表查询答案"><span class="toc-number">5.0.1.</span> <span class="toc-text">单表查询答案</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1368,9 +1344,55 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 34
+        Total : 36
         </div>
         <!-- search  -->
         
@@ -1380,6 +1402,25 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/Collection接口的list具体实现类之ArrayList/" >Collection接口的list具体实现类之ArrayList</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/线程安全与线程不安全/" >线程安全与线程不安全</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
@@ -1481,7 +1522,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML详解/" >XML-1前提</a>
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML前提/" >XML-1前提</a>
         </li>
     
     
@@ -1559,59 +1600,65 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="ArrayList"><span class="iconfont-archer">&#xe606;</span>ArrayList</span>
+    
         <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
     
         <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
     
         <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
     
         <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
     
-        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
     
         <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
     
-        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
-    
-        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
-    
-        <span class="sidebar-tag-name" data-tags="mybatis动态sql"><span class="iconfont-archer">&#xe606;</span>mybatis动态sql</span>
-    
         <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
     
-        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
     
         <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
     
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
-        <span class="sidebar-tag-name" data-tags="DataStructrue sort"><span class="iconfont-archer">&#xe606;</span>DataStructrue sort</span>
-    
-        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
-    
-        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
-    
-        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
-    
-        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
-    
-        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
-    
-        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
-    
-        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
     
-        <span class="sidebar-tag-name" data-tags="spring的自动装配（注解） spring数据库连接"><span class="iconfont-archer">&#xe606;</span>spring的自动装配（注解） spring数据库连接</span>
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
+    
+        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
+    
+        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
     
         <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
     
         <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
     
         <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
     

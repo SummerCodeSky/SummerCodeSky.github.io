@@ -359,6 +359,75 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/01/02/Collection接口的list具体实现类之ArrayList/" >
+            
+                <span>Collection接口的list具体实现类之ArrayList</span>
+        </a>
+        <div class="abstract-content">
+            ArrayList应用程序即为：数据结构+算法
+解决算法复杂度问题。
+基本实现以下方法
+1234567int size();add(E e) ;add(int index, E element); //在列表中指定的位置上插入指定的元素。remove(int index) ;//移除此列表中指定位置的元素set(int index, E element) ;//用指定元素替换此列表中指定位置的元素。 get(int index) ;//返回此列表中指定位置的元素。 clear() ;//从这个列表中移除所有的元素。
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/02</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "ArrayList">ArrayList</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/01/02/线程安全与线程不安全/" >
+            
+                <span>线程安全与线程不安全</span>
+        </a>
+        <div class="abstract-content">
+            线程安全与线程不安全概念线程安全：指多个线程在执行同一段代码的时候采用加锁机制,使每次的执行结果和单线程执行的结果都是一样的,不存在执行程序时出现意外结果。
+线程不安全: 是指不提供加锁机制保护,有可能出现多个线程先后更改数据造成所得到的数据是脏数据。
+无论是单线程还是多线程在缺少保护机制的情况下，运行就会出现不一致。
+什么原因造成线程不安全全局变量及静态变量是线程不安全的主要原因。
+1.若只是对全局变量及静态变量进行读操作而不涉及写操作，那就不涉及安全性问题。
+2.若有多个线程对变量执行写操作，那么就会涉及安全。
+解决办法同步代码块(synchronized)12345synchron...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/02</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "线程安全">线程安全</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/12/09/小程序的flex布局/" >
             
                 <span>小程序的flex布局</span>
@@ -453,7 +522,7 @@ SQLite:是一款轻型的数据库，是遵守ACID...
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "mybatis动态sql">mybatis动态sql</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "动态sql">动态sql</a>
     
 </div>
             
@@ -577,7 +646,7 @@ SQLite:是一款轻型的数据库，是遵守ACID...
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "spring的自动装配（注解） spring数据库连接">spring的自动装配（注解） spring数据库连接</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "spring">spring</a>
     
 </div>
             
@@ -609,72 +678,6 @@ SQLite:是一款轻型的数据库，是遵守ACID...
             <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "spring对其他类型参数的注入">spring对其他类型参数的注入</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/11/28/spring-2核心技术/" >
-            
-                <span>spring-2核心技术</span>
-        </a>
-        <div class="abstract-content">
-            IOC容器​        Spring Framework implementation of the Inversion of Control(IoC)[1]。IoC 也称为依赖注入(DI)。
-​        ioc—控制反转（对bean的控制权，现在反转给spring容器；让spring容器帮我们去创建对象）。
-​        name 控制反转(IoC)，bean 本身通过使用 classes 的直接构造或诸如 Service Locator pattern 之类的机制来控制其依赖关系的实例化或位置。
-两个基本依赖​        org.springframework.be...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/28</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "spring核心">spring核心</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/11/27/打印日志Logging/" >
-            
-                <span>打印日志Logging</span>
-        </a>
-        <div class="abstract-content">
-            打印日志前提spring为什么引入Logging​        Logging 是 Spring 的一个非常重要的依赖项，因为 
-a)它是唯一的强制外部依赖项；
-b)每个人都喜欢从他们正在使用的工具中看到一些输出；
-c)Spring 集成了许多其他工具，所有这些工具也都做了选择 logging 依赖。
-可移植性​        Spring 中的强制 logging 依赖是 Jakarta Commons Logging _API(JCL)。针对 JCL 进行编译，并且我们还为扩展 Spring Framework 的 classes 显示 JCL Log objects。
-​    ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/27</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "log4j">log4j</a>
     
 </div>
             
@@ -1341,9 +1344,55 @@ c)Spring 集成了许多其他工具，所有这些工具也都做了选择 logg
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 34
+        Total : 36
         </div>
         <!-- search  -->
         
@@ -1353,6 +1402,25 @@ c)Spring 集成了许多其他工具，所有这些工具也都做了选择 logg
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/Collection接口的list具体实现类之ArrayList/" >Collection接口的list具体实现类之ArrayList</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/线程安全与线程不安全/" >线程安全与线程不安全</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
@@ -1454,7 +1522,7 @@ c)Spring 集成了许多其他工具，所有这些工具也都做了选择 logg
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML详解/" >XML-1前提</a>
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML前提/" >XML-1前提</a>
         </li>
     
     
@@ -1532,59 +1600,65 @@ c)Spring 集成了许多其他工具，所有这些工具也都做了选择 logg
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="ArrayList"><span class="iconfont-archer">&#xe606;</span>ArrayList</span>
+    
         <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
     
         <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
     
         <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
     
         <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
     
-        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
     
         <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
     
-        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
-    
-        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
-    
-        <span class="sidebar-tag-name" data-tags="mybatis动态sql"><span class="iconfont-archer">&#xe606;</span>mybatis动态sql</span>
-    
         <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
     
-        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
     
         <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
     
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
-        <span class="sidebar-tag-name" data-tags="DataStructrue sort"><span class="iconfont-archer">&#xe606;</span>DataStructrue sort</span>
-    
-        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
-    
-        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
-    
-        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
-    
-        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
-    
-        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
-    
-        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
-    
-        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
     
-        <span class="sidebar-tag-name" data-tags="spring的自动装配（注解） spring数据库连接"><span class="iconfont-archer">&#xe606;</span>spring的自动装配（注解） spring数据库连接</span>
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
+    
+        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
+    
+        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
     
         <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
     
         <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
     
         <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
     

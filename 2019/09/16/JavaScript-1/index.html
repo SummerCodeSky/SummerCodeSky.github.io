@@ -200,6 +200,7 @@
     
     <!-- 谷歌统计  -->
     
+<link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
 </head>
 
     
@@ -423,9 +424,9 @@ height:50vh;
 
 <h3 id="能够显示隐藏的-HTML-元素"><a href="#能够显示隐藏的-HTML-元素" class="headerlink" title="能够显示隐藏的 HTML 元素"></a>能够显示隐藏的 HTML 元素</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span>Hello JavaScript!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"document.getElementById('demo').style.display='block'"</span>&gt;</span></span><br><span class="line">点击我！</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="引入JavaScript三种方式"><a href="#引入JavaScript三种方式" class="headerlink" title="引入JavaScript三种方式"></a>引入JavaScript三种方式</h2><h3 id="内部样式（head中的JavaScript）"><a href="#内部样式（head中的JavaScript）" class="headerlink" title="内部样式（head中的JavaScript）"></a>内部样式（head中的JavaScript）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--内部样式，写在HTML头部--&gt;</span></span><br><span class="line">    <span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">function myFunction() &#123;</span><br><span class="line">    document.getElementById("demo").innerHTML = "段落已被更改。";</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Head 中的 JavaScript<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span>一个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"myFunction()"</span>&gt;</span>试一试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="引入JavaScript三种方式"><a href="#引入JavaScript三种方式" class="headerlink" title="引入JavaScript三种方式"></a>引入JavaScript三种方式</h2><h3 id="内部样式（head中的JavaScript）"><a href="#内部样式（head中的JavaScript）" class="headerlink" title="内部样式（head中的JavaScript）"></a>内部样式（head中的JavaScript）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--内部样式，写在HTML头部--&gt;</span></span><br><span class="line">    <span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = <span class="string">"段落已被更改。"</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Head 中的 JavaScript<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span>一个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"myFunction()"</span>&gt;</span>试一试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="内联样式（body中的JavaScript）"><a href="#内联样式（body中的JavaScript）" class="headerlink" title="内联样式（body中的JavaScript）"></a>内联样式（body中的JavaScript）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--1.内联样式  触发点击事件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> <span class="attr">onclick</span>=<span class="string">"alert('你好！！！')"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"alert('你好呀。。。。。。。。。。。。。。')"</span>&gt;</span>点击我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者-------------------直接加入Script</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>A Web Page<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span>一个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"myFunction()"</span>&gt;</span>试一试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">function myFunction() &#123;</span><br><span class="line">   document.getElementById("demo").innerHTML = "段落被更改。";</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="内联样式（body中的JavaScript）"><a href="#内联样式（body中的JavaScript）" class="headerlink" title="内联样式（body中的JavaScript）"></a>内联样式（body中的JavaScript）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--1.内联样式  触发点击事件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交"</span> <span class="attr">onclick</span>=<span class="string">"alert('你好！！！')"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"alert('你好呀。。。。。。。。。。。。。。')"</span>&gt;</span>点击我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者-------------------直接加入Script</span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>A Web Page<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span>一个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"myFunction()"</span>&gt;</span>试一试<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">   <span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = <span class="string">"段落被更改。"</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="外部样式（head中的JavaScript）"><a href="#外部样式（head中的JavaScript）" class="headerlink" title="外部样式（head中的JavaScript）"></a>外部样式（head中的JavaScript）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--外部样式--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/js1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -460,7 +461,7 @@ height:50vh;
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(5 + 6);</span><br></pre></td></tr></table></figure>
 
 <h2 id="如何修改css样式"><a href="#如何修改css样式" class="headerlink" title="如何修改css样式"></a>如何修改css样式</h2><p><strong>以下的*代表着获取到的控件,例如：</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">如根据ID获取到的控件：</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    var temp = document.getElementId("id的name");</span><br><span class="line">	temp.cssText = "width: 666px; color:#ffffff"; </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">如根据form表单的name获取控件：</span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">placeholder</span>=<span class="string">"请输入用户名："</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"请输入密码："</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"登录"</span> <span class="attr">onclick</span>=<span class="string">"check()"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    //根据form表单的name=“user”获取输入框的内容</span><br><span class="line">     var temp = login.user.value;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">如根据ID获取到的控件：</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> temp = <span class="built_in">document</span>.getElementId(<span class="string">"id的name"</span>);</span></span><br><span class="line"><span class="javascript">	temp.cssText = <span class="string">"width: 666px; color:#ffffff"</span>; </span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">如根据form表单的name获取控件：</span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">placeholder</span>=<span class="string">"请输入用户名："</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"请输入密码："</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"登录"</span> <span class="attr">onclick</span>=<span class="string">"check()"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//根据form表单的name=“user”获取输入框的内容</span></span></span><br><span class="line"><span class="javascript">     <span class="keyword">var</span> temp = login.user.value;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="第一种：使用-cssText-全属性"><a href="#第一种：使用-cssText-全属性" class="headerlink" title="第一种：使用 cssText 全属性"></a>第一种：使用 cssText 全属性</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.style.cssText = "width: 666px; color:#ffffff";</span><br></pre></td></tr></table></figure>
 
@@ -468,7 +469,7 @@ height:50vh;
 
 <h4 id="第三种：直接使用单属性"><a href="#第三种：直接使用单属性" class="headerlink" title="第三种：直接使用单属性"></a>第三种：直接使用单属性</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.style.width="666px";</span><br></pre></td></tr></table></figure>
 
-<h2 id="查找父节点子节点个数与名称"><a href="#查找父节点子节点个数与名称" class="headerlink" title="查找父节点子节点个数与名称"></a>查找父节点子节点个数与名称</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span> = <span class="string">"show()"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">    var elementList = "";</span><br><span class="line">    function show()&#123;</span><br><span class="line">        var number =getElement(document);</span><br><span class="line">        alert("文本节点个数：" + number);</span><br><span class="line">        elementList = elementList.substring(0,elementList.length - 1);</span><br><span class="line">        alert("文本HTML标签属性：" + elementList.toLowerCase());</span><br><span class="line">    &#125;</span><br><span class="line">    function getElement(node)&#123;</span><br><span class="line">        var total = 0;</span><br><span class="line">        //如果节点类型为HTML那么node.nodeType = 1</span><br><span class="line">        //注意==（错误）</span><br><span class="line">        if(node.nodeType == 1)&#123;</span><br><span class="line">            //得到第一层节点个数，需要定义函数全局变量</span><br><span class="line">            total++;</span><br><span class="line">            //得到第一层节点名称</span><br><span class="line">            elementList += node.nodeName + ",";</span><br><span class="line">        &#125;</span><br><span class="line">        //根据第一层节点遍历到最深层节点</span><br><span class="line">        for(let m = node.firstChild;m != null; m = m.nextSibling)&#123;</span><br><span class="line">            total += getElement(m);</span><br><span class="line">        &#125;</span><br><span class="line">        return total;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="查找父节点子节点个数与名称"><a href="#查找父节点子节点个数与名称" class="headerlink" title="查找父节点子节点个数与名称"></a>查找父节点子节点个数与名称</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span> = <span class="string">"show()"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> elementList = <span class="string">""</span>;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> number =getElement(<span class="built_in">document</span>);</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">"文本节点个数："</span> + number);</span></span><br><span class="line">        elementList = elementList.substring(0,elementList.length - 1);</span><br><span class="line"><span class="javascript">        alert(<span class="string">"文本HTML标签属性："</span> + elementList.toLowerCase());</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">getElement</span>(<span class="params">node</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> total = <span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//如果节点类型为HTML那么node.nodeType = 1</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">//注意==（错误）</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(node.nodeType == <span class="number">1</span>)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">//得到第一层节点个数，需要定义函数全局变量</span></span></span><br><span class="line">            total++;</span><br><span class="line"><span class="javascript">            <span class="comment">//得到第一层节点名称</span></span></span><br><span class="line"><span class="javascript">            elementList += node.nodeName + <span class="string">","</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="comment">//根据第一层节点遍历到最深层节点</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">for</span>(<span class="keyword">let</span> m = node.firstChild;m != <span class="literal">null</span>; m = m.nextSibling)&#123;</span></span><br><span class="line">            total += getElement(m);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> total;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
     </article>
@@ -1148,9 +1149,47 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 36
+        Total : 42
         </div>
         <!-- search  -->
         
@@ -1161,8 +1200,52 @@ top:50vh;
     
     
     
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/hello-world/" >Hello World</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span><a class="archive-post-title" href= "/2020/02/14/Java设计模式总结之23种设计模式/" >Java设计模式总结之23种设计模式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2020/02/13/Interview-1/" >Interview-1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/java-GC/" >java-GC</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2020/02/02/哈希表和红黑树/" >哈希表和红黑树</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2020/02/01/HashMap和HashTable的区别/" >HashMap和HashTable的区别</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href= "/2020/01/18/基本类型与包装类/" >基本类型与包装类</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1200,12 +1283,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-6jdbc完成数据库事务操作/" >spring-6jdbc完成数据库事务操作</a>
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-1对数据库事务操作/" >mybatis-1初学</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-1对数据库事务操作/" >mybatis-1初学</a>
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-6jdbc完成数据库事务操作/" >spring-6jdbc完成数据库事务操作</a>
         </li>
     
     
@@ -1348,79 +1431,88 @@ top:50vh;
             <span class="archive-post-date">08/15</span><a class="archive-post-title" href= "/2019/08/15/Data-Structrue-Stack-Queue/" >Data Structrue-Stack&&Queue</a>
         </li>
     
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2019/08/13/hello-world/" >Hello World</a>
-        </li>
-    
     </div>
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="hashmap"><span class="iconfont-archer">&#xe606;</span>hashmap</span>
+    
+        <span class="sidebar-tag-name" data-tags="文件的上传和下载（Tomcat和jar包）"><span class="iconfont-archer">&#xe606;</span>文件的上传和下载（Tomcat和jar包）</span>
+    
+        <span class="sidebar-tag-name" data-tags="TCP UDP"><span class="iconfont-archer">&#xe606;</span>TCP UDP</span>
+    
         <span class="sidebar-tag-name" data-tags="ArrayList"><span class="iconfont-archer">&#xe606;</span>ArrayList</span>
     
-        <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
-    
-        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
-    
-        <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
-    
-        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
-    
-        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
-    
-        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
-    
-        <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
-    
-        <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
-    
-        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
-    
-        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
-    
-        <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
+        <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
     
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
-    
-        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
     
         <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
     
+        <span class="sidebar-tag-name" data-tags="HashMap和HashTable"><span class="iconfont-archer">&#xe606;</span>HashMap和HashTable</span>
+    
         <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
     
-        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="LinkedListTree"><span class="iconfont-archer">&#xe606;</span>LinkedListTree</span>
     
         <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
     
-        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+        <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
+    
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
+    
+        <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
     
         <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
     
+        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+    
         <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
     
         <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
     
         <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
     
+        <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
+    
+        <span class="sidebar-tag-name" data-tags="HashMap查找算法"><span class="iconfont-archer">&#xe606;</span>HashMap查找算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
+    
+        <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
+    
         <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
     
         <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
     
-        <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
-    
-        <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
-    
-        <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
-    
         <span class="sidebar-tag-name" data-tags="数据库连接池"><span class="iconfont-archer">&#xe606;</span>数据库连接池</span>
+    
+        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
+    
+        <span class="sidebar-tag-name" data-tags="包装类"><span class="iconfont-archer">&#xe606;</span>包装类</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

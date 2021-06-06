@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Summer">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Summer">
+    
+    <meta name="keywords" content="summer,summer-theme,summer-blog">
+    
+    <meta name="description" content="Summer'sSky">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>基本类型与包装类 · Summer&#39;s Sky</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Summer&#39;s Sky.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">基本类型与包装类</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Summer's Sky.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            基本类型与包装类
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "包装类">包装类</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">931</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/01/18</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h1><h2 id="有了基本类型为什么会有包装类"><a href="#有了基本类型为什么会有包装类" class="headerlink" title="有了基本类型为什么会有包装类"></a>有了基本类型为什么会有包装类</h2><p>  在Java语言中，new一个对象存储在堆里，我们通过栈中的引用来使用这些对象；出现了基本类型，对于这些类型不是用new关键字来创建，而是直接将变量的值存储在栈中，因此更加高效。</p>
+<p>  为了让基本类型也具有对象的特征，就出现了包装类型，如，向集合list等中存放类型为object，就需要包装类。</p>
+<h2 id="基本类型与包装类的相互转化"><a href="#基本类型与包装类的相互转化" class="headerlink" title="基本类型与包装类的相互转化"></a>基本类型与包装类的相互转化</h2><h3 id="装箱"><a href="#装箱" class="headerlink" title="装箱"></a>装箱</h3><p>自动装箱</p>
+<p>手动装箱</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//自动装箱</span></span><br><span class="line">Integer ii = i;</span><br><span class="line">System.out.println(<span class="string">"自动装箱"</span> + ii);</span><br><span class="line">Integer iii = <span class="keyword">new</span> Integer(i);</span><br><span class="line">System.out.println(<span class="string">"自动装箱"</span> + iii);</span><br><span class="line"><span class="comment">//手动装箱</span></span><br><span class="line">Integer iiii = Integer.valueOf(i);</span><br><span class="line">System.out.println(<span class="string">"手动装箱"</span> + iiii);</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">自动装箱<span class="number">1</span></span><br><span class="line">自动装箱<span class="number">1</span></span><br><span class="line">手动装箱<span class="number">1</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="拆箱"><a href="#拆箱" class="headerlink" title="拆箱"></a>拆箱</h3><p>自动拆箱</p>
+<p>手动拆箱</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Integer number = <span class="number">11</span>;</span><br><span class="line"><span class="comment">//自动拆箱</span></span><br><span class="line"><span class="keyword">int</span> j = number;</span><br><span class="line">System.out.println(<span class="string">"自动拆箱"</span> + j);</span><br><span class="line"><span class="comment">//手动拆箱</span></span><br><span class="line"><span class="keyword">int</span> jj = number.intValue();</span><br><span class="line">System.out.println(<span class="string">"手动拆箱"</span> + jj);</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">自动拆箱<span class="number">11</span></span><br><span class="line">手动拆箱<span class="number">11</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="String和int相互转化"><a href="#String和int相互转化" class="headerlink" title="String和int相互转化"></a>String和int相互转化</h2><h3 id="String-int"><a href="#String-int" class="headerlink" title="String-int"></a>String-int</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//String转化为int</span></span><br><span class="line">String s = <span class="string">"123"</span>;</span><br><span class="line"><span class="comment">//方法1</span></span><br><span class="line">Integer integer = <span class="keyword">new</span> Integer(s);</span><br><span class="line"><span class="keyword">int</span> j = integer.intValue();</span><br><span class="line">System.out.println(j);</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法2</span></span><br><span class="line"><span class="comment">//十进制形式解析字符串;默认以十进制形式解析int i = Integer.parseInt(s);</span></span><br><span class="line"><span class="keyword">int</span> i = Integer.parseInt(s,<span class="number">10</span>);</span><br><span class="line">System.out.println(i);</span><br></pre></td></tr></table></figure>
+
+<h3 id="int-String"><a href="#int-String" class="headerlink" title="int - String"></a>int - String</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//int转化为String</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">123</span>;</span><br><span class="line"><span class="comment">//方法1</span></span><br><span class="line">String s1 = i + <span class="string">""</span>;</span><br><span class="line"><span class="comment">//方法2</span></span><br><span class="line">String s = String.valueOf(i);</span><br><span class="line">System.out.println(s1);</span><br><span class="line">System.out.println(s);</span><br></pre></td></tr></table></figure>
+
+<h3 id="int-String-1"><a href="#int-String-1" class="headerlink" title="int-String"></a>int-String</h3><h2 id="基本类型和包装类区别"><a href="#基本类型和包装类区别" class="headerlink" title="基本类型和包装类区别"></a>基本类型和包装类区别</h2><h3 id="声明方式不同"><a href="#声明方式不同" class="headerlink" title="声明方式不同"></a>声明方式不同</h3><p>基本类型不使用new关键字，而包装类型需要使用new关键字来在堆中分配存储空间；</p>
+<h3 id="存储方式及位置不同"><a href="#存储方式及位置不同" class="headerlink" title="存储方式及位置不同"></a>存储方式及位置不同</h3><p>基本类型是直接将变量值存储在栈中，而包装类型是将对象放在堆中，然后通过引用来使用；</p>
+<h3 id="初始值不同"><a href="#初始值不同" class="headerlink" title="初始值不同"></a>初始值不同</h3><p>基本类型的初始值如int为0，boolean为false，而包装类型的初始值为null；</p>
+<h3 id="使用方式不同"><a href="#使用方式不同" class="headerlink" title="使用方式不同"></a>使用方式不同</h3><p>基本类型直接赋值直接使用就好，而包装类型在集合如Collection、Map时会使用到。</p>
+<h2 id="基本类型和包装类的关系"><a href="#基本类型和包装类的关系" class="headerlink" title="基本类型和包装类的关系"></a>基本类型和包装类的关系</h2><p>byte →    Byte</p>
+<p>short    →    Short</p>
+<p>int    →    Integer</p>
+<p>long →    Long</p>
+<p>float    →    Float</p>
+<p>double    →    Double</p>
+<p>char    →    Character</p>
+<p>boolean→    Boolean</p>
+<p><strong>针对Integer作出具体介绍，其他类似</strong>；</p>
+<h1 id="Integer类"><a href="#Integer类" class="headerlink" title="Integer类"></a>Integer类</h1><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.BYTES);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.MAX_VALUE);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line"><span class="number">2147483647</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.MIN_VALUE);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line">-<span class="number">2147483648</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> System.out.println(Integer.SIZE);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line"><span class="number">32</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.TYPE);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Integer integer = <span class="keyword">new</span> Integer(<span class="number">1234</span>);</span><br><span class="line">      System.out.println(integer.TYPE);</span><br><span class="line">      System.out.println(integer);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line"><span class="number">1234</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      Integer integer1 = <span class="keyword">new</span> Integer(<span class="string">"1234"</span>);</span><br><span class="line">      System.out.println(integer1.TYPE);</span><br><span class="line">      System.out.println(integer1);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line"><span class="number">1234</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      <span class="keyword">int</span> a = Integer.bitCount(<span class="number">123</span>);</span><br><span class="line">      System.out.println(a);</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">13</span>;</span><br><span class="line">      <span class="keyword">byte</span> b = a.byteValue();</span><br><span class="line">      System.out.println(b);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.compare(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">//程序结果</span></span><br><span class="line">-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">12</span>;</span><br><span class="line">Integer b = <span class="number">123</span>;</span><br><span class="line">System.out.println(a.compareTo(b));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.decode(<span class="string">"1234"</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">12</span>;</span><br><span class="line">Integer b = <span class="number">123</span>;</span><br><span class="line">System.out.println(a.equals(b));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.max(<span class="number">11</span>,<span class="number">22</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.min(<span class="number">11</span>,<span class="number">22</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.parseInt(<span class="string">"12345"</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.parseInt(<span class="string">"98345"</span>,<span class="number">16</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Integer.sum(<span class="number">12</span>,<span class="number">23</span>));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h1 id="特别注意的地方总结"><a href="#特别注意的地方总结" class="headerlink" title="特别注意的地方总结"></a>特别注意的地方总结</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Integer i1 = <span class="number">97</span>;</span><br><span class="line">Integer i2 = <span class="number">97</span>;</span><br><span class="line">System.out.println(i1 == i2);</span><br><span class="line">System.out.println(i1.equals(i2));</span><br><span class="line">System.out.println(<span class="string">"---------------------------------------------------------------------"</span>);</span><br><span class="line"></span><br><span class="line">Integer i3 = <span class="number">197</span>;</span><br><span class="line">Integer i4 = <span class="number">197</span>;</span><br><span class="line">System.out.println(i3 == i4);</span><br><span class="line">System.out.println(i3.equals(i4));</span><br></pre></td></tr></table></figure>
+
+<p>程序结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">true</span></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line"><span class="keyword">false</span></span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">Process finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>因为在byte范围内，自动装箱就不会创建新的对象，而是从常量池中获取，Integer类型会自动拆箱为int相比较，而在byte范围外的值就会再创建新对象。</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">Summer</a>
+            <p>原文链接：<a href="http://yoursite.com/2020/01/18/基本类型与包装类/">http://yoursite.com/2020/01/18/基本类型与包装类/</a>
+            <p>发表日期：<a href="http://yoursite.com/2020/01/18/基本类型与包装类/">January 18th 2020, 4:45:01 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/2020/01/18/基本类型与包装类/">June 6th 2021, 10:06:03 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/02/01/HashMap和HashTable的区别/" title= "HashMap和HashTable的区别">
+                    <div class="nextTitle">HashMap和HashTable的区别</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/01/02/Collection接口的list具体实现类之ArrayList/" title= "Collection接口的list具体实现类之ArrayList">
+                    <div class="prevTitle">Collection接口的list具体实现类之ArrayList</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:Summerwithcode@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/SummerCodeSky" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#包装类"><span class="toc-number">1.</span> <span class="toc-text">包装类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#有了基本类型为什么会有包装类"><span class="toc-number">1.1.</span> <span class="toc-text">有了基本类型为什么会有包装类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型与包装类的相互转化"><span class="toc-number">1.2.</span> <span class="toc-text">基本类型与包装类的相互转化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#装箱"><span class="toc-number">1.2.1.</span> <span class="toc-text">装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆箱"><span class="toc-number">1.2.2.</span> <span class="toc-text">拆箱</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String和int相互转化"><span class="toc-number">1.3.</span> <span class="toc-text">String和int相互转化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-int"><span class="toc-number">1.3.1.</span> <span class="toc-text">String-int</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int-String"><span class="toc-number">1.3.2.</span> <span class="toc-text">int - String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int-String-1"><span class="toc-number">1.3.3.</span> <span class="toc-text">int-String</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型和包装类区别"><span class="toc-number">1.4.</span> <span class="toc-text">基本类型和包装类区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#声明方式不同"><span class="toc-number">1.4.1.</span> <span class="toc-text">声明方式不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储方式及位置不同"><span class="toc-number">1.4.2.</span> <span class="toc-text">存储方式及位置不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始值不同"><span class="toc-number">1.4.3.</span> <span class="toc-text">初始值不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方式不同"><span class="toc-number">1.4.4.</span> <span class="toc-text">使用方式不同</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型和包装类的关系"><span class="toc-number">1.5.</span> <span class="toc-text">基本类型和包装类的关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Integer类"><span class="toc-number">2.</span> <span class="toc-text">Integer类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性"><span class="toc-number">2.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造方法"><span class="toc-number">2.2.</span> <span class="toc-text">构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法"><span class="toc-number">2.3.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#特别注意的地方总结"><span class="toc-number">3.</span> <span class="toc-text">特别注意的地方总结</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 42
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/hello-world/" >Hello World</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span><a class="archive-post-title" href= "/2020/02/14/Java设计模式总结之23种设计模式/" >Java设计模式总结之23种设计模式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2020/02/13/Interview-1/" >Interview-1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/java-GC/" >java-GC</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2020/02/02/哈希表和红黑树/" >哈希表和红黑树</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2020/02/01/HashMap和HashTable的区别/" >HashMap和HashTable的区别</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href= "/2020/01/18/基本类型与包装类/" >基本类型与包装类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/Collection接口的list具体实现类之ArrayList/" >Collection接口的list具体实现类之ArrayList</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2020/01/02/线程安全与线程不安全/" >线程安全与线程不安全</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2019/12/09/小程序的flex布局/" >小程序的flex布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2019/12/03/MySql数据库/" >MySql数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-2动态SQL实现/" >mybatis-2动态SQL实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-1对数据库事务操作/" >mybatis-1初学</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-6jdbc完成数据库事务操作/" >spring-6jdbc完成数据库事务操作</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-5AOP相关and模拟切面/" >spring-5AOP相关and模拟切面</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-4自动装配模式and与数据库连接/" >spring-4自动装配模式and与数据库连接</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-3其他引用类型的注入/" >spring-3其他引用类型的注入</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-2核心技术/" >spring-2核心技术</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/27</span><a class="archive-post-title" href= "/2019/11/27/打印日志Logging/" >打印日志Logging</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/spring-1框架入门了解/" >spring框架1-入门了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/XML解析/" >XML解析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2019/11/22/java注解/" >java注解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2019/11/21/java反射机制/" >java反射机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/18</span><a class="archive-post-title" href= "/2019/11/18/框架前提/" >框架前提</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2019/11/07/java-web中jsp和servlet编码配置（pageEncoding-charset、request-response）及中文乱码问题/" >java web中jsp和servlet编码配置（pageEncoding&charset、request&response）及中文乱码问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/29</span><a class="archive-post-title" href= "/2019/10/29/servlet/" >servlet</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2019/10/28/Jstl-jsp标准标签库/" >Jstl-jsp标准标签库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/21</span><a class="archive-post-title" href= "/2019/10/21/配置tomcat服务器/" >配置tomcat服务器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2019/10/17/XML前提/" >XML-1前提</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/12</span><a class="archive-post-title" href= "/2019/10/12/新建maven项目的配置及方式/" >新建maven项目的配置及方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/09</span><a class="archive-post-title" href= "/2019/10/09/数据库连接-JDBC-JDBC工具类库/" >数据库连接-JDBC*JDBC工具类库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href= "/2019/09/26/使用工具及下载等相关整理合集/" >使用工具及下载等相关整理合集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2019/09/16/JavaScript-1/" >JavaScript&&1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2019/09/06/Database2-SQL语言/" >Database2-SQL语言</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/04</span><a class="archive-post-title" href= "/2019/09/04/DataBase1/" >DataBase1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/02</span><a class="archive-post-title" href= "/2019/09/02/CSS-lable/" >CSS-lable</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2019/08/29/HTML-label/" >HTML&&label</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/20</span><a class="archive-post-title" href= "/2019/08/20/Thread/" >Thread</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/20</span><a class="archive-post-title" href= "/2019/08/20/IO流/" >IO流</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span><a class="archive-post-title" href= "/2019/08/19/DataStructrue-Search-ClassicalProblem/" >DataStructrue-Search&&ClassicalProblem</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/19</span><a class="archive-post-title" href= "/2019/08/19/DataStructrue-sort/" >DataStructrue-sort</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/15</span><a class="archive-post-title" href= "/2019/08/15/Data-Structrue-Stack-Queue/" >Data Structrue-Stack&&Queue</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="hashmap"><span class="iconfont-archer">&#xe606;</span>hashmap</span>
+    
+        <span class="sidebar-tag-name" data-tags="文件的上传和下载（Tomcat和jar包）"><span class="iconfont-archer">&#xe606;</span>文件的上传和下载（Tomcat和jar包）</span>
+    
+        <span class="sidebar-tag-name" data-tags="TCP UDP"><span class="iconfont-archer">&#xe606;</span>TCP UDP</span>
+    
+        <span class="sidebar-tag-name" data-tags="ArrayList"><span class="iconfont-archer">&#xe606;</span>ArrayList</span>
+    
+        <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
+    
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+    
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="HashMap和HashTable"><span class="iconfont-archer">&#xe606;</span>HashMap和HashTable</span>
+    
+        <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
+    
+        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="LinkedListTree"><span class="iconfont-archer">&#xe606;</span>LinkedListTree</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
+    
+        <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
+    
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
+    
+        <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
+    
+        <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
+    
+        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
+    
+        <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
+    
+        <span class="sidebar-tag-name" data-tags="HashMap查找算法"><span class="iconfont-archer">&#xe606;</span>HashMap查找算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
+    
+        <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
+    
+        <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
+    
+        <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据库连接池"><span class="iconfont-archer">&#xe606;</span>数据库连接池</span>
+    
+        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
+    
+        <span class="sidebar-tag-name" data-tags="包装类"><span class="iconfont-archer">&#xe606;</span>包装类</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Summer"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

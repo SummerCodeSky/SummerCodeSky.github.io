@@ -200,6 +200,7 @@
     
     <!-- 谷歌统计  -->
     
+<link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
 </head>
 
     
@@ -339,6 +340,217 @@
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
             <main class="main index-page">
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/02/14/Java设计模式总结之23种设计模式/" >
+            
+                <span>Java设计模式总结之23种设计模式</span>
+        </a>
+        <div class="abstract-content">
+            java设计模式设计模式分类总体来说设计模式分为三大类：
+创建型模式，共五种：
+工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。
+结构型模式，共七种：
+适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。
+行为型模式，共十一种：
+策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。
+其实还有两类：并发型模式和线程池模式。
+GoF（四小组/四小队） 的 23 种设计模式的分类表
+
+
+
+范围\目的
+创建型模式
+结构型模式
+
+
+
+类模式
+工厂方法
+(类）适配器
+
+
+对象模式
+单例 原型...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/14</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/02/13/Interview-1/" >
+            
+                <span>Interview-1</span>
+        </a>
+        <div class="abstract-content">
+            InterviewJava基础HashMap和Hashtable的区别详见HashMap和HashTable的区别.md中
+1、HashMap是非线程安全的，HashTable是线程安全的。2、HashMap的键和值都允许有null值存在，而HashTable则不行。3、因为线程安全的问题，HashMap效率比HashTable的要高。
+Java的GC详见java-GC.md中
+SpringMVC运行原理客户端请求提交到DispatcherServlet
+由DispatcherServlet控制器查询HandlerMapping，找到并分发到指定的Controller中。
+Control...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/13</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/02/12/java-GC/" >
+            
+                <span>java-GC</span>
+        </a>
+        <div class="abstract-content">
+            GCjava GC是在什么时候，对什么东西，做了什么事情？什么时候：1.新生代有一个Eden区和两个survivor区，
+首先将对象放入Eden区，如果空间不足就向其中的一个survivor区上放，
+如果仍然放不下就会引发一次发生在新生代的minor GC，将存活的对象放入另一个survivor区中，，然后清空Eden和之前的那个survivor区的内存。
+在某次GC过程中，如果发现仍然又放不下的对象，就将这些对象放入老年代内存里去。
+2.大对象以及长期存活的对象直接进入老年区。
+3.当每次执行minor GC的时候应该对要晋升到老年代的对象进行分析，
+如果这些马上要到老年区的老年对象的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/12</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/02/02/哈希表和红黑树/" >
+            
+                <span>哈希表和红黑树</span>
+        </a>
+        <div class="abstract-content">
+            哈希表概念一个一个查找key困难，所以有了hash算法加快查找。
+哈希表（Hash table，也叫散列表），是根据键值(Key)而直接进行访问的数据结构。也就是说，它通过把键值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
+散列技术：
+关键词(key)    —&gt;   对应关系f(key)   —&gt;   存储位置
+构造散列函数方法除留余数法123f(key) = key mod p(p≤m)//**散列表长为m;//通常p为小于或等于表长（最好接近m）的最小质数或不包含小于20质因子的合数。
+
+一般的m取值尽量不要接近2...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/02</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "HashMap查找算法">HashMap查找算法</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/02/01/HashMap和HashTable的区别/" >
+            
+                <span>HashMap和HashTable的区别</span>
+        </a>
+        <div class="abstract-content">
+            HashMapHashMap简介主要有以下内容: 
+1、HashMap数据结构介绍
+2、HashMap重要属性介绍
+3、数据的存储、插入过程以及查找过程
+4、问题处理。
+HashMap implement  Serializable，Cloneable
+HashMap 的继承图：
+
+HashMap 根据键的 hashCode 值存储数据，大多数情况下可以直接定位到它的值，因而具有很快的访问速度，但遍历顺序却是不确定的。 
+ HashMap 最多只允许一条记录的键为 null ，允许多条记录的值为 null 。
+HashMap 非线程安全，即任一时刻可以有多个线程同时写 HashMap，可...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/01</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "HashMap和HashTable">HashMap和HashTable</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/01/18/基本类型与包装类/" >
+            
+                <span>基本类型与包装类</span>
+        </a>
+        <div class="abstract-content">
+            包装类有了基本类型为什么会有包装类  在Java语言中，new一个对象存储在堆里，我们通过栈中的引用来使用这些对象；出现了基本类型，对于这些类型不是用new关键字来创建，而是直接将变量的值存储在栈中，因此更加高效。
+  为了让基本类型也具有对象的特征，就出现了包装类型，如，向集合list等中存放类型为object，就需要包装类。
+基本类型与包装类的相互转化装箱自动装箱
+手动装箱
+123456789int i = 1;//自动装箱Integer ii = i;System.out.println("自动装箱" + ii);Integer iii = new Integer(i);Syste...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "包装类">包装类</a>
+    
+</div>
+            
+        </div>
+    </article>
     
     
     
@@ -1026,9 +1238,47 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 36
+        Total : 42
         </div>
         <!-- search  -->
         
@@ -1039,8 +1289,52 @@
     
     
     
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/hello-world/" >Hello World</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span><a class="archive-post-title" href= "/2020/02/14/Java设计模式总结之23种设计模式/" >Java设计模式总结之23种设计模式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/13</span><a class="archive-post-title" href= "/2020/02/13/Interview-1/" >Interview-1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/12</span><a class="archive-post-title" href= "/2020/02/12/java-GC/" >java-GC</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2020/02/02/哈希表和红黑树/" >哈希表和红黑树</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2020/02/01/HashMap和HashTable的区别/" >HashMap和HashTable的区别</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href= "/2020/01/18/基本类型与包装类/" >基本类型与包装类</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1078,12 +1372,12 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-6jdbc完成数据库事务操作/" >spring-6jdbc完成数据库事务操作</a>
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-1对数据库事务操作/" >mybatis-1初学</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/mybatis-1对数据库事务操作/" >mybatis-1初学</a>
+            <span class="archive-post-date">11/28</span><a class="archive-post-title" href= "/2019/11/28/spring-6jdbc完成数据库事务操作/" >spring-6jdbc完成数据库事务操作</a>
         </li>
     
     
@@ -1226,79 +1520,88 @@
             <span class="archive-post-date">08/15</span><a class="archive-post-title" href= "/2019/08/15/Data-Structrue-Stack-Queue/" >Data Structrue-Stack&&Queue</a>
         </li>
     
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2019/08/13/hello-world/" >Hello World</a>
-        </li>
-    
     </div>
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="hashmap"><span class="iconfont-archer">&#xe606;</span>hashmap</span>
+    
+        <span class="sidebar-tag-name" data-tags="文件的上传和下载（Tomcat和jar包）"><span class="iconfont-archer">&#xe606;</span>文件的上传和下载（Tomcat和jar包）</span>
+    
+        <span class="sidebar-tag-name" data-tags="TCP UDP"><span class="iconfont-archer">&#xe606;</span>TCP UDP</span>
+    
         <span class="sidebar-tag-name" data-tags="ArrayList"><span class="iconfont-archer">&#xe606;</span>ArrayList</span>
     
-        <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
-    
-        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
-    
-        <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
-    
-        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
-    
-        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
-    
-        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
-    
-        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
-    
-        <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
-    
-        <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
-    
-        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
-    
-        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
-    
-        <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
+        <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
     
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
-    
-        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
     
         <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
     
+        <span class="sidebar-tag-name" data-tags="HashMap和HashTable"><span class="iconfont-archer">&#xe606;</span>HashMap和HashTable</span>
+    
         <span class="sidebar-tag-name" data-tags="IO"><span class="iconfont-archer">&#xe606;</span>IO</span>
     
-        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="LinkedListTree"><span class="iconfont-archer">&#xe606;</span>LinkedListTree</span>
     
         <span class="sidebar-tag-name" data-tags="MySql"><span class="iconfont-archer">&#xe606;</span>MySql</span>
     
-        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+        <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
+    
+        <span class="sidebar-tag-name" data-tags="xml"><span class="iconfont-archer">&#xe606;</span>xml</span>
+    
+        <span class="sidebar-tag-name" data-tags="StackQueue"><span class="iconfont-archer">&#xe606;</span>StackQueue</span>
+    
+        <span class="sidebar-tag-name" data-tags="jstl"><span class="iconfont-archer">&#xe606;</span>jstl</span>
+    
+        <span class="sidebar-tag-name" data-tags="SearchClassical-Problem"><span class="iconfont-archer">&#xe606;</span>SearchClassical-Problem</span>
+    
+        <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
     
         <span class="sidebar-tag-name" data-tags="注解"><span class="iconfont-archer">&#xe606;</span>注解</span>
     
+        <span class="sidebar-tag-name" data-tags="servlet"><span class="iconfont-archer">&#xe606;</span>servlet</span>
+    
+        <span class="sidebar-tag-name" data-tags="动态sql"><span class="iconfont-archer">&#xe606;</span>动态sql</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring核心"><span class="iconfont-archer">&#xe606;</span>spring核心</span>
+    
         <span class="sidebar-tag-name" data-tags="spring"><span class="iconfont-archer">&#xe606;</span>spring</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
     
         <span class="sidebar-tag-name" data-tags="spring事务操作"><span class="iconfont-archer">&#xe606;</span>spring事务操作</span>
     
         <span class="sidebar-tag-name" data-tags="aop"><span class="iconfont-archer">&#xe606;</span>aop</span>
     
+        <span class="sidebar-tag-name" data-tags="工具 下载"><span class="iconfont-archer">&#xe606;</span>工具 下载</span>
+    
+        <span class="sidebar-tag-name" data-tags="HashMap查找算法"><span class="iconfont-archer">&#xe606;</span>HashMap查找算法</span>
+    
+        <span class="sidebar-tag-name" data-tags="spring对其他类型参数的注入"><span class="iconfont-archer">&#xe606;</span>spring对其他类型参数的注入</span>
+    
+        <span class="sidebar-tag-name" data-tags="flex布局"><span class="iconfont-archer">&#xe606;</span>flex布局</span>
+    
         <span class="sidebar-tag-name" data-tags="log4j"><span class="iconfont-archer">&#xe606;</span>log4j</span>
+    
+        <span class="sidebar-tag-name" data-tags="乱码"><span class="iconfont-archer">&#xe606;</span>乱码</span>
+    
+        <span class="sidebar-tag-name" data-tags="框架"><span class="iconfont-archer">&#xe606;</span>框架</span>
+    
+        <span class="sidebar-tag-name" data-tags="Tomcat"><span class="iconfont-archer">&#xe606;</span>Tomcat</span>
     
         <span class="sidebar-tag-name" data-tags="IntelliJ Eclipse maven项目 系统配置"><span class="iconfont-archer">&#xe606;</span>IntelliJ Eclipse maven项目 系统配置</span>
     
-        <span class="sidebar-tag-name" data-tags="database"><span class="iconfont-archer">&#xe606;</span>database</span>
-    
-        <span class="sidebar-tag-name" data-tags="Thread"><span class="iconfont-archer">&#xe606;</span>Thread</span>
-    
-        <span class="sidebar-tag-name" data-tags="反射"><span class="iconfont-archer">&#xe606;</span>反射</span>
-    
         <span class="sidebar-tag-name" data-tags="数据库连接池"><span class="iconfont-archer">&#xe606;</span>数据库连接池</span>
+    
+        <span class="sidebar-tag-name" data-tags="线程安全"><span class="iconfont-archer">&#xe606;</span>线程安全</span>
+    
+        <span class="sidebar-tag-name" data-tags="包装类"><span class="iconfont-archer">&#xe606;</span>包装类</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
